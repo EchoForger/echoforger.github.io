@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -126,7 +126,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
@@ -714,8 +714,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -807,6 +816,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、引言"><span class="nav-text">一、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、内部API限制"><span class="nav-text">二、内部API限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-getDeclaredMethod"><span class="nav-text">2.1 getDeclaredMethod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-getMethod"><span class="nav-text">2.2 getMethod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-getDeclaredMethodInternal"><span class="nav-text">2.3 getDeclaredMethodInternal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-ShouldBlockAccessToMember"><span class="nav-text">2.4 ShouldBlockAccessToMember</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-AccessMethod"><span class="nav-text">2.4.1 AccessMethod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-限制场景"><span class="nav-text">2.4.2 限制场景</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-GetMemberAction"><span class="nav-text">2.5 GetMemberAction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-GetActionFromAccessFlags"><span class="nav-text">2.6 GetActionFromAccessFlags</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-EnforcementPolicy"><span class="nav-text">2.6.1 EnforcementPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-HiddenApiAccessFlags"><span class="nav-text">2.6.2 HiddenApiAccessFlags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-3-Action"><span class="nav-text">2.6.3 Action</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-IsCallerTrusted"><span class="nav-text">2.7 IsCallerTrusted</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-1-IsCallerTrusted"><span class="nav-text">2.7.1 IsCallerTrusted</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-GetMemberActionImpl"><span class="nav-text">2.8 GetMemberActionImpl</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-1-GetHiddenApiExemptions"><span class="nav-text">2.8.1 GetHiddenApiExemptions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-2-WarnAboutAccess"><span class="nav-text">2.8.2 WarnAboutAccess</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、总结"><span class="nav-text">三、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-限制原理总结"><span class="nav-text">3.1 限制原理总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-黑白名单"><span class="nav-text">3.2 黑白名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-非SDK接口说明"><span class="nav-text">3.3 非SDK接口说明</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

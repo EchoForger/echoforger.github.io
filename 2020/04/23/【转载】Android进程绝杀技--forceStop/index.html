@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -126,7 +126,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
@@ -721,8 +721,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -814,6 +823,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-概述"><span class="nav-text">一.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-引言"><span class="nav-text">1.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Am-main"><span class="nav-text">1.2 Am.main</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Am-run"><span class="nav-text">1.3 Am.run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Am-onRun"><span class="nav-text">1.4 Am.onRun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Am-runForceStop"><span class="nav-text">1.5 Am.runForceStop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-AMP-forceStopPackage"><span class="nav-text">1.6 AMP.forceStopPackage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-AMN-onTransact"><span class="nav-text">1.7 AMN.onTransact</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-小节"><span class="nav-text">1.8 小节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-force-stop内部机理"><span class="nav-text">二. force-stop内部机理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-AMS-forceStopPackage"><span class="nav-text">2.1 AMS.forceStopPackage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-AMS-forceStopPackageLocked"><span class="nav-text">2.2 AMS.forceStopPackageLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-AMS-forceStopPackageLocked"><span class="nav-text">2.3 AMS.forceStopPackageLocked</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-Process"><span class="nav-text">三. Process</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-AMS-killPackageProcessesLocked"><span class="nav-text">3.1 AMS.killPackageProcessesLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-AMS-removeProcessLocked"><span class="nav-text">3.2 AMS.removeProcessLocked</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-Activity"><span class="nav-text">四. Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-ASS-finishDisabledPackageActivitiesLocked"><span class="nav-text">4.1 ASS.finishDisabledPackageActivitiesLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-AS-finishDisabledPackageActivitiesLocked"><span class="nav-text">4.2 AS.finishDisabledPackageActivitiesLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-AS-finishActivityLocked"><span class="nav-text">4.3 AS.finishActivityLocked</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-AR-makeFinishingLocked"><span class="nav-text">4.3.1 AR.makeFinishingLocked</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-ASS-requestVisibleBehindLocked"><span class="nav-text">4.3.2 ASS.requestVisibleBehindLocked</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3-TaskRecord-setFrontOfTask"><span class="nav-text">4.3.3 TaskRecord.setFrontOfTask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-4-AS-adjustFocusedActivityLocked"><span class="nav-text">4.3.4 AS.adjustFocusedActivityLocked</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-5-AS-finishCurrentActivityLocked"><span class="nav-text">4.3.5 AS.finishCurrentActivityLocked</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-6-AS-destroyActivityLocked"><span class="nav-text">4.3.6 AS.destroyActivityLocked</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-Service"><span class="nav-text">五. Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-bringDownDisabledPackageServicesLocked"><span class="nav-text">5.1 bringDownDisabledPackageServicesLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-collectPackageServicesLocked"><span class="nav-text">5.2 collectPackageServicesLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-bringDownServiceLocked"><span class="nav-text">5.3 bringDownServiceLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-unscheduleServiceRestartLocked"><span class="nav-text">5.4 unscheduleServiceRestartLocked</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-Provider"><span class="nav-text">六. Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-PM-collectPackageProvidersLocked"><span class="nav-text">6.1 PM.collectPackageProvidersLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-PM-collectPackageProvidersLocked"><span class="nav-text">6.2 PM.collectPackageProvidersLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-AMS-removeDyingProviderLocked"><span class="nav-text">6.3 AMS.removeDyingProviderLocked</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-Broadcast"><span class="nav-text">七. Broadcast</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-BQ-cleanupDisabledPackageReceiversLocked"><span class="nav-text">7.1 BQ.cleanupDisabledPackageReceiversLocked</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-BR-cleanupDisabledPackageReceiversLocked"><span class="nav-text">7.2 BR.cleanupDisabledPackageReceiversLocked</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-Alarm和Notification"><span class="nav-text">八. Alarm和Notification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-Alarm清理"><span class="nav-text">8.1 Alarm清理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-Notification清理"><span class="nav-text">8.2 Notification清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-级联诛杀"><span class="nav-text">九. 级联诛杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-CI-getClassLoader"><span class="nav-text">9.1 CI.getClassLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-LA-getClassLoader"><span class="nav-text">9.2 LA.getClassLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-AMS-addPackageDependency"><span class="nav-text">9.3 AMS.addPackageDependency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十-总结"><span class="nav-text">十. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
