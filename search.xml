@@ -924,6 +924,184 @@
 ]]></content>
   </entry>
   <entry>
+    <title>【转载】Flutter 跨平台演进及架构开篇</title>
+    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Flutter%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>版权声明：</strong> 本站所有博文内容均为原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
+</blockquote>
+<h2 id="一、移动跨平台技术演进"><a href="#一、移动跨平台技术演进" class="headerlink" title="一、移动跨平台技术演进"></a>一、移动跨平台技术演进</h2><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h4><p>移动互联网发展十余年，伴随着 Android、iOS 等智能手机的不断普及，移动端已逐步取代 PC 端，成为兵家必争之地。正所谓“得移动端者得天下”，移动端已成为互联网领域最大的流量分发入口，一大批互联网公司正是在这大趋势下崛起。</p>
+<h4 id="2-为什么需要跨平台技术"><a href="#2-为什么需要跨平台技术" class="headerlink" title="2. 为什么需要跨平台技术"></a>2. 为什么需要跨平台技术</h4><p>伴随着移动互联网的高速发展，公司间竞争越来越激烈，如何将好想法快速落地、快速试错，成为备受关注的问题。提升研发效率、缩短研发周期，保障产品快速试错并能快速迭代新功能，让新产品新功能以最快的速度同时抵达 Android、iOS 等多端用户。</p>
+<p>众所周知，Android 应用采用 Java 或 Kotlin 编写，iOS 应用采用 Objective-C 或 Swift 编写，Web 端采用 HTML /CSS/JavaScript 编写。当需要开发支持多端的应用，每一端都需要独立研发、测试，一直到上线，以及后续的维护工作，工作量成倍增涨，势必延长研发周期。</p>
+<p>为了解决多端独立开发的问题，跨平台技术便应运而生，各大互联网公司为此都投入大量人力，于是出现了各种跨平台技术框架，<strong>面对移动领域的跨平台技术方案的层出不穷，又该如何做技术选型呢？</strong></p>
+<h4 id="3-移动端技术选型"><a href="#3-移动端技术选型" class="headerlink" title="3. 移动端技术选型"></a>3. 移动端技术选型</h4><p>作为移动端的跨端技术方案，所关注无外乎以下这4个方面：研发效率、动态性、多端一致性、性能体验。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/1.png" alt="img"></p>
+<ol>
+<li>研发效率：最大化代码复用，减少多端差异的适配工作量，降低开发成本，专注业务开发，实现“write once，run everywhere”的终极目标。效率提升是贯穿整个业务的生命周期线，即便业务上线后，可持续降低后续的维护成本，加快新feature的迭代速度，这是一个持续的效率收益。当然，这里不得不说，任何一门新技术在开发启动学习阶段会有一些成本，但上手后的收益是长期的。</li>
+<li>动态化：突破渠道的更新频率，可快速迭代新功能，这一点不仅是跨平台技术的诉求，也是Native技术必备的杀手锏，这也是评估跨端技术的一个重要考核点。</li>
+<li>多端一致性：好产品在多端UI设计上，往往是整体风格统一，所以业务方采用原生各自独立开发完成后，还需额外花不少时间来修改UI以保证多端一致性；可见，各端独立实现开发方式，带来的效率滞后，不仅仅是Android和iOS各开发一份代码的工作量，还有双端UI的一致性对齐的工作。</li>
+<li>性能体验：一般地，跨端技术方案拥有以上多重优势，但在性能方面比原生流畅更差些。牺牲部分体验换来效率提升，这一点也是情理之中，试想一下，跨平台技术方案同时兼得这4点，那么原生技术恐怕已退出历史舞台，早已是跨平台技术的天下，所以往往跨平台技术的性能优劣便成为核心指标。</li>
+</ol>
+<h4 id="4-跨平台技术划分"><a href="#4-跨平台技术划分" class="headerlink" title="4. 跨平台技术划分"></a>4. 跨平台技术划分</h4><p>对研发效率和体验的不断追逐，移动端的跨平台技术方框架层出不穷，然则天下武功众多，万变不离其宗，从其核心本质来划分，可大致分为以下三大类：</p>
+<p><img src="http://gityuan.com/img/flutter-arch/2.png" alt="img"></p>
+<ol>
+<li>Web技术：主要依赖于WebView的技术，功能支持受限，性能体验很差，比如PhoneGap、Cordova、小程序。</li>
+<li>原生渲染：使用JavaScript作为编程语言，通过中间层转化为原生控件来渲染UI界面，比如React Native、Weex。</li>
+<li>自渲染技术：自行实现一套渲染框架，可通过调用skia等方式完成自渲染，而不依赖于原生控件，比如Flutter、Unity。</li>
+</ol>
+<h4 id="5-跨平台技术演进"><a href="#5-跨平台技术演进" class="headerlink" title="5. 跨平台技术演进"></a>5. 跨平台技术演进</h4><p>跨平台技术，一直以来是每一个有追求的开发者所追逐的梦想，同时也是守旧者的噩梦，跨平台的多端一体化方案势必颠覆现有的原生各端独立开发模式，接下来列举众多的跨平台技术中最为关键的几个技术方案的演进阶段。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/3.png" alt="img"></p>
+<p>从上图可以看出，技术演进过程大致分以下三个阶段： 第一阶段，采用WebView技术绘制界面的Hybrid混合开发技术，通过JS Bridge 将系统部分能力暴露给 JS 调用，其缺点是性能较差，功能受限，扩展性差，不适合交互复杂的场景，比如Cordova。 第二阶段，针对WebView界面性能等问题，于是绘制交还原生渲染，仅仅通过JS调用原生控件，相比WebView技术性能体验更好，这是目前绝大部分跨平台框架的设计思路，比如React Native、Weex。另外，最近小程序也比较火，第一和第二阶段的融合，依然采用WebView作为渲染容器，通过限制Web技术栈的子集，规范化组件使用，并逐步引入原生控件代表WebView渲染，以提升性能。 第三阶段，虽然通过桥接技术使用原生控件解决了功能受限问题，提升性能体验，但相比原生体验差距还是比较大，以及处理平台差异性非常耗费人力。于是Flutter提出自带渲染引擎的解决方案，尽可能减少不同平台间的差异性, 同时媲美原生的高性能体验，因此业界对 Flutter有着极高的关注度。</p>
+<p><strong>面对现有的如此多跨平台方案，为何当下最火的跨平台技术是Flutter，有哪些优势呢？</strong></p>
+<p>RN、Weex均使用JavaScript作为编程语言，JavaScript作为前端开发语言，在跨平台开发中可谓大放异彩，利用web技术不仅能开发出网站，也可以开发手机端web应用和移动端应用程序，似有一统三界(Android、iOS、Web)的趋势，这就是大家常说的“大前端”时代。这些技术方案流畅度不太好，平台一致性较差，至今还没能大面积取代原生开发。</p>
+<p>Flutter是以Dart语言编写，开发体验更接近客户端，从大家使用反馈来看也是如此，Flutter开发环境这一套的流程对于前端开发来说并不太友好。Flutter的定位同样是多端一体化，但是以客户端为首，先磨平Android和iOS双端开发体验，再逐步向Web端渗透，从Flutter规划的Roadmap也能看出，Flutter for web目前仍处于预览版，Flutter客户端方向都已经如火如荼上线了不少应用。</p>
+<p>在此之前，大家常说“大前端”，对于Flutter技术，在笔者看来称之为“大移动端”更贴切，Flutter的UI框架优先支持客户端(Android/iOS)应用的同时，然后再适配Web端。移动互联网时代，不少公司都制定“移动优先”的战略，甚至只开发移动端，没有Web端。移动互联网的时代造就“大移动端”，Flutter作为一款能做到媲美原生的高性能跨平台技术方案，或许一统天下。</p>
+<p>在跨平台技术领域，只要挑战在，技术就不会停滞，伴随着技术不断演进与革新，终将走向美好。</p>
+<h4 id="6-Flutter技术优势"><a href="#6-Flutter技术优势" class="headerlink" title="6. Flutter技术优势"></a>6. Flutter技术优势</h4><p>Flutter是彻底的跨平台方案，既没有采用webView，也没有采用JS桥接原生控件，而是自行实现一套UI框架，在引擎底层通过Skia渲染到屏幕。对于UI之外所需要使用的移动设备自身提供的服务，比如相机、定位、屏幕触摸等，则采用Platform Channels跟原生系统通信的方式来实现。</p>
+<p>对于Flutter优势，回到前面讲到移动端技术选型的4要素，研发效率、动态性、多端一致性、性能体验，分别对应下面这一组词语。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/4.png" alt="img"></p>
+<ol>
+<li>高效率：采用dart语言编写代码，虽然刚开始上手需要点时间，但熟练后效率比较高。一套代码适用多个平台(Android、iOS、Web)，以及高效的Hot Reload能快速辅助调试；</li>
+<li>动态化：2017年3月苹果下发警告邮件，禁止JSPatch等 iOS App热更新方案，从此iOS动态化成为一个不宜公开讨论的话题。同样地，Flutter引擎在某一个官方版本对动态化做过一些尝试，但后续基于风险考虑移除，当然并没有阻碍大家对技术的探索，这里不方便展开讨论；</li>
+<li>高一致性：实现UI像素级的控制，Flutter渲染引擎依靠跨平台Skia图形库来实现，仅依赖系统图形绘制相关的接口，比如未来Android会支持vulkan，iOS会支持metal，这些都是通过skia封装调用。可最大程度上保证不同平台的体验一致性，见下图所示。</li>
+</ol>
+<p><img src="http://gityuan.com/img/flutter-arch/5.png" alt="img"></p>
+<ol>
+<li>高性能：渲染性能优于现有的各种跨平台框架，可媲美原生性能的跨平台技术方案，Dart代码执行效率比JS高，通过AOT编译成平台原生代码，渲染采用自渲染skia方案，既不需要JS Bridge桥接，也不需要Art虚拟机参与。再从渲染原理来看看Flutter的高性能的底气在哪里。</li>
+</ol>
+<p><img src="http://gityuan.com/img/flutter-arch/6_flutter_compare.png" alt="img"></p>
+<p>图解：</p>
+<ul>
+<li>Android原生框架，通过调用Java Framework层，再调用到skia来渲染界面；</li>
+<li>其他跨平台方案(如RN)，通过JSBridge中间层来将JS写的APP转换成相应的原生渲染逻辑，可见比Native代码增加了更多逻辑，性能逊色差于原生框架；</li>
+<li>Flutter框架，APP通过调用Dart Framework层，再直接调用到skia来渲染界面，并没有经过原生Framework过程，可见其渲染性能并不会弱于Native技术，这是一个性能上限很高的跨平台技术。</li>
+</ul>
+<p>当然，不得不说目前的Flutter确实不够尽善尽美，会存在一些不够尽善尽美之处，比如生态不够健全，包体积问题，但其该方案的上限比较高，想象空间比较大，相信更多开发者参与进来，经过更多打磨，未来会做得更好。</p>
+<h4 id="7-业界发展近况"><a href="#7-业界发展近况" class="headerlink" title="7. 业界发展近况"></a>7. 业界发展近况</h4><p>2017年5月Google I/O大会正式对外公布Flutter，到2018年12月发布Flutter1.0，引发全球大量的开发者和企业开始研究Flutter。StackOverflow 2019年的全球开发者文件调查中，Flutter被评选为最受开发者欢迎的框架之一，超过了TensorFlow和Node.js。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/7_flutter_rank.png" alt="img"></p>
+<p>到目前，全球越来越多的公司已经在大家耳熟能详的知名APP中使用Flutter技术并落地，尤其国内知名互联网公司对Flutter投入度很大，社区也是非常活跃。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/8_flutter_company.png" alt="img"></p>
+<h4 id="8-Flutter未来趋势"><a href="#8-Flutter未来趋势" class="headerlink" title="8. Flutter未来趋势"></a>8. Flutter未来趋势</h4><p>目前Flutter主要在移动端Android/iOS双端跨端，Flutter 的愿景是成为一个多端运行的 UI 框架，能够支持不仅仅是移动端，还包括Web、桌面、甚至嵌入式设备。在2019 Google I/O 开发者大会上推出的使用 Flutter 开发 Web 应用的框架，同年9月发布Flutter 1.9，并将Flutter web合入Flutter主仓库。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/9_flutter_multi_arch.png" alt="img"></p>
+<p>从架构图看，Flutter采用同一个Dart Framework层来统一Flutter C++引擎和Web引擎，最终可以运行在Android，iOS，Browser上，从Flutter引擎代码不难看出Flutter也是支持Fuchsia操作系统。</p>
+<p>Fuchsia是Google内部正在开发的一款新的操作系统，采用Flutter作为系统默认的UI框架，也就是说Flutter天然支持Fuchsia，这无疑让Flutter在众多的跨平台方案更有优势。</p>
+<p>从Fuchsia技术架构来看，内核层zircon的基础LK是专为嵌入式应用中小型系统设计的内核，代码简洁，适合嵌入式设备和高性能设备，比如IOT、移动可穿戴设备等，目前这些领域还没有标准化级别的垄断者。以及在框架层中有着语音交互、云端以及智能化等模块，由此笔者揣测未来Fuchsia率先应用在音控等智能嵌入式设备。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/10_fuchsia.png" alt="img"></p>
+<p>目前大家普遍比较看好的未来两个技术就是5G和IoT时代。对于5G的需求，很大程度上是因为移动互联网发展到“IoT时代”的阶段。这个发展阶段，全球上网设备的数量可能会达到500亿个。随着5G+IOT时代的到来，现在大家比较关注的Flutter包大小也同样不再是一个问题，或许Flutter技术的生命期比客户端更长，或许Fuchsia正在驰骋IOT疆场，你所掌握的Flutter技术栈可以无缝迁移，一次弯道超车的机会。</p>
+<p>到此，介绍完跨平台技术演进以及Flutter的优势。看到这，相信你可能对Flutter技术有一定兴趣，为了能让大家快速了解Flutter内部原理而不枯燥，Gityuan通过一系列图来帮大家从整体架构来快速理解Flutter。</p>
+<h2 id="二、Flutter引擎架构"><a href="#二、Flutter引擎架构" class="headerlink" title="二、Flutter引擎架构"></a>二、Flutter引擎架构</h2><h4 id="1-Flutter技术架构"><a href="#1-Flutter技术架构" class="headerlink" title="1. Flutter技术架构"></a>1. Flutter技术架构</h4><p>先来看看Flutter整体的技术架构，分为四层，从上之下依次是Dart APP，Dart Framework， C++ Engine，Platform。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/11_flutter_arch.png" alt="img"></p>
+<p>Flutter架构最核心的便是Framework（框架）和Engine（引擎）：</p>
+<ul>
+<li>Flutter Framework层：用Dart编写，封装整个Flutter架构的核心功能，包括Widget、动画、绘制、手势等功能，有Material（Android风格UI）和Cupertino（iOS风格）的UI界面， 可构建Widget控件以及实现UI布局。</li>
+<li>Flutter Engine层：用C++编写，用于高质量移动应用的轻量级运行时环境，实现了Flutter的核心库，包括Dart虚拟机、动画和图形、文字渲染、通信通道、事件通知、插件架构等。引擎渲染采用的是2D图形渲染库Skia，虚拟机采用的是面向对象语言Dart VM，并将它们托管到Flutter的嵌入层。shell实现了平台相关的代码，比如跟屏幕键盘IME和系统应用生命周期事件的交互。不同平台有不同的shell，比如Android和iOS的shell。</li>
+</ul>
+<h4 id="2-Flutter编译产物"><a href="#2-Flutter编译产物" class="headerlink" title="2. Flutter编译产物"></a>2. Flutter编译产物</h4><p>看完Flutter内部架构，或许你好奇，Flutter不用Android/iOS的本地语言技术开发，Dart编写完的代码如何让不同系统可以识别，最终编译后得到的产物是什么呢？</p>
+<p><img src="http://gityuan.com/img/flutter-arch/12_flutter_artifact.png" alt="img"></p>
+<p>Flutter产物分为Dart业务代码和Engine代码各自生成的产物，图中的Dart Code包含开发者编写的业务代码，Engine Code是引擎代码，如果并没有定制化引擎，则无需重新编译引擎代码。</p>
+<p>一份Dart代码，可编译生成双端产物，实现跨平台的能力。经过编译工具处理后可生成双端产物，图中便是release模式的编译产物，Android产物是由vm、isolate各自的指令段和数据段以及flutter.jar组成的app.apk，iOS产物是由App.framework和Flutter.framework组成的Runner.app。</p>
+<p>这个过程涉及frontend_server、gen_snapshot、xcrun、ninja编译工具。frontend_server前端编译器会进行词法分析、语法分析以及相关全局转换等工作，将dart代码转换为AST(抽象语法树)，并生成app.dill格式的dart kernel。gen_snapshot经过CHA、内联等一系列执行流的优化，根据中间代码生成优化后的FlowGraph对象，再转换为具体相应系统架构（arm/arm64等）的二进制指令。</p>
+<h4 id="3-Flutter引擎启动"><a href="#3-Flutter引擎启动" class="headerlink" title="3. Flutter引擎启动"></a>3. Flutter引擎启动</h4><p>既然了解了Flutter的编译产物，那你或许又好奇，Flutter这台引擎如何发动的，怎么跟Native衔接呢？</p>
+<p><img src="http://gityuan.com/img/flutter-arch/13_flutter_engine_startup.png" alt="img"></p>
+<p>这里以Android为例，熟悉Android的开发者，应该都了解APP启动过程，会执行Application和Activity的onCreate()方法，FlutterApplication和FlutterActivity的onCreate()方法正是连接Native和Flutter的枢纽。</p>
+<ul>
+<li>FlutterApplication.java的onCreate过程主要完成初始化配置、加载引擎libflutter.so、注册JNI方法；</li>
+<li>FlutterActivity.java的onCreate过程，通过FlutterJNI的AttachJNI()方法来初始化引擎Engine、Dart虚拟机、Isolate、taskRunner等对象。再经过层层处理最终调用main.dart中main()方法，执行runApp(Widget app)来处理整个Dart业务代码。</li>
+</ul>
+<p>Flutter引擎启动中会创建有4个TaskRunner以及创建虚拟机，分别来看看它们的工作原理。</p>
+<h4 id="4-TaskRunner工作原理"><a href="#4-TaskRunner工作原理" class="headerlink" title="4. TaskRunner工作原理"></a>4. TaskRunner工作原理</h4><p>Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，会为这些线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列(或任务队列)以及Looper；有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/14_task_loop.png" alt="img"></p>
+<p>上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。</p>
+<p>每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。</p>
+<ul>
+<li>Step 1: 检查task，当task队列不为空，先执行一个task；</li>
+<li>Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；</li>
+</ul>
+<p>可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</p>
+<p>了解了其工作机制，再来看看这4个Task Runner的具体工作内容。</p>
+<ul>
+<li>Platform Task Runner：运行在Android或者iOS的主线程，尽管阻塞该线程并不会影响Flutter渲染管道，平台线程建议不要执行耗时操作；否则可能触发watchdog来结束该应用。比如Android、iOS都是使用平台线程来传递用户输入事件，一旦平台线程被阻塞则会引起手势事件丢失。</li>
+<li>UI Task Runner: 运行在ui线程，比如1.ui，用于引擎执行root isolate中的所有Dart代码，执行渲染与处理Vsync信号，将widget转换生成Layer Tree。除了渲染之外，还有处理Native Plugins消息、Timers、Microtasks等工作；</li>
+<li>GPU Task Runner：运行在gpu线程，比如1.gpu，用于将Layer Tree转换为具体GPU指令，执行设备GPU相关的skia调用，转换相应平台的绘制方式，比如OpenGL, vulkan, metal等。每一帧的绘制需要UI Runner和GPU Runner配合完成，任何一个环节延迟都可能导致掉帧；</li>
+<li>IO Task Runner：运行在io线程，比如1.io，前3个Task Runner都不允许执行耗时操作，该Runner用于将图片从磁盘读取出来，解压转换为GPU可识别的格式后，再上传给GPU线程。为了能访问GPU，IO Runner跟GPU Runner的Context在同一个ShareGroup。比如ui.image通过异步调用让IO Runner来异步加载图片，该线程不能执行其他耗时操作，否则可能会影响图片加载的性能。</li>
+</ul>
+<h4 id="5-Dart虚拟机工作"><a href="#5-Dart虚拟机工作" class="headerlink" title="5. Dart虚拟机工作"></a>5. Dart虚拟机工作</h4><p>Flutter引擎启动会创建Dart虚拟机以及Root Isolate。DartVM自身也拥有自己的Isolate，完全由虚拟机自己管理的，Flutter引擎也无法直接访问。Dart的UI相关操作，是由Root Isolate通过Dart的C++调用，或者是发送消息通知的方式，将UI渲染相关的任务提交到UIRunner执行，这样就可以跟Flutter引擎相关模块进行交互。</p>
+<p>何为Isolate，从字面上理解是“隔离”，isolate之间是逻辑隔离的。Isolate中的代码也是按顺序执行，因为Dart没有共享内存的并发，没有竞争的可能性，故不需要加锁，也没有死锁风险。对于Dart程序的并发则需要依赖多个isolate来实现。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/15_isolate_heap.png" alt="img"></p>
+<p>图解：</p>
+<ul>
+<li>isolate堆是运该isolate中代码分配的所有对象的GC管理的内存存储；</li>
+<li>vm isolate是一个伪isolate，里面包含不可变对象，比如null，true，false；</li>
+<li>isolate堆能引用vm isolate堆中的对象，但vm isolate不能引用isolate堆；</li>
+<li>isolate彼此之间不能相互引用；</li>
+<li>每个isolate都有一个执行dart代码的Mutator thread，一个处理虚拟机内部任务(比如GC, JIT等)的helper thread； 可见，isolate是拥有内存堆和控制线程，虚拟机中可以有很多isolate，但彼此之间内存不共享，无法直接访问，只能通过dart特有的Port端口通信；isolate除了拥有一个mutator控制线程，还有一些其他辅助线程，比如后台JIT编译线程、GC清理/并发标记线程；</li>
+</ul>
+<h4 id="6-Widget架构概览"><a href="#6-Widget架构概览" class="headerlink" title="6. Widget架构概览"></a>6. Widget架构概览</h4><p>Flutter引擎启动后执行Dart业务，是通过runApp(Widget app)方法，那Widget又是什么呢？</p>
+<p><img src="http://gityuan.com/img/flutter-arch/16_widget_arch.png" alt="img"></p>
+<p>Widget是所有Flutter应用程序的基石，Widget可以是一个按钮，一种字体或者颜色，一个布局属性等，在Flutter的UI世界可谓是“万物皆Widget”。常见的Widget子类为StatelessWidget(无状态)和StatefulWidget(有状态)；</p>
+<ul>
+<li>StatelessWidget：内部没有保存状态，UI界面创建后不会发生改变；</li>
+<li>StatefulWidget：内部有保存状态，当状态发生改变，调用setState()方法会触发StatefulWidget的UI发生更新，对于自定义继承自StatefulWidget的子类，必须要重写createState()方法。</li>
+</ul>
+<p><strong>三棵树</strong></p>
+<p><img src="http://gityuan.com/img/flutter-arch/17_three_tree.png" alt="img"></p>
+<p>图解：</p>
+<ul>
+<li>Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。</li>
+<li>Element表示Widget配置树的特定位置的一个实例，同时持有Widget和RenderObject，负责管理Widget配置和RenderObject渲染。Element状态由Flutter Framework管理， 开发人员只需更改Widget即可。</li>
+<li>RenderObject表示渲染树的一个对象，负责真正的渲染工作，比如测量大小、位置、绘制等都由RenderObject完成。</li>
+</ul>
+<p>可见，开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。</p>
+<h4 id="7-渲染原理"><a href="#7-渲染原理" class="headerlink" title="7. 渲染原理"></a>7. 渲染原理</h4><p>Dart的UI采用Widget来实现，最终转换为RenderObject，那界面又是如何渲染的呢？</p>
+<p><img src="http://gityuan.com/img/flutter-arch/18_gpu_pipeline.png" alt="img"></p>
+<p>渲染过程，UI线程完成布局、绘制操作，生成Layer Tree；GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步骤：</p>
+<ul>
+<li>Animate: 遍历_transientCallbacks，执行动画回调方法；</li>
+<li>Build: 对于dirty的元素会执行build构造，没有dirty元素则不会执行，对应于buildScope()</li>
+<li>Layout: 计算渲染对象的大小和位置，对应于flushLayout()，这个过程可能会嵌套再调用build操作；</li>
+<li>Compositing bits: 更新具有脏合成位的任何渲染对象， 对应于flushCompositingBits()；</li>
+<li>Paint: 将绘制命令记录到Layer， 对应于flushPaint()；</li>
+<li>Compositing: 将Compositing bits发送给GPU， 对应于compositeFrame()；</li>
+</ul>
+<p>GPU线程通过skia向GPU硬件绘制一帧的数据，GPU将帧信息保存到FrameBuffer里面，然后视频控制器会根据VSync信号从FrameBuffer取帧数据传递给显示器，从而显示出最终的画面。</p>
+<h4 id="8-Platform-Channels"><a href="#8-Platform-Channels" class="headerlink" title="8. Platform Channels"></a>8. Platform Channels</h4><p>Flutter框架提供了UI的控件支持，对于APP除了UI还有其他依赖于Native平台的支持，比如调用Camera的功能，该怎么办呢？为此，Flutter通过提供Platform Channel的功能，使得Dart代码具备与Native交互的能力。</p>
+<p><img src="http://gityuan.com/img/flutter-arch/19_platform_channels.png" alt="img"></p>
+<p>Platform Channel用于Flutter与Native之间的消息传递，整个过程的消息与响应是异步执行，不会阻塞用户界面。Flutter引擎框架已完成桥接的通道，这样开发者只需在Native层编写定制的Android/iOS代码，即可在Dart代码中直接调用，这也就是Flutter Plugin插件的一种形式。</p>
+<h2 id="三、Flutter源码解读"><a href="#三、Flutter源码解读" class="headerlink" title="三、Flutter源码解读"></a>三、Flutter源码解读</h2><p>笔者(Gityuan)之前一直从事于Android操作系统底层研发工作，今年刚接触Flutter，Flutter作为一门全新的跨平台技术框架，不断深究会发现这是一个小型系统，涉及到的技术很广：</p>
+<ul>
+<li>编译技术如何将dart代码转换为AST(抽象语法树)，如何汇编转换为机器码，打包产物是什么？</li>
+<li>Flutter这台引擎如何发动的，怎么跟Native原生系统衔接运行，如何识别产物并加载到内存？</li>
+<li>引擎启动后，TaskRunner如何分发任务，跟原生系统消息机制有什么关系？</li>
+<li>Dart虚拟机如何管理内存，跟isolate又有什么关系？</li>
+<li>开发者编写的Widget控件如何渲染到屏幕上？</li>
+<li>Flutter如何通过plugin支持移动设备提供的服务？</li>
+</ul>
+<p>这些疑问在前面都逐一简要解答，如果仅仅是用Flutter做业务开发，并不需要掌握这么深度技术，不过，知其然知其所以然，能让你游刃有余。</p>
+<p>本文同步在我的公号<a href="https://mp.weixin.qq.com/s/UZQU-PWM5JEb3dYtZKT6Cw" target="_blank" rel="noopener">《跨平台技术演进及Flutter未来》</a>，另外为大家创建了Flutter微信交流群，想加入可添加Gityuan微信好友，备注flutter即可，如发现任何文章有问题欢迎大家直接跟我反馈。</p>
+<h4 id="启动篇"><a href="#启动篇" class="headerlink" title="启动篇"></a>启动篇</h4><ul>
+<li><a href="http://gityuan.com/2019/06/22/flutter_booting/" target="_blank" rel="noopener">深入理解Flutter引擎启动</a></li>
+<li><a href="http://gityuan.com/2019/06/23/dart-vm/" target="_blank" rel="noopener">深入理解Dart虚拟机启动</a></li>
+<li><a href="http://gityuan.com/2019/06/29/flutter_run_app/" target="_blank" rel="noopener">深入理解Flutter应用启动</a></li>
+</ul>
+<h4 id="通信篇"><a href="#通信篇" class="headerlink" title="通信篇"></a>通信篇</h4><ul>
+<li><a href="http://gityuan.com/2019/07/20/flutter_message_loop/" target="_blank" rel="noopener">深入理解Flutter消息机制</a></li>
+<li><a href="http://gityuan.com/2019/08/10/flutter_channel/" target="_blank" rel="noopener">深入理解Flutter的Platform Channel机制</a></li>
+<li><a href="http://gityuan.com/2019/07/21/flutter_future/" target="_blank" rel="noopener">深入理解Flutter异步Future机制</a></li>
+<li><a href="http://gityuan.com/2019/07/27/flutter-isolate/" target="_blank" rel="noopener">深入理解Flutter的Isolate创建过程</a></li>
+</ul>
+<h4 id="渲染篇"><a href="#渲染篇" class="headerlink" title="渲染篇"></a>渲染篇</h4><ul>
+<li><a href="http://gityuan.com/2019/06/15/flutter_ui_draw/" target="_blank" rel="noopener">Flutter渲染机制—UI线程</a></li>
+<li><a href="http://gityuan.com/2019/06/16/flutter_gpu_draw/" target="_blank" rel="noopener">Flutter渲染机制—GPU线程</a></li>
+<li><a href="http://gityuan.com/2019/07/06/flutter_set_state/" target="_blank" rel="noopener">深入理解setState更新机制</a></li>
+<li><a href="http://gityuan.com/2019/07/13/flutter_animator/" target="_blank" rel="noopener">深入理解Flutter动画原理</a></li>
+</ul>
+<p>后续笔者将持续研究与梳理Flutter内部机制的文章。</p>
+<h2 id="四、结束语"><a href="#四、结束语" class="headerlink" title="四、结束语"></a>四、结束语</h2><p>本文分为三部分全方位逐级深入的分析Flutter技术，先讲述跨平台技术的过去与未来，再解读Flutter架构设计原理，最后剖析Flutter内部源码，后续将持续更新更多剖析技术深度细节以及实战经验，以彻底揭秘更多Flutter技术。</p>
+<p>科技不断在进步，技术不断发展，移动跨平台技术几乎从Android、iOS诞生不久便出现，已发展快10年。时至今日，兼具跨端高效率与高性能体验的Flutter力压群雄，崭露头角，已然成为当下最热门的移动端新技术，全球越来越多的公司在Flutter技术布局并落地产品应用，社区也非常活跃。</p>
+<p>随着5G+IOT时代的到来，Fuchsia系统或许发力IOT新战场，你所掌握的Flutter技术栈可以无缝迁移，这是一次弯道超车的机会。即便Fuchsia落败，相信只要深扎Flutter系统技术的精髓，其他任何的移动端新技术都可以轻松快速地掌握。</p>
+<p>最后，用一句话来结束本次分享，“有时候，你选择一个方向，不是因为它一定会成为未来，而是它有可能成为不一样的未来。”</p>
+]]></content>
+  </entry>
+  <entry>
     <title>【转载】搭建Flutter Engine源码编译环境</title>
     <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E6%90%AD%E5%BB%BAFlutter%20Engine%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
     <content><![CDATA[<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><h4 id="1-1-准备"><a href="#1-1-准备" class="headerlink" title="1.1 准备"></a>1.1 准备</h4><ul>
@@ -1012,6 +1190,401 @@
 <li><a href="https://github.com/flutter/flutter/wiki/The-flutter-tool" target="_blank" rel="noopener">https://github.com/flutter/flutter/wiki/The-flutter-tool</a></li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>【转载】字节跳动为什么选用Flutter：并非跨平台终极之选，但它可能是不一样的未来</title>
+    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8Flutter%EF%BC%9A%E5%B9%B6%E9%9D%9E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BB%88%E6%9E%81%E4%B9%8B%E9%80%89%EF%BC%8C%E4%BD%86%E5%AE%83%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E6%9C%AA%E6%9D%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>2018 年 12 月 ，Google 宣布 Flutter 1.0 版本正式发布。截至目前， Flutter 在 Github 上已获得 88000+ 的关注和 11000+ 的 Fork ，其发展速度相当惊人，是今年移动端最火热的开发框架之一。</p>
+</blockquote>
+<p>Flutter 大火背后的原因是什么？为什么越来越多的企业和开发者会选择使用 Flutter？Flutter 会成为跨平台开发的终极之选吗？我认为“ Flutter 并非跨平台终极之选，最初选择 Flutter，不是因为它一定会成为未来终极之选，而是因为它有可能成为不一样的未来。”</p>
+<h2 id="Flutter-大火的原因"><a href="#Flutter-大火的原因" class="headerlink" title="Flutter 大火的原因"></a>Flutter 大火的原因</h2><p>有人说 Flutter 大火主要原因是它选择了 Dart 语言，Dart 有着高性能的表现和可快速分配内存的能力，能同时支持 JIT 和 AOT 模式，允许在带类型的语言中支持形变和有状态热重载，能编译出高效率的 ARM 机器码指令，Dart 作为面向对象的语言也能让绝大多数开发者更快速上手。我认可 Dart 语言有一定的优势，但这样的优势并非 Dart 独有，我想这更不会是大家选择 Flutter 的核心原因，这是因果倒置。事实上，Dart 是 2011 年推出的，在 Flutter 出现之前，Dart 曾一度几乎被人遗忘。正是因为近年来 Flutter 的火爆，才让 Dart 重新进入大众的视线。Flutter 当初选择 Dart，或者仅因为 Google 的 Flutter 和 Dart 这两个团队离得比较近，交流比较方便。 我认为 Flutter 之所以大火，主要是以下几个原因：</p>
+<h4 id="1-现有跨平台技术存在缺陷"><a href="#1-现有跨平台技术存在缺陷" class="headerlink" title="1. 现有跨平台技术存在缺陷"></a>1. 现有跨平台技术存在缺陷</h4><p>在移动互联网时代，Android 和 iOS 两大阵营长期共存，再加上体系成熟的 Web 前端技术，导致出现同一个应用需多端重复开发的人力成本问题。正因如此，移动时代下的跨平台技术是一个需要长期研究的课题。如果当下的跨平台技术已经有比较完美的解决方案，可能就没有新技术萌芽的机会。而事实上，目前业界比较成熟的跨平台技术都存在一定的缺陷，比如小程序（WebView）渲染耗时过长，白屏率会影响转化收益，能实现的功能非常受限；再比如 React Native 的性能不足、问题排除难、维护成本高等。而 Flutter 的出现，让这些跨平台开发问题有所改善，它还是 Google 开源的技术，自身也具备一定的热度。另外，一直备受关注且神秘的 Fuchsia 系统在 UI 框架上使用的也是 Flutter，可作为长期战略投入，这也增强了大家对 Flutter 的信心。</p>
+<h4 id="2-研发效率就是竞争力"><a href="#2-研发效率就是竞争力" class="headerlink" title="2. 研发效率就是竞争力"></a>2. 研发效率就是竞争力</h4><p>移动互联网进入下半场，出现一些新兴互联网独角兽、小巨头，在没有历史包袱的情况下，更愿意尝试技术上限更高的新技术。从校招和社招的难度上不难发现：客户端的人才相比之前更为稀缺，尤其是 iOS 工程师。而下半场会有更多竞争和更为激烈的赛道，比如教育等方向。Flutter 本身非常适合从零开始的没有历史包袱的应用开发，对于新业务尤其是在团队人力紧缺的情况下，在技术选型上考虑 Flutter，能加快产品在多端落地、快速试错。</p>
+<h4 id="3-集漂亮与流畅集于一身"><a href="#3-集漂亮与流畅集于一身" class="headerlink" title="3. 集漂亮与流畅集于一身"></a>3. 集漂亮与流畅集于一身</h4><p>Flutter “一出生”就以“UI 漂亮、像素级可控、性能流畅、可媲美原生性能”等特点吸引广大开发者的眼球，自渲染引擎甚至具备开发游戏的能力。移动下半场，没有人口红利，竞争更为激烈，如何能更好地满足用户对高品质、高流畅的需求，便是移动端一种强有力的竞争力。跨平台技术想要拥有更高的流畅度，采用自渲染技术的方案便是更优解，也是一个更为彻底的跨平台技术方向。</p>
+<h2 id="字节跳动选择-Flutter-的初心"><a href="#字节跳动选择-Flutter-的初心" class="headerlink" title="字节跳动选择 Flutter 的初心"></a>字节跳动选择 Flutter 的初心</h2><p>说到这里，先分享一下 Flutter 最初是如何诞生的故事。Flutter 创始人 Eric 之前在 Chrome 团队工作，期间遇到一些难以解决的问题， 希望 Web 中的一部分能够拥有更加平滑的体验， 为此他花了几周时间做了一个实验，不考虑 Web 的兼容方式，删除了大量为了兼容访问的代码和一些 Web 开发者不常用的功能， 删除到有不少 Web 元素的渲染已经不支持了，然后做了一个基准测试，得出结论是某些关注指标的速度快了 20 倍。于是，Eric 决定再做点什么，后面投入了大量研究和开发，便有了现在的 Flutter 。</p>
+<p>听到这里给人的感觉是，对于 Web 工程师而言 Flutter 应该容易上手。我跟公司很多正在使用或者调研 Flutter 的业务团队做过沟通，发现客户端比前端的同学对 Flutter 接受度更高，我个人从 Android 端技术出身，的确觉得学习 Flutter 还是非常容易上手的，但公司内前端的同学对 Flutter 使用的吐槽会多一点。所以，我认为 Flutter 更像是以客户端视角的跨平台技术，Flutter 与其说是大前端技术，不如说是大移动端技术。Flutter 发展的 Roadmap 也是先全面支持 Android/iOS 端能力，再进一步完善 Web 端能力支持的。</p>
+<p>字节跳动对于客户端技术还是非常重视的，字节跳动有很多客户端工程师，之前客户端深入点的基础技术更多是搞插件化、热修复、性能优化、安全加固等，跨平台方向一直都是前端工程师在不遗余力地推进，属于大前端方向。而 Flutter 是客户端更有主导的跨平台技术方案。另外说明，字节跳动并不是说只有一套跨平台技术栈，公司内部也是多套跨端技术栈并存，也包括自研的方案。</p>
+<p>在字节跳动，跨平台技术并没有形成大规模的落地，之前也提到没有历史包袱，所以在面对跨平台技术选型的时候，更关注跨平台技术的技术上限以及发展潜力，自渲染技术的 Flutter 可以理解为更彻底更纯粹的跨平台技术，伴随着媲美原生的流畅度，这便是我们选择 Flutter 的初心。</p>
+<h2 id="Flutter-落地过程中的“坑”"><a href="#Flutter-落地过程中的“坑”" class="headerlink" title="Flutter 落地过程中的“坑”"></a>Flutter 落地过程中的“坑”</h2><p>截至目前，字节跳动有很多业务落地了 Flutter 技术方案，包括今日头条、西瓜视频、皮皮虾等 20 多个业务在使用 Flutter 开发，有纯 Flutter 工程，也有 Flutter 与 Native 的混合工程。如果大家想要了解更多业务落地情况，后续我会在今年的 QCon 北京 2020 大会上分享。</p>
+<p>Flutter 虽潜力上限很高，但仍需打磨和雕琢，我们在 Flutter 推动过程中遇到很多问题，比如包体积过大的问题、性能达不到预期、对混合工程的支持不够友好、各宿主 Flutter 引擎版本不一致、基础库不完善、Flutter 改造后各项数据打平等。除此之外，还有很多非技术的困难，比如业务团队并不认可 Flutter 新技术，工程师缺乏 Flutter 经验，担忧审核风险等，都会影响业务方是否采用 Flutter 技术，每一个困难都需要去解决，不然就难以落地。下面就其中两个难点，我来展开聊一下。</p>
+<h4 id="1-包体积问题"><a href="#1-包体积问题" class="headerlink" title="1. 包体积问题"></a>1. 包体积问题</h4><p>字节跳动内的大型 APP，比如今日头条、抖音等对包体积的增量非常敏感，Flutter 的包体积涉及两个部分，一个是一次性 Flutter 引擎的包体积问题，一个是每次写 Dart 代码比写 OC 代码代码增量的问题。这两个问题对我们来说都非常棘手，我们成立了包体积优化专项进行全力攻坚，同时跟 Google 工程师多次会议沟通，不断精简包体积。最终我们通过一系列优化手段，包含 Data 压缩、编译优化、Skia 裁剪、BoringSSL/ICU 库 / 文字渲染 /libwebp 等库裁剪取得了不少的效果；通过实践我们发现用 OC 代码和 Dart 代码写相同的业务逻辑，Dart 生成的机器码指令比 OC 多，主要在生成的二进制指令头、指令冗余、指令对齐的精简，以及 StackMap 和 CodeSourceMap 的精简等方面。同时我们也向 Google 反馈了这些情况。关于指令精简，可以查看 Issue 进展，里面有记录详细的推进过程： <a href="https://github.com/flutter/flutter/issues/40345" target="_blank" rel="noopener">https://github.com/flutter/flutter/issues/40345</a></p>
+<h4 id="2-性能优化问题"><a href="#2-性能优化问题" class="headerlink" title="2. 性能优化问题"></a>2. 性能优化问题</h4><p>这是我们遇到的棘手问题之一，我们用 Flutter 官方提供的性能分析工具 Timeline 来分析一个比较诡异的性能问题，始终无法发现任何异常。困扰已久，后来干脆重新撸了一遍 Timeline 整个性能分析工具的源码，最终找到了其缺陷，并向 Flutter 社区提及，合入了 10 个 PR ，基于此让我有幸成为了 Flutter Member ，后续会持续向社区贡献更多力量：<a href="https://github.com/flutter/flutter/issues/47771" target="_blank" rel="noopener">https://github.com/flutter/flutter/issues/47771</a>.</p>
+<p>Flutter 是一个自渲染的跨平台技术，有着很高的性能上限，但并不代表现在性能各方面都很优秀，毕竟 Flutter 作为一个“新生儿”，还是有一些需要进一步改造的地方。除性能工具改造之外，其实在 Flutter 落地场景中，我们也解决了不少性能问题，同时优化了自身的引擎，比如 UI 预加载策略、Flutter Turbo 技术、Vsync 调度策略等，让引擎提速，争取让 Flutter 性能发挥到极致。</p>
+<h2 id="Flutter-在业务层面的发展阻力"><a href="#Flutter-在业务层面的发展阻力" class="headerlink" title="Flutter 在业务层面的发展阻力"></a>Flutter 在业务层面的发展阻力</h2><p>引入 Flutter 之后，在公司的业务也创造了不少价值。主要体现在这几个方面：其一，Flutter 多端一致性上表现良好，能做到所见即所得，无需针对某一平台做额外适配工作；其二，热重载技术使得设计团队和工程团队可以非常快速的修改和调试 UI，设计师只需要关注一个平台实现，UI 验收效率明显提高，跨端开发可以提高工程师的人效（有团队初步估算人效大致提升了 1.8 倍）；其三，性能流畅度提升，相较于 H5 版本首屏时间有较大提升，最后，产品商业化数据都有明显的收益，能直观地看到 Flutter 给公司带来的创收。</p>
+<p>不过，现阶段 Flutter 的发展仍有一些阻力：</p>
+<h4 id="1-Flutter-采用的是-Dart-语言，没能引入前端成熟的生态体系"><a href="#1-Flutter-采用的是-Dart-语言，没能引入前端成熟的生态体系" class="headerlink" title="1. Flutter 采用的是 Dart 语言，没能引入前端成熟的生态体系"></a>1. Flutter 采用的是 Dart 语言，没能引入前端成熟的生态体系</h4><p>作为前端工程师可能更希望是 Flutter 上层采用的是 JavaScript 或者 TypeScript，未来可考虑提供高性能的 Dart 与 JS 互转能力。另外，Flutter 开发对于前端开发工程师而言，还是有一些挑战的，纯前端不一定能 Cover 的技术，比如 Flutter 的一个硬件相关的 Plugin 只在某款手机出现 Bug，如果社区没有现存解决方案，可能就需要花比较大的时间成本去学习 Native 技术，或者请教客户端工程师。</p>
+<h4 id="2-开源库相对比较欠缺，更新频次不足"><a href="#2-开源库相对比较欠缺，更新频次不足" class="headerlink" title="2. 开源库相对比较欠缺，更新频次不足"></a>2. 开源库相对比较欠缺，更新频次不足</h4><p>Flutter 生态还不够完善，新业务接入需要自己造轮子，尤其是在业务团队对 Flutter 掌握不够熟练的情况下，会增加额外的成本，Flutter 在大中型企业会更容易推广起来，有人力可以去造轮子让公司内其他的业务复用；另外，Flutter 文档有点少，能借鉴的经验不多，未来需加强和鼓励更多开发者加入到生态共建。</p>
+<h4 id="3-跟原生系统生态存在着一定的竞争关系"><a href="#3-跟原生系统生态存在着一定的竞争关系" class="headerlink" title="3. 跟原生系统生态存在着一定的竞争关系"></a>3. 跟原生系统生态存在着一定的竞争关系</h4><p>有朋友跟我说起过这样一件事，看到 Flutter 这么火，Android 开发团队就问他，“大家为什么要用 Flutter 开发 App，我们 Android 哪一点不好，告诉我们，我们可以改进它”。姑且不说他们对跨平台理解不够，但至少能看出原生平台对跨端技术的担忧，不少 Android 团队在推出 Kotlin Multiplatform ，希望能争夺更多市场。 另外，苹果商店的审核风险也是大家所担忧的，官方的公告原意是说应用程序的核心特性和功能必须包含在软件的二进制文件中，而不是通过类似 HTML5 的技术来实现动态更新，苹果要打压的是动态更新技术，考虑到 Flutter 的合规性，Google 主动把 Flutter 的 iOS 动态化能力去掉了，Flutter 最终打包生成的产物就是 IPA，Flutter 其实是完全符合规范的，甚至还有使用 Flutter 开发的应用还被 Apple 推荐过。相反，React Native、Weex、H5 等技术都是一种动态化解决方案，这正是苹果要管控的，目前苹果的态度更多的是不提倡，但也不保证不封杀。即便如此，苹果不希望原生开发生态被其他跨平台技术抢占，苹果也在不断推行 SwiftUI 框架，力图抵挡 Flutter 等跨平台技术对原生开发的蚕食。Flutter 未来要加强推进步伐，让更多的大型 App 通过 Flutter 技术得到收益，只有用户群体上来，未来的地位和话语权才会更高，就像现在小程序，原则上是不符合苹果的审核要求的，但各大型应用基本都上线了小程序功能，目前来看不至于说苹果把小程序直接干掉。</p>
+<h2 id="Flutter-并非跨平台终极之选"><a href="#Flutter-并非跨平台终极之选" class="headerlink" title="Flutter 并非跨平台终极之选"></a>Flutter 并非跨平台终极之选</h2><p>从 Hybrid App 到 React Native，再到 Flutter，跨平台技术层出不穷。目前来看，Flutter 是跨平台开发的最热门技术，但我并不认为 Flutter 就一定是跨平台开发的终极之选，它有着历史局限性，我只能说 Flutter 可能是当下最有潜力的跨平台技术。如果你对性能流畅度有高要求，或者有多个产品希望快速在多端试错迭代，我会推荐你尝试 Flutter。</p>
+<p>未来一段时间，还应该是多套跨平台技术并存的时代， 目前 Flutter 也没有全面做到可以碾压其他跨平台技术，可根据团队以及业务特点来考虑更适合的方案。有一定客户端经验的同学入手 Flutter 会更快一些，如果团队在 React Native 上有很好落地，业务没有遇到性能等瓶颈，且团队缺少客户端能力，建议先做技术调研和沉淀，不要盲目追求新技术，只有当团队有能力且业务有需求的情况下，建议再考虑切换技术栈。</p>
+<p>我们前面提到过，一直备受关注且神秘的 Fuchsia 系统在 UI 框架上使用的也是 Flutter。Fuchsia 是 Google 开发的下一代操作系统。Fuchsia 是采用全新模块化设计思想、跨平台框架技术的系统。它能支持快捷裁剪定制，更能适应未来的多元化设备，包含手机、平板、笔记本、路由器、智能设备、机器人等，Fuchsia 有可能成为一个全新的跨全平台的通用操作系统。</p>
+<p>在现阶段，开始尝试探索和积累沉淀 Flutter 技术能力，并在业务上使用 Flutter 技术的应用，从战略上来将已经处于领先。选择 Flutter，正可谓是“进可攻退可守”，往前进一步，Flutter 应用未来可无缝迁移到 Fuchsia 系统，借用 Fuchsia 系统的能量扩展到更广泛的用户场景；退一步，Flutter 技术自身在 Android/iOS 平台的表现相比其他跨平台技术已经是很优秀。</p>
+<p>最初选择 Flutter，不是因为它一定会成为未来终极之选，而是它有可能成为不一样的未来。</p>
+<h2 id="Flutter-展望：终将走向多端一体化"><a href="#Flutter-展望：终将走向多端一体化" class="headerlink" title="Flutter 展望：终将走向多端一体化"></a>Flutter 展望：终将走向多端一体化</h2><p>回顾整移动操作系统的演变历程，从塞班功能机到 Android/iOS 智能机，从小屏手机到全面屏、刘海屏、水滴屏。任何系统的演变最终体现在输入和输出两个环节，接收到输入信号后经过操作系统处理后输出信息给用户。从按键式交互到触屏式交互，伴随着塞班系统到 Android 系统的转变，未来的交互方式一定会更加生物智能化，当下的触屏交互可以理解成人类的触觉输入方式，未来将朝着人们更常见的听觉（语音）输入和视觉（身体姿势、表情等）输入，甚至嗅觉（气味变化）输入，这些都会伴随着新的操作系统而诞生。屏幕从小尺寸到大尺寸，并没有引发操作系统变革，因为技术创新是非连续性，非连续性才会引发第二曲线，诞生新技术。从 1960 年大型机，到 1990 年个人笔记本，再到现在的智能手机，设备本身越来越小。未来的设备如果发展非连续变革，可能不再需要实体硬件，随处可输出，一张白纸、一面墙，到那时操作系统的 UI 架构必然会有全新的变化。</p>
+<p>随着科技的发展，5G 时代的到来，人工智能的日趋成熟，端到底会有哪些变化？是否会出现新的操作系统？系统的 UI 架构是否会出现新的变革？Android/iOS 平台是否能与之并存？搭载 Flutter UI 框架的 Fuchsia 系统能否在 IOT 领域以及新的交互方式大放异彩，再领风骚？是否有万物互联互通的超级平台出现？</p>
+<p>技术在不断演变中螺旋前进，平台自身也随之演进，未来 Flutter 会朝着多端一体化的方向发展，能支持更多的端（包括平板、笔记本、智能设备等）。作为一套跨平台的 UI 框架，Flutter 采用自渲染的技术方案，是一个上限很高的跨平台技术，但 Flutter 更重要的是需要提升工程化能力以及生态圈的建设，才能吸引更多的开发者加入。</p>
+<h2 id="加入我们"><a href="#加入我们" class="headerlink" title="加入我们"></a>加入我们</h2><p>欢迎更多小伙伴加入字节跳动移动平台部，探索和深耕移动端技术，团队技术氛围浓厚，和我们开创可能成为不一样的未来，Android/iOS/Flutter等在北上深杭招聘各级别岗位，可简历发送至<a href="mailto:yuanhuihui@bytedance.com">yuanhuihui@bytedance.com</a>, 详细内推岗位见 <a href="http://gityuan.com/job。" target="_blank" rel="noopener">http://gityuan.com/job。</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>一篇文章搞定 macOS 截图</title>
+    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
+<h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
+<h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" />
+
+
+<h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
+<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
+<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
+<p>也可以在终端执行一条命令永久去除软阴影：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
+<h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
+<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
+<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" />
+
+
+<h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
+<h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
+<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" />
+
+
+<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
+<h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p>
+<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
+<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
+<h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
+<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" />
+
+
+<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【转载】理解Android P内部API的限制调用机制</title>
+    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E7%90%86%E8%A7%A3Android%20P%E5%86%85%E9%83%A8API%E7%9A%84%E9%99%90%E5%88%B6%E8%B0%83%E7%94%A8%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<blockquote>
+<p>本文基于原生Android 9.0源码来解读hidden API的限制调用机制</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">libcore/ojluni/src/main/java/java/lang/Class.java</span><br><span class="line">art/runtime/<span class="keyword">native</span>/java_lang_Class.cc</span><br><span class="line">art/runtime/hidden_api.h</span><br><span class="line">art/runtime/runtime.h</span><br></pre></td></tr></table></figure>
+
+<h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>每一次Android大版本的升级，往往会有大量的APP出现兼容性问题，导致这个情况的主要原因是由于APP的热修复SDKs以及依赖Android internal API(内部API)，也就是非SDK API。这些API是指标记@hide的类、方法以及字段，它们不属于官方Android SDK的字段与函数。</p>
+<p>Google希望未来Android大版本升级，APP都能正常运行，而很多APP对内部API的调用通过反射或JNI间接调用的方法来调用，破坏兼容性。 为此Google从Android P开始限制对内部API的使用，继续使用则抛出如下异常。</p>
+<p><img src="http://gityuan.com/images/hidden-api/hidden-api-exp.png" alt="hidden-api-exp"></p>
+<p>虽然Google目前对这个限制使用不是很完善，存在一些漏洞，可能有些APP会利用漏洞继续使用，但这是不推荐的方式，标记@hide的类、方法以及字段在跨版本之间的兼容性将会无法保障，如果继续使用，那么后续出现兼容性问题将不再另行通知。因此，建议APP减少使用非SDK接口以提升稳定性。开发者都是按Google的预期使用公平的SDK或者NDK，对于开发者便于维护，对于用户体验更一致，大大有利于Android生态的健康发展。</p>
+<p>Android 7.0对Native的NDK的调用限制是手铐，而Android 9.0对Java层SDK的调用限制就是脚铐，那么对于Android应用想再搞一些插件化之类的黑科技便是带着脚手铐跳舞，即便能跳但舞姿已不太优雅了。</p>
+<h2 id="二、内部API限制"><a href="#二、内部API限制" class="headerlink" title="二、内部API限制"></a>二、内部API限制</h2><p>Android P限制APP对内部API的调用，而内部API只能通过反射或JNI间接调用，那么限制机制必然是在反射和JNI方法调用链中插入判断逻辑。 在下面小节2.4.2会讲述到所有的限制场景，这里以反射获取方法的getDeclaredMethod()为例来展开说明，其他反射或JNI调用也是类似的逻辑。</p>
+<h3 id="2-1-getDeclaredMethod"><a href="#2-1-getDeclaredMethod" class="headerlink" title="2.1 getDeclaredMethod"></a>2.1 getDeclaredMethod</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getMethod(name, parameterTypes, <span class="keyword">false</span>);  <span class="comment">//【见小节2.2】</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-getMethod"><a href="#2-2-getMethod" class="headerlink" title="2.2 getMethod"></a>2.2 getMethod</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;[] parameterTypes, <span class="keyword">boolean</span> recursivePublicMethods)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;  <span class="comment">//方法名不能为空</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"name == null"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (parameterTypes == <span class="keyword">null</span>) &#123;</span><br><span class="line">        parameterTypes = EmptyArray.CLASS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Class&lt;?&gt; c : parameterTypes) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;  <span class="comment">//参数不能为空</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(<span class="string">"parameter type is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//非public方法，则执行getDeclaredMethodInternal【见小节2.3】</span></span><br><span class="line">    Method result = recursivePublicMethods ? getPublicMethodRecursive(name, parameterTypes)</span><br><span class="line">                                           : getDeclaredMethodInternal(name, parameterTypes);</span><br><span class="line">    <span class="comment">//找不到，则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span> ||</span><br><span class="line">        (recursivePublicMethods &amp;&amp; !Modifier.isPublic(result.getAccessFlags()))) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(name + <span class="string">" "</span> + Arrays.toString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-getDeclaredMethodInternal"><a href="#2-3-getDeclaredMethodInternal" class="headerlink" title="2.3 getDeclaredMethodInternal"></a>2.3 getDeclaredMethodInternal</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FastNative</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> Method <span class="title">getDeclaredMethodInternal</span><span class="params">(String name, Class&lt;?&gt;[] args)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>getDeclaredMethodInternal这是一个native方法，经过JNI调用，进入如下方法：</p>
+<p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> jobject <span class="title">Class_getDeclaredMethodInternal</span><span class="params">(JNIEnv* env, jobject javaThis,</span></span></span><br><span class="line"><span class="function"><span class="params">                                               jstring name, jobjectArray args)</span> </span>&#123;</span><br><span class="line">  <span class="function">ScopedFastNativeObjectAccess <span class="title">soa</span><span class="params">(env)</span></span>;</span><br><span class="line">  <span class="function">StackHandleScope&lt;1&gt; <span class="title">hs</span><span class="params">(soa.Self())</span></span>;</span><br><span class="line">  DCHECK_EQ(Runtime::Current()-&gt;GetClassLinker()-&gt;GetImagePointerSize(), kRuntimePointerSize);</span><br><span class="line">  DCHECK(!Runtime::Current()-&gt;IsActiveTransaction());</span><br><span class="line">  Handle&lt;mirror::Method&gt; result = hs.NewHandle(</span><br><span class="line">      mirror::Class::GetDeclaredMethodInternal&lt;kRuntimePointerSize, <span class="literal">false</span>&gt;(</span><br><span class="line">          soa.Self(),</span><br><span class="line">          DecodeClass(soa, javaThis),</span><br><span class="line">          soa.Decode&lt;mirror::String&gt;(name),</span><br><span class="line">          soa.Decode&lt;mirror::ObjectArray&lt;mirror::Class&gt;&gt;(args)));</span><br><span class="line">  <span class="comment">//检测该方法是否允许访问【小节2.4】</span></span><br><span class="line">  <span class="keyword">if</span> (result == <span class="literal">nullptr</span> || ShouldBlockAccessToMember(result-&gt;GetArtMethod(), soa.Self())) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> soa.AddLocalReference&lt;jobject&gt;(result.Get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-ShouldBlockAccessToMember"><a href="#2-4-ShouldBlockAccessToMember" class="headerlink" title="2.4 ShouldBlockAccessToMember"></a>2.4 ShouldBlockAccessToMember</h3><p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">ALWAYS_INLINE <span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">ShouldBlockAccessToMember</span><span class="params">(T* member, Thread* self)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//【小节2.5】</span></span><br><span class="line">  hiddenapi::Action action = hiddenapi::GetMemberAction(</span><br><span class="line">      member, self, IsCallerTrusted, hiddenapi::kReflection);</span><br><span class="line">  <span class="comment">//对于不是允许级别的接口，则通知相应监听器</span></span><br><span class="line">  <span class="keyword">if</span> (action != hiddenapi::kAllow) &#123;</span><br><span class="line">    hiddenapi::NotifyHiddenApiListener(member);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> action == hiddenapi::kDeny;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是限制反射访问，此处的access_method等于hiddenapi::kReflection，除此之外还有其他几种模式，如下</p>
+<h4 id="2-4-1-AccessMethod"><a href="#2-4-1-AccessMethod" class="headerlink" title="2.4.1 AccessMethod"></a>2.4.1 AccessMethod</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AccessMethod &#123;</span><br><span class="line">  kNone,        <span class="comment">// 测试模式，不会出现在实际场景访问权限</span></span><br><span class="line">  kReflection,  <span class="comment">// Java反射调用</span></span><br><span class="line">  kJNI,         <span class="comment">// JNI调用过程</span></span><br><span class="line">  kLinking,     <span class="comment">// 动态链接过程</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-2-限制场景"><a href="#2-4-2-限制场景" class="headerlink" title="2.4.2 限制场景"></a>2.4.2 限制场景</h4><p>ShouldBlockAccessToMember是限制内部API访问的核心路径</p>
+<ul>
+<li>kReflection反射过程：<ul>
+<li>Class_newInstance：对象实例化</li>
+<li>Class_getDeclaredConstructorInternal：构造方法</li>
+<li>Class_getDeclaredMethodInternal：获取方法</li>
+<li>Class_getDeclaredField：获取字段</li>
+<li>Class_getPublicFieldRecursive：获取字段</li>
+</ul>
+</li>
+<li>kJNI的JNI调用过程：<ul>
+<li>FindMethodID：查找方法</li>
+<li>FindFieldID：查找字段</li>
+</ul>
+</li>
+<li>kLinking动态链接：<ul>
+<li>UnstartedClassNewInstance</li>
+<li>UnstartedClassGetDeclaredConstructor</li>
+<li>UnstartedClassGetDeclaredMethod</li>
+<li>UnstartedClassGetDeclaredField</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-GetMemberAction"><a href="#2-5-GetMemberAction" class="headerlink" title="2.5 GetMemberAction"></a>2.5 GetMemberAction</h3><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetMemberAction</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                              Thread* self,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="built_in">std</span>::function&lt;<span class="keyword">bool</span>(Thread*)&gt; fn_caller_is_trusted,</span></span></span><br><span class="line"><span class="function"><span class="params">                              AccessMethod access_method)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取hidenn API的可访问标识</span></span><br><span class="line">  HiddenApiAccessFlags::ApiList api_list = member-&gt;GetHiddenApiAccessFlags();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取相应的访问行为【小节2.6】</span></span><br><span class="line">  Action action = GetActionFromAccessFlags(member-&gt;GetHiddenApiAccessFlags());</span><br><span class="line">  <span class="keyword">if</span> (action == kAllow) &#123;  <span class="comment">//允许则直接返回</span></span><br><span class="line">    <span class="keyword">return</span> action;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//检测是否平台调用【小节2.7】</span></span><br><span class="line">  <span class="keyword">if</span> (fn_caller_is_trusted(self)) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//对于hidden接口，且非平台调用【小节2.8】</span></span><br><span class="line">  <span class="keyword">return</span> detail::GetMemberActionImpl(member, api_list, action, access_method);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>功能说明：</p>
+<ul>
+<li>当Action=kAllow，则直接返回；否则执行如下：</li>
+<li>通过fn_caller_is_trusted看当前是否是系统调用的，如果是系统调用则返回，否则执行如下：</li>
+<li>通过GetMemberActionImpl()做进一步判断</li>
+</ul>
+<p>此处的fn_caller_is_trusted是指IsCallerTrusted</p>
+<h3 id="2-6-GetActionFromAccessFlags"><a href="#2-6-GetActionFromAccessFlags" class="headerlink" title="2.6 GetActionFromAccessFlags"></a>2.6 GetActionFromAccessFlags</h3><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetActionFromAccessFlags</span><span class="params">(HiddenApiAccessFlags::ApiList api_list)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (api_list == HiddenApiAccessFlags::kWhitelist) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;   <span class="comment">//位于白名单，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  EnforcementPolicy policy = Runtime::Current()-&gt;GetHiddenApiEnforcementPolicy();</span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kNoChecks) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;  <span class="comment">//非强制执行策略，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kJustWarn) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllowButWarn;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//执行到这，policy&gt;=kDarkGreyAndBlackList</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(policy) &gt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(api_list)) &#123;</span><br><span class="line">    <span class="keyword">return</span> api_list == HiddenApiAccessFlags::kDarkGreylist</span><br><span class="line">        ? kAllowButWarnAndToast : kAllowButWarn;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> kDeny;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上逻辑用图来展示EnforcementPolicy和HiddenApiAccessFlags在不同取值的情况下，所对应的Action值。 纵轴代表强制策略级别，横轴代表隐藏API的标识，表中数据代表Action，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>kWhitelist</th>
+<th>kLightGreylist</th>
+<th>kDarkGreylist</th>
+<th>kBlacklist</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kNoChecks</td>
+<td>kAllow</td>
+<td>kAllow</td>
+<td>kAllow</td>
+<td>kAllow</td>
+</tr>
+<tr>
+<td>kJustWarn</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarn</td>
+</tr>
+<tr>
+<td>kDarkGreyAndBlackList</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kDeny</td>
+<td>kDeny</td>
+</tr>
+<tr>
+<td>kBlacklistOnly</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarnAndToast</td>
+<td>kDeny</td>
+</tr>
+</tbody></table>
+<p>图解：</p>
+<ul>
+<li>当HiddenApiAccessFlags等于kWhitelist，则Action=kAllow，否则如下</li>
+<li>当EnforcementPolicy等于kNoChecks，则Action=kAllow，否则如下</li>
+<li>当EnforcementPolicy等于kJustWarn，则Action=kAllowButWarn，否则如下</li>
+<li>当HiddenApiAccessFlags等于kLightGreylist，则Action=kAllowButWarn，否则如下</li>
+<li>当HiddenApiAccessFlags等于kDarkGreylist，且等于EnforcementPolicy=kBlacklistOnly，则kAllowButWarnAndToast，否则如下</li>
+<li>否则Action=kDeny</li>
+</ul>
+<h4 id="2-6-1-EnforcementPolicy"><a href="#2-6-1-EnforcementPolicy" class="headerlink" title="2.6.1 EnforcementPolicy"></a>2.6.1 EnforcementPolicy</h4><p>EnforcementPolicy的级别如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">EnforcementPolicy</span> &#123;</span></span><br><span class="line">  kNoChecks             = <span class="number">0</span>,</span><br><span class="line">  kJustWarn             = <span class="number">1</span>,  <span class="comment">// 保持检查，一切都允许(仅仅记录日志)</span></span><br><span class="line">  kDarkGreyAndBlackList = <span class="number">2</span>,  <span class="comment">// 禁止深灰色和黑名单</span></span><br><span class="line">  kBlacklistOnly        = <span class="number">3</span>,  <span class="comment">// 只禁止黑名单</span></span><br><span class="line">  kMax = kBlacklistOnly,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可通过SetHiddenApiEnforcementPolicy()来修改Runtime中的成员变量hidden_api_policy_。</p>
+<h4 id="2-6-2-HiddenApiAccessFlags"><a href="#2-6-2-HiddenApiAccessFlags" class="headerlink" title="2.6.2 HiddenApiAccessFlags"></a>2.6.2 HiddenApiAccessFlags</h4><p>HiddenApiAccessFlags的级别如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HiddenApiAccessFlags</span> </span>&#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">enum</span> ApiList &#123;</span><br><span class="line">    kWhitelist = <span class="number">0</span>,</span><br><span class="line">    kLightGreylist,</span><br><span class="line">    kDarkGreylist,</span><br><span class="line">    kBlacklist,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-3-Action"><a href="#2-6-3-Action" class="headerlink" title="2.6.3 Action"></a>2.6.3 Action</h4><p>Action级别如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> Action &#123;</span><br><span class="line">  kAllow,         <span class="comment">//通过</span></span><br><span class="line">  kAllowButWarn,  <span class="comment">//通过，但日志警告</span></span><br><span class="line">  kAllowButWarnAndToast,  <span class="comment">//通过，且日志警告和弹窗</span></span><br><span class="line">  kDeny   <span class="comment">//拒绝访问</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-IsCallerTrusted"><a href="#2-7-IsCallerTrusted" class="headerlink" title="2.7 IsCallerTrusted"></a>2.7 IsCallerTrusted</h3><p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(Thread* self)</span> <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function">FirstExternalCallerVisitor <span class="title">visitor</span><span class="params">(self)</span></span>;</span><br><span class="line">    visitor.WalkStack();</span><br><span class="line">    <span class="comment">//【见小节2.7.1】</span></span><br><span class="line">    <span class="keyword">return</span> visitor.caller != <span class="literal">nullptr</span> &amp;&amp;</span><br><span class="line">           hiddenapi::IsCallerTrusted(visitor.caller-&gt;GetDeclaringClass());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-7-1-IsCallerTrusted"><a href="#2-7-1-IsCallerTrusted" class="headerlink" title="2.7.1 IsCallerTrusted"></a>2.7.1 IsCallerTrusted</h4><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ALWAYS_INLINE</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(ObjPtr&lt;mirror::Class&gt; caller,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::ClassLoader&gt; caller_class_loader,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::DexCache&gt; caller_dex_cache)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (caller_class_loader.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// Boot classloader，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller_dex_cache.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">const</span> DexFile* caller_dex_file = caller_dex_cache-&gt;GetDexFile();</span><br><span class="line">    <span class="keyword">if</span> (caller_dex_file != <span class="literal">nullptr</span> &amp;&amp; caller_dex_file-&gt;IsPlatformDexFile()) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// caller是平台dex文件，则返回true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller.IsNull() &amp;&amp;</span><br><span class="line">      caller-&gt;ShouldSkipHiddenApiChecks() &amp;&amp;</span><br><span class="line">      Runtime::Current()-&gt;IsJavaDebuggable()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">//处于debuggable调试模式且caller已被标记可信任，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caller被认为是可信任的场景如下：</p>
+<ul>
+<li>当类加载器是Boot classloader，则返回true</li>
+<li>当caller是平台dex文件，则返回true</li>
+<li>处于debuggable调试模式且caller已被标记可信任，则返回true</li>
+</ul>
+<h3 id="2-8-GetMemberActionImpl"><a href="#2-8-GetMemberActionImpl" class="headerlink" title="2.8 GetMemberActionImpl"></a>2.8 GetMemberActionImpl</h3><p>[-&gt; hidden_api.cc]</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line"><span class="function">Action <span class="title">GetMemberActionImpl</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                           HiddenApiAccessFlags::ApiList api_list,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Action action,</span></span></span><br><span class="line"><span class="function"><span class="params">                           AccessMethod access_method)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取签名</span></span><br><span class="line">  <span class="function">MemberSignature <span class="title">member_signature</span><span class="params">(member)</span></span>;</span><br><span class="line">  Runtime* runtime = Runtime::Current();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> bool shouldWarn = kLogAllAccesses || runtime-&gt;IsJavaDebuggable();</span><br><span class="line">  <span class="keyword">if</span> (shouldWarn || action == kDeny) &#123;</span><br><span class="line">    <span class="comment">//判断是否为可豁免接口【小节2.8.1】</span></span><br><span class="line">    <span class="keyword">if</span> (member_signature.IsExempted(runtime-&gt;GetHiddenApiExemptions())) &#123;</span><br><span class="line">      action = kAllow;</span><br><span class="line">      MaybeWhitelistMember(runtime, member);</span><br><span class="line">      <span class="keyword">return</span> kAllow;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">      <span class="comment">//打印包含有关此类成员访问信息的日志消息【小节2.8.2】</span></span><br><span class="line">      member_signature.WarnAboutAccess(access_method, api_list);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (action == kDeny) &#123;</span><br><span class="line">    <span class="keyword">return</span> action; <span class="comment">//拒绝调用</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">    <span class="comment">// 根据运行时标志的不同，我们可以将成员移动到白名单中，并在下次访问成员时跳过警告。</span></span><br><span class="line">    MaybeWhitelistMember(runtime, member);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果此操作需要UI警告，设置适当的标志</span></span><br><span class="line">    <span class="keyword">if</span> (shouldWarn &amp;&amp;</span><br><span class="line">        (action == kAllowButWarnAndToast || runtime-&gt;ShouldAlwaysSetHiddenApiWarningFlag())) &#123;</span><br><span class="line">      runtime-&gt;SetPendingHiddenApiWarning(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-8-1-GetHiddenApiExemptions"><a href="#2-8-1-GetHiddenApiExemptions" class="headerlink" title="2.8.1 GetHiddenApiExemptions"></a>2.8.1 GetHiddenApiExemptions</h4><p>[-&gt; runtime.h]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Runtime</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// SetHiddenApiEnforcementPolicy()可修改该值</span></span><br><span class="line">    hiddenapi::EnforcementPolicy hidden_api_policy_;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//SetHiddenApiExemptions()可修改该值</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; hidden_api_exemptions_;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GetHiddenApiExemptions()是获取Runtime里面的成员变量hidden_api_exemptions_</p>
+<h4 id="2-8-2-WarnAboutAccess"><a href="#2-8-2-WarnAboutAccess" class="headerlink" title="2.8.2 WarnAboutAccess"></a>2.8.2 WarnAboutAccess</h4><p>[-&gt; hidden_api.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemberSignature::WarnAboutAccess</span><span class="params">(AccessMethod access_method,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      HiddenApiAccessFlags::ApiList <span class="built_in">list</span>)</span> </span>&#123;</span><br><span class="line">  LOG(WARNING) &lt;&lt; <span class="string">"Accessing hidden "</span> &lt;&lt; (type_ == kField ? <span class="string">"field "</span> : <span class="string">"method "</span>)</span><br><span class="line">               &lt;&lt; Dumpable&lt;MemberSignature&gt;(*<span class="keyword">this</span>) &lt;&lt; <span class="string">" ("</span> &lt;&lt; <span class="built_in">list</span> &lt;&lt; ", " &lt;&lt; access_method &lt;&lt; ")";</span><br></pre></td></tr></table></figure>
+
+<p>打印包含有关此类成员访问信息的日志消息</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><h4 id="3-1-限制原理总结"><a href="#3-1-限制原理总结" class="headerlink" title="3.1 限制原理总结"></a>3.1 限制原理总结</h4><p>（1）从前面的内部API限制过程，可知主要控制逻辑在方法ShouldBlockAccessToMember，调用该方法的核心路径如下：</p>
+<ul>
+<li>kReflection反射过程：<ul>
+<li>Class_newInstance：对象实例化</li>
+<li>Class_getDeclaredConstructorInternal：构造方法</li>
+<li>Class_getDeclaredMethodInternal：获取方法</li>
+<li>Class_getDeclaredField：获取字段</li>
+<li>Class_getPublicFieldRecursive：获取字段</li>
+</ul>
+</li>
+<li>kJNI的JNI调用过程：<ul>
+<li>FindMethodID：查找方法</li>
+<li>FindFieldID：查找字段</li>
+</ul>
+</li>
+<li>kLinking动态链接：<ul>
+<li>UnstartedClassNewInstance</li>
+<li>UnstartedClassGetDeclaredConstructor</li>
+<li>UnstartedClassGetDeclaredMethod</li>
+<li>UnstartedClassGetDeclaredField</li>
+</ul>
+</li>
+</ul>
+<p>（2）ShouldBlockAccessToMember过程是否运行主要有如下情况：</p>
+<ul>
+<li>当EnforcementPolicy强制不限制的情况</li>
+<li>当类加载器是Boot classloader的情况</li>
+<li>当caller是平台dex文件的情况</li>
+<li>当处于debuggable调试模式且caller已被标记可信任的情况</li>
+<li>当GetHiddenApiExemptions为豁免情况</li>
+</ul>
+<p>（3）掌握了ShouldBlockAccessToMember原理，也就可以有的放矢了，突破限制方案，比如：</p>
+<ul>
+<li>修改ART的EnforcementPolicy，也就是Runtime中的成员变量hidden_api_policy_，可以基于地址偏移找到相应的成员，这就不就细说</li>
+<li>修改隐藏API豁免变量，也就是Runtime中的成员变量hidden_api_exemptions_</li>
+<li>修改classLoader为BootClassLoader</li>
+</ul>
+<h4 id="3-2-黑白名单"><a href="#3-2-黑白名单" class="headerlink" title="3.2 黑白名单"></a>3.2 黑白名单</h4><p>关于在Android P的几个预览版本一直在不断调整，目前主要是黑名单、浅灰名单、vendor名单这3个名单，对应文件名：hiddenapi-force-blacklist.txt，hiddenapi-light-greylist.txt，hiddenapi-vendor-list.txt。这些文件在编译阶段生成为hiddenapi，记录在access_flags_字段值。整个过程是在hiddenapi.cc过程的CategorizeAllClasses()中完成的。</p>
+<p><img src="http://gityuan.com/images/hidden-api/android_hideapi.png" alt="hidden-api-exp"></p>
+<p>目前主要使用的是黑名单和浅灰名单，深灰名单暂没有使用：</p>
+<ul>
+<li>黑名单内容：setHiddenApiExemptions</li>
+<li>浅灰名单内容：Activity, Service，ContentProvider，ActivityManager, ActivityThread，Application，ContextImpl，Intent等</li>
+</ul>
+<h4 id="3-3-非SDK接口说明"><a href="#3-3-非SDK接口说明" class="headerlink" title="3.3 非SDK接口说明"></a>3.3 非SDK接口说明</h4><ol>
+<li>非SDK接口限制适用于所有应用，但是会豁免使用平台密钥签署的应用，并且针对系统app的白名单</li>
+<li>如果你的应用有必须使用非SDK接口的充分理由，可以向Google提交<a href="https://issuetracker.google.com/issues/new?component=328403&template=1027267" target="_blank" rel="noopener">功能请求</a>，并提供用例详情;</li>
+<li>如果你的应用使用很多第三方库，而又难以排除是否正在使用非SDK接口，可以尝试使用AOSP提供的静态分析工具<a href="https://android.googlesource.com/platform/prebuilts/runtime/+/master/appcompat" target="_blank" rel="noopener">veridex</a>;</li>
+<li>应用运行时检测到非SDK接口的使用，会打印一条<code>Accessing hidden field|method ...</code> 形式的logcat警告。当然对于设置android:debuggable=true的可调试应用会显示toast消息，并打印logcat日志。</li>
+<li>黑名单/灰名单编码在平台dex文件的字段和函数访问标志位中，无法从系统镜像中找到单独包含这些名单的文件。</li>
+<li>黑名单/灰名单在采用相同Android版本是一致的。手机厂商可以向黑名单添加自己的API，但无法从AOSP黑名单或灰名单中移除，Google兼容性定义文件(CDD)来保障这一工作，并在测试过程通过CTS来确保Android运行时强制执行名单。</li>
+<li>目前，Google对Android暂时没有限制访问dex2oat二进制文件的计划，但是dex文件格式无法保证会稳定，可能随时会修改或删除dex2oat以及dex衍生文件。</li>
+</ol>
+<p>Android 7.0针对Native lib引入了namespace来限制平台lib对外的可见性，普通APP在Android N上不能直接调用系统私有库，Android系统允许调用的公用库定义在<a href="https://android.googlesource.com/platform/system/core/+/refs/heads/master/rootdir/etc/public.libraries.android.txt" target="_blank" rel="noopener">public.libraries.android.txt</a>。 这个feature只针对target SDK为24及以上的APP。</p>
+<p>Android 7.0限制对C/C++代码的NDK，Android 9.0限制对Java的SDK。这一以来APP想利用内部API搞黑科技的难度以及不稳定性都会有所增加。</p>
+<p>最后说一点，目前网络有一些开发者发表了关于非SDK接口限制的绕过技术，但基本没有APP是通过这些漏洞方式来突破隐藏API的访问，说明大家有所顾忌，这对生态来说是好事。另外关于绕过技术对于Google和手机厂商都已注意到，要简单封杀容易但可能会带来调试与复杂度的提升，所以Google正在积极寻找平衡接口限制与运行时易于调试之间的平衡，相信很快Google会有更完善的解决方案。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
+
+
+<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
+
+
+<p>这样便成功地修改了博客的主题。</p>
+<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code></p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
+
+
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>网站</tag>
+      </tags>
   </entry>
   <entry>
     <title>【转载】Android进程绝杀技--forceStop</title>
@@ -1227,373 +1800,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>【转载】字节跳动为什么选用Flutter：并非跨平台终极之选，但它可能是不一样的未来</title>
-    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8Flutter%EF%BC%9A%E5%B9%B6%E9%9D%9E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BB%88%E6%9E%81%E4%B9%8B%E9%80%89%EF%BC%8C%E4%BD%86%E5%AE%83%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E6%9C%AA%E6%9D%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>2018 年 12 月 ，Google 宣布 Flutter 1.0 版本正式发布。截至目前， Flutter 在 Github 上已获得 88000+ 的关注和 11000+ 的 Fork ，其发展速度相当惊人，是今年移动端最火热的开发框架之一。</p>
-</blockquote>
-<p>Flutter 大火背后的原因是什么？为什么越来越多的企业和开发者会选择使用 Flutter？Flutter 会成为跨平台开发的终极之选吗？我认为“ Flutter 并非跨平台终极之选，最初选择 Flutter，不是因为它一定会成为未来终极之选，而是因为它有可能成为不一样的未来。”</p>
-<h2 id="Flutter-大火的原因"><a href="#Flutter-大火的原因" class="headerlink" title="Flutter 大火的原因"></a>Flutter 大火的原因</h2><p>有人说 Flutter 大火主要原因是它选择了 Dart 语言，Dart 有着高性能的表现和可快速分配内存的能力，能同时支持 JIT 和 AOT 模式，允许在带类型的语言中支持形变和有状态热重载，能编译出高效率的 ARM 机器码指令，Dart 作为面向对象的语言也能让绝大多数开发者更快速上手。我认可 Dart 语言有一定的优势，但这样的优势并非 Dart 独有，我想这更不会是大家选择 Flutter 的核心原因，这是因果倒置。事实上，Dart 是 2011 年推出的，在 Flutter 出现之前，Dart 曾一度几乎被人遗忘。正是因为近年来 Flutter 的火爆，才让 Dart 重新进入大众的视线。Flutter 当初选择 Dart，或者仅因为 Google 的 Flutter 和 Dart 这两个团队离得比较近，交流比较方便。 我认为 Flutter 之所以大火，主要是以下几个原因：</p>
-<h4 id="1-现有跨平台技术存在缺陷"><a href="#1-现有跨平台技术存在缺陷" class="headerlink" title="1. 现有跨平台技术存在缺陷"></a>1. 现有跨平台技术存在缺陷</h4><p>在移动互联网时代，Android 和 iOS 两大阵营长期共存，再加上体系成熟的 Web 前端技术，导致出现同一个应用需多端重复开发的人力成本问题。正因如此，移动时代下的跨平台技术是一个需要长期研究的课题。如果当下的跨平台技术已经有比较完美的解决方案，可能就没有新技术萌芽的机会。而事实上，目前业界比较成熟的跨平台技术都存在一定的缺陷，比如小程序（WebView）渲染耗时过长，白屏率会影响转化收益，能实现的功能非常受限；再比如 React Native 的性能不足、问题排除难、维护成本高等。而 Flutter 的出现，让这些跨平台开发问题有所改善，它还是 Google 开源的技术，自身也具备一定的热度。另外，一直备受关注且神秘的 Fuchsia 系统在 UI 框架上使用的也是 Flutter，可作为长期战略投入，这也增强了大家对 Flutter 的信心。</p>
-<h4 id="2-研发效率就是竞争力"><a href="#2-研发效率就是竞争力" class="headerlink" title="2. 研发效率就是竞争力"></a>2. 研发效率就是竞争力</h4><p>移动互联网进入下半场，出现一些新兴互联网独角兽、小巨头，在没有历史包袱的情况下，更愿意尝试技术上限更高的新技术。从校招和社招的难度上不难发现：客户端的人才相比之前更为稀缺，尤其是 iOS 工程师。而下半场会有更多竞争和更为激烈的赛道，比如教育等方向。Flutter 本身非常适合从零开始的没有历史包袱的应用开发，对于新业务尤其是在团队人力紧缺的情况下，在技术选型上考虑 Flutter，能加快产品在多端落地、快速试错。</p>
-<h4 id="3-集漂亮与流畅集于一身"><a href="#3-集漂亮与流畅集于一身" class="headerlink" title="3. 集漂亮与流畅集于一身"></a>3. 集漂亮与流畅集于一身</h4><p>Flutter “一出生”就以“UI 漂亮、像素级可控、性能流畅、可媲美原生性能”等特点吸引广大开发者的眼球，自渲染引擎甚至具备开发游戏的能力。移动下半场，没有人口红利，竞争更为激烈，如何能更好地满足用户对高品质、高流畅的需求，便是移动端一种强有力的竞争力。跨平台技术想要拥有更高的流畅度，采用自渲染技术的方案便是更优解，也是一个更为彻底的跨平台技术方向。</p>
-<h2 id="字节跳动选择-Flutter-的初心"><a href="#字节跳动选择-Flutter-的初心" class="headerlink" title="字节跳动选择 Flutter 的初心"></a>字节跳动选择 Flutter 的初心</h2><p>说到这里，先分享一下 Flutter 最初是如何诞生的故事。Flutter 创始人 Eric 之前在 Chrome 团队工作，期间遇到一些难以解决的问题， 希望 Web 中的一部分能够拥有更加平滑的体验， 为此他花了几周时间做了一个实验，不考虑 Web 的兼容方式，删除了大量为了兼容访问的代码和一些 Web 开发者不常用的功能， 删除到有不少 Web 元素的渲染已经不支持了，然后做了一个基准测试，得出结论是某些关注指标的速度快了 20 倍。于是，Eric 决定再做点什么，后面投入了大量研究和开发，便有了现在的 Flutter 。</p>
-<p>听到这里给人的感觉是，对于 Web 工程师而言 Flutter 应该容易上手。我跟公司很多正在使用或者调研 Flutter 的业务团队做过沟通，发现客户端比前端的同学对 Flutter 接受度更高，我个人从 Android 端技术出身，的确觉得学习 Flutter 还是非常容易上手的，但公司内前端的同学对 Flutter 使用的吐槽会多一点。所以，我认为 Flutter 更像是以客户端视角的跨平台技术，Flutter 与其说是大前端技术，不如说是大移动端技术。Flutter 发展的 Roadmap 也是先全面支持 Android/iOS 端能力，再进一步完善 Web 端能力支持的。</p>
-<p>字节跳动对于客户端技术还是非常重视的，字节跳动有很多客户端工程师，之前客户端深入点的基础技术更多是搞插件化、热修复、性能优化、安全加固等，跨平台方向一直都是前端工程师在不遗余力地推进，属于大前端方向。而 Flutter 是客户端更有主导的跨平台技术方案。另外说明，字节跳动并不是说只有一套跨平台技术栈，公司内部也是多套跨端技术栈并存，也包括自研的方案。</p>
-<p>在字节跳动，跨平台技术并没有形成大规模的落地，之前也提到没有历史包袱，所以在面对跨平台技术选型的时候，更关注跨平台技术的技术上限以及发展潜力，自渲染技术的 Flutter 可以理解为更彻底更纯粹的跨平台技术，伴随着媲美原生的流畅度，这便是我们选择 Flutter 的初心。</p>
-<h2 id="Flutter-落地过程中的“坑”"><a href="#Flutter-落地过程中的“坑”" class="headerlink" title="Flutter 落地过程中的“坑”"></a>Flutter 落地过程中的“坑”</h2><p>截至目前，字节跳动有很多业务落地了 Flutter 技术方案，包括今日头条、西瓜视频、皮皮虾等 20 多个业务在使用 Flutter 开发，有纯 Flutter 工程，也有 Flutter 与 Native 的混合工程。如果大家想要了解更多业务落地情况，后续我会在今年的 QCon 北京 2020 大会上分享。</p>
-<p>Flutter 虽潜力上限很高，但仍需打磨和雕琢，我们在 Flutter 推动过程中遇到很多问题，比如包体积过大的问题、性能达不到预期、对混合工程的支持不够友好、各宿主 Flutter 引擎版本不一致、基础库不完善、Flutter 改造后各项数据打平等。除此之外，还有很多非技术的困难，比如业务团队并不认可 Flutter 新技术，工程师缺乏 Flutter 经验，担忧审核风险等，都会影响业务方是否采用 Flutter 技术，每一个困难都需要去解决，不然就难以落地。下面就其中两个难点，我来展开聊一下。</p>
-<h4 id="1-包体积问题"><a href="#1-包体积问题" class="headerlink" title="1. 包体积问题"></a>1. 包体积问题</h4><p>字节跳动内的大型 APP，比如今日头条、抖音等对包体积的增量非常敏感，Flutter 的包体积涉及两个部分，一个是一次性 Flutter 引擎的包体积问题，一个是每次写 Dart 代码比写 OC 代码代码增量的问题。这两个问题对我们来说都非常棘手，我们成立了包体积优化专项进行全力攻坚，同时跟 Google 工程师多次会议沟通，不断精简包体积。最终我们通过一系列优化手段，包含 Data 压缩、编译优化、Skia 裁剪、BoringSSL/ICU 库 / 文字渲染 /libwebp 等库裁剪取得了不少的效果；通过实践我们发现用 OC 代码和 Dart 代码写相同的业务逻辑，Dart 生成的机器码指令比 OC 多，主要在生成的二进制指令头、指令冗余、指令对齐的精简，以及 StackMap 和 CodeSourceMap 的精简等方面。同时我们也向 Google 反馈了这些情况。关于指令精简，可以查看 Issue 进展，里面有记录详细的推进过程： <a href="https://github.com/flutter/flutter/issues/40345" target="_blank" rel="noopener">https://github.com/flutter/flutter/issues/40345</a></p>
-<h4 id="2-性能优化问题"><a href="#2-性能优化问题" class="headerlink" title="2. 性能优化问题"></a>2. 性能优化问题</h4><p>这是我们遇到的棘手问题之一，我们用 Flutter 官方提供的性能分析工具 Timeline 来分析一个比较诡异的性能问题，始终无法发现任何异常。困扰已久，后来干脆重新撸了一遍 Timeline 整个性能分析工具的源码，最终找到了其缺陷，并向 Flutter 社区提及，合入了 10 个 PR ，基于此让我有幸成为了 Flutter Member ，后续会持续向社区贡献更多力量：<a href="https://github.com/flutter/flutter/issues/47771" target="_blank" rel="noopener">https://github.com/flutter/flutter/issues/47771</a>.</p>
-<p>Flutter 是一个自渲染的跨平台技术，有着很高的性能上限，但并不代表现在性能各方面都很优秀，毕竟 Flutter 作为一个“新生儿”，还是有一些需要进一步改造的地方。除性能工具改造之外，其实在 Flutter 落地场景中，我们也解决了不少性能问题，同时优化了自身的引擎，比如 UI 预加载策略、Flutter Turbo 技术、Vsync 调度策略等，让引擎提速，争取让 Flutter 性能发挥到极致。</p>
-<h2 id="Flutter-在业务层面的发展阻力"><a href="#Flutter-在业务层面的发展阻力" class="headerlink" title="Flutter 在业务层面的发展阻力"></a>Flutter 在业务层面的发展阻力</h2><p>引入 Flutter 之后，在公司的业务也创造了不少价值。主要体现在这几个方面：其一，Flutter 多端一致性上表现良好，能做到所见即所得，无需针对某一平台做额外适配工作；其二，热重载技术使得设计团队和工程团队可以非常快速的修改和调试 UI，设计师只需要关注一个平台实现，UI 验收效率明显提高，跨端开发可以提高工程师的人效（有团队初步估算人效大致提升了 1.8 倍）；其三，性能流畅度提升，相较于 H5 版本首屏时间有较大提升，最后，产品商业化数据都有明显的收益，能直观地看到 Flutter 给公司带来的创收。</p>
-<p>不过，现阶段 Flutter 的发展仍有一些阻力：</p>
-<h4 id="1-Flutter-采用的是-Dart-语言，没能引入前端成熟的生态体系"><a href="#1-Flutter-采用的是-Dart-语言，没能引入前端成熟的生态体系" class="headerlink" title="1. Flutter 采用的是 Dart 语言，没能引入前端成熟的生态体系"></a>1. Flutter 采用的是 Dart 语言，没能引入前端成熟的生态体系</h4><p>作为前端工程师可能更希望是 Flutter 上层采用的是 JavaScript 或者 TypeScript，未来可考虑提供高性能的 Dart 与 JS 互转能力。另外，Flutter 开发对于前端开发工程师而言，还是有一些挑战的，纯前端不一定能 Cover 的技术，比如 Flutter 的一个硬件相关的 Plugin 只在某款手机出现 Bug，如果社区没有现存解决方案，可能就需要花比较大的时间成本去学习 Native 技术，或者请教客户端工程师。</p>
-<h4 id="2-开源库相对比较欠缺，更新频次不足"><a href="#2-开源库相对比较欠缺，更新频次不足" class="headerlink" title="2. 开源库相对比较欠缺，更新频次不足"></a>2. 开源库相对比较欠缺，更新频次不足</h4><p>Flutter 生态还不够完善，新业务接入需要自己造轮子，尤其是在业务团队对 Flutter 掌握不够熟练的情况下，会增加额外的成本，Flutter 在大中型企业会更容易推广起来，有人力可以去造轮子让公司内其他的业务复用；另外，Flutter 文档有点少，能借鉴的经验不多，未来需加强和鼓励更多开发者加入到生态共建。</p>
-<h4 id="3-跟原生系统生态存在着一定的竞争关系"><a href="#3-跟原生系统生态存在着一定的竞争关系" class="headerlink" title="3. 跟原生系统生态存在着一定的竞争关系"></a>3. 跟原生系统生态存在着一定的竞争关系</h4><p>有朋友跟我说起过这样一件事，看到 Flutter 这么火，Android 开发团队就问他，“大家为什么要用 Flutter 开发 App，我们 Android 哪一点不好，告诉我们，我们可以改进它”。姑且不说他们对跨平台理解不够，但至少能看出原生平台对跨端技术的担忧，不少 Android 团队在推出 Kotlin Multiplatform ，希望能争夺更多市场。 另外，苹果商店的审核风险也是大家所担忧的，官方的公告原意是说应用程序的核心特性和功能必须包含在软件的二进制文件中，而不是通过类似 HTML5 的技术来实现动态更新，苹果要打压的是动态更新技术，考虑到 Flutter 的合规性，Google 主动把 Flutter 的 iOS 动态化能力去掉了，Flutter 最终打包生成的产物就是 IPA，Flutter 其实是完全符合规范的，甚至还有使用 Flutter 开发的应用还被 Apple 推荐过。相反，React Native、Weex、H5 等技术都是一种动态化解决方案，这正是苹果要管控的，目前苹果的态度更多的是不提倡，但也不保证不封杀。即便如此，苹果不希望原生开发生态被其他跨平台技术抢占，苹果也在不断推行 SwiftUI 框架，力图抵挡 Flutter 等跨平台技术对原生开发的蚕食。Flutter 未来要加强推进步伐，让更多的大型 App 通过 Flutter 技术得到收益，只有用户群体上来，未来的地位和话语权才会更高，就像现在小程序，原则上是不符合苹果的审核要求的，但各大型应用基本都上线了小程序功能，目前来看不至于说苹果把小程序直接干掉。</p>
-<h2 id="Flutter-并非跨平台终极之选"><a href="#Flutter-并非跨平台终极之选" class="headerlink" title="Flutter 并非跨平台终极之选"></a>Flutter 并非跨平台终极之选</h2><p>从 Hybrid App 到 React Native，再到 Flutter，跨平台技术层出不穷。目前来看，Flutter 是跨平台开发的最热门技术，但我并不认为 Flutter 就一定是跨平台开发的终极之选，它有着历史局限性，我只能说 Flutter 可能是当下最有潜力的跨平台技术。如果你对性能流畅度有高要求，或者有多个产品希望快速在多端试错迭代，我会推荐你尝试 Flutter。</p>
-<p>未来一段时间，还应该是多套跨平台技术并存的时代， 目前 Flutter 也没有全面做到可以碾压其他跨平台技术，可根据团队以及业务特点来考虑更适合的方案。有一定客户端经验的同学入手 Flutter 会更快一些，如果团队在 React Native 上有很好落地，业务没有遇到性能等瓶颈，且团队缺少客户端能力，建议先做技术调研和沉淀，不要盲目追求新技术，只有当团队有能力且业务有需求的情况下，建议再考虑切换技术栈。</p>
-<p>我们前面提到过，一直备受关注且神秘的 Fuchsia 系统在 UI 框架上使用的也是 Flutter。Fuchsia 是 Google 开发的下一代操作系统。Fuchsia 是采用全新模块化设计思想、跨平台框架技术的系统。它能支持快捷裁剪定制，更能适应未来的多元化设备，包含手机、平板、笔记本、路由器、智能设备、机器人等，Fuchsia 有可能成为一个全新的跨全平台的通用操作系统。</p>
-<p>在现阶段，开始尝试探索和积累沉淀 Flutter 技术能力，并在业务上使用 Flutter 技术的应用，从战略上来将已经处于领先。选择 Flutter，正可谓是“进可攻退可守”，往前进一步，Flutter 应用未来可无缝迁移到 Fuchsia 系统，借用 Fuchsia 系统的能量扩展到更广泛的用户场景；退一步，Flutter 技术自身在 Android/iOS 平台的表现相比其他跨平台技术已经是很优秀。</p>
-<p>最初选择 Flutter，不是因为它一定会成为未来终极之选，而是它有可能成为不一样的未来。</p>
-<h2 id="Flutter-展望：终将走向多端一体化"><a href="#Flutter-展望：终将走向多端一体化" class="headerlink" title="Flutter 展望：终将走向多端一体化"></a>Flutter 展望：终将走向多端一体化</h2><p>回顾整移动操作系统的演变历程，从塞班功能机到 Android/iOS 智能机，从小屏手机到全面屏、刘海屏、水滴屏。任何系统的演变最终体现在输入和输出两个环节，接收到输入信号后经过操作系统处理后输出信息给用户。从按键式交互到触屏式交互，伴随着塞班系统到 Android 系统的转变，未来的交互方式一定会更加生物智能化，当下的触屏交互可以理解成人类的触觉输入方式，未来将朝着人们更常见的听觉（语音）输入和视觉（身体姿势、表情等）输入，甚至嗅觉（气味变化）输入，这些都会伴随着新的操作系统而诞生。屏幕从小尺寸到大尺寸，并没有引发操作系统变革，因为技术创新是非连续性，非连续性才会引发第二曲线，诞生新技术。从 1960 年大型机，到 1990 年个人笔记本，再到现在的智能手机，设备本身越来越小。未来的设备如果发展非连续变革，可能不再需要实体硬件，随处可输出，一张白纸、一面墙，到那时操作系统的 UI 架构必然会有全新的变化。</p>
-<p>随着科技的发展，5G 时代的到来，人工智能的日趋成熟，端到底会有哪些变化？是否会出现新的操作系统？系统的 UI 架构是否会出现新的变革？Android/iOS 平台是否能与之并存？搭载 Flutter UI 框架的 Fuchsia 系统能否在 IOT 领域以及新的交互方式大放异彩，再领风骚？是否有万物互联互通的超级平台出现？</p>
-<p>技术在不断演变中螺旋前进，平台自身也随之演进，未来 Flutter 会朝着多端一体化的方向发展，能支持更多的端（包括平板、笔记本、智能设备等）。作为一套跨平台的 UI 框架，Flutter 采用自渲染的技术方案，是一个上限很高的跨平台技术，但 Flutter 更重要的是需要提升工程化能力以及生态圈的建设，才能吸引更多的开发者加入。</p>
-<h2 id="加入我们"><a href="#加入我们" class="headerlink" title="加入我们"></a>加入我们</h2><p>欢迎更多小伙伴加入字节跳动移动平台部，探索和深耕移动端技术，团队技术氛围浓厚，和我们开创可能成为不一样的未来，Android/iOS/Flutter等在北上深杭招聘各级别岗位，可简历发送至<a href="mailto:yuanhuihui@bytedance.com">yuanhuihui@bytedance.com</a>, 详细内推岗位见 <a href="http://gityuan.com/job。" target="_blank" rel="noopener">http://gityuan.com/job。</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>【转载】Flutter 跨平台演进及架构开篇</title>
-    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Flutter%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>版权声明：</strong> 本站所有博文内容均为原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
-</blockquote>
-<h2 id="一、移动跨平台技术演进"><a href="#一、移动跨平台技术演进" class="headerlink" title="一、移动跨平台技术演进"></a>一、移动跨平台技术演进</h2><h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h4><p>移动互联网发展十余年，伴随着 Android、iOS 等智能手机的不断普及，移动端已逐步取代 PC 端，成为兵家必争之地。正所谓“得移动端者得天下”，移动端已成为互联网领域最大的流量分发入口，一大批互联网公司正是在这大趋势下崛起。</p>
-<h4 id="2-为什么需要跨平台技术"><a href="#2-为什么需要跨平台技术" class="headerlink" title="2. 为什么需要跨平台技术"></a>2. 为什么需要跨平台技术</h4><p>伴随着移动互联网的高速发展，公司间竞争越来越激烈，如何将好想法快速落地、快速试错，成为备受关注的问题。提升研发效率、缩短研发周期，保障产品快速试错并能快速迭代新功能，让新产品新功能以最快的速度同时抵达 Android、iOS 等多端用户。</p>
-<p>众所周知，Android 应用采用 Java 或 Kotlin 编写，iOS 应用采用 Objective-C 或 Swift 编写，Web 端采用 HTML /CSS/JavaScript 编写。当需要开发支持多端的应用，每一端都需要独立研发、测试，一直到上线，以及后续的维护工作，工作量成倍增涨，势必延长研发周期。</p>
-<p>为了解决多端独立开发的问题，跨平台技术便应运而生，各大互联网公司为此都投入大量人力，于是出现了各种跨平台技术框架，<strong>面对移动领域的跨平台技术方案的层出不穷，又该如何做技术选型呢？</strong></p>
-<h4 id="3-移动端技术选型"><a href="#3-移动端技术选型" class="headerlink" title="3. 移动端技术选型"></a>3. 移动端技术选型</h4><p>作为移动端的跨端技术方案，所关注无外乎以下这4个方面：研发效率、动态性、多端一致性、性能体验。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/1.png" alt="img"></p>
-<ol>
-<li>研发效率：最大化代码复用，减少多端差异的适配工作量，降低开发成本，专注业务开发，实现“write once，run everywhere”的终极目标。效率提升是贯穿整个业务的生命周期线，即便业务上线后，可持续降低后续的维护成本，加快新feature的迭代速度，这是一个持续的效率收益。当然，这里不得不说，任何一门新技术在开发启动学习阶段会有一些成本，但上手后的收益是长期的。</li>
-<li>动态化：突破渠道的更新频率，可快速迭代新功能，这一点不仅是跨平台技术的诉求，也是Native技术必备的杀手锏，这也是评估跨端技术的一个重要考核点。</li>
-<li>多端一致性：好产品在多端UI设计上，往往是整体风格统一，所以业务方采用原生各自独立开发完成后，还需额外花不少时间来修改UI以保证多端一致性；可见，各端独立实现开发方式，带来的效率滞后，不仅仅是Android和iOS各开发一份代码的工作量，还有双端UI的一致性对齐的工作。</li>
-<li>性能体验：一般地，跨端技术方案拥有以上多重优势，但在性能方面比原生流畅更差些。牺牲部分体验换来效率提升，这一点也是情理之中，试想一下，跨平台技术方案同时兼得这4点，那么原生技术恐怕已退出历史舞台，早已是跨平台技术的天下，所以往往跨平台技术的性能优劣便成为核心指标。</li>
-</ol>
-<h4 id="4-跨平台技术划分"><a href="#4-跨平台技术划分" class="headerlink" title="4. 跨平台技术划分"></a>4. 跨平台技术划分</h4><p>对研发效率和体验的不断追逐，移动端的跨平台技术方框架层出不穷，然则天下武功众多，万变不离其宗，从其核心本质来划分，可大致分为以下三大类：</p>
-<p><img src="http://gityuan.com/img/flutter-arch/2.png" alt="img"></p>
-<ol>
-<li>Web技术：主要依赖于WebView的技术，功能支持受限，性能体验很差，比如PhoneGap、Cordova、小程序。</li>
-<li>原生渲染：使用JavaScript作为编程语言，通过中间层转化为原生控件来渲染UI界面，比如React Native、Weex。</li>
-<li>自渲染技术：自行实现一套渲染框架，可通过调用skia等方式完成自渲染，而不依赖于原生控件，比如Flutter、Unity。</li>
-</ol>
-<h4 id="5-跨平台技术演进"><a href="#5-跨平台技术演进" class="headerlink" title="5. 跨平台技术演进"></a>5. 跨平台技术演进</h4><p>跨平台技术，一直以来是每一个有追求的开发者所追逐的梦想，同时也是守旧者的噩梦，跨平台的多端一体化方案势必颠覆现有的原生各端独立开发模式，接下来列举众多的跨平台技术中最为关键的几个技术方案的演进阶段。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/3.png" alt="img"></p>
-<p>从上图可以看出，技术演进过程大致分以下三个阶段： 第一阶段，采用WebView技术绘制界面的Hybrid混合开发技术，通过JS Bridge 将系统部分能力暴露给 JS 调用，其缺点是性能较差，功能受限，扩展性差，不适合交互复杂的场景，比如Cordova。 第二阶段，针对WebView界面性能等问题，于是绘制交还原生渲染，仅仅通过JS调用原生控件，相比WebView技术性能体验更好，这是目前绝大部分跨平台框架的设计思路，比如React Native、Weex。另外，最近小程序也比较火，第一和第二阶段的融合，依然采用WebView作为渲染容器，通过限制Web技术栈的子集，规范化组件使用，并逐步引入原生控件代表WebView渲染，以提升性能。 第三阶段，虽然通过桥接技术使用原生控件解决了功能受限问题，提升性能体验，但相比原生体验差距还是比较大，以及处理平台差异性非常耗费人力。于是Flutter提出自带渲染引擎的解决方案，尽可能减少不同平台间的差异性, 同时媲美原生的高性能体验，因此业界对 Flutter有着极高的关注度。</p>
-<p><strong>面对现有的如此多跨平台方案，为何当下最火的跨平台技术是Flutter，有哪些优势呢？</strong></p>
-<p>RN、Weex均使用JavaScript作为编程语言，JavaScript作为前端开发语言，在跨平台开发中可谓大放异彩，利用web技术不仅能开发出网站，也可以开发手机端web应用和移动端应用程序，似有一统三界(Android、iOS、Web)的趋势，这就是大家常说的“大前端”时代。这些技术方案流畅度不太好，平台一致性较差，至今还没能大面积取代原生开发。</p>
-<p>Flutter是以Dart语言编写，开发体验更接近客户端，从大家使用反馈来看也是如此，Flutter开发环境这一套的流程对于前端开发来说并不太友好。Flutter的定位同样是多端一体化，但是以客户端为首，先磨平Android和iOS双端开发体验，再逐步向Web端渗透，从Flutter规划的Roadmap也能看出，Flutter for web目前仍处于预览版，Flutter客户端方向都已经如火如荼上线了不少应用。</p>
-<p>在此之前，大家常说“大前端”，对于Flutter技术，在笔者看来称之为“大移动端”更贴切，Flutter的UI框架优先支持客户端(Android/iOS)应用的同时，然后再适配Web端。移动互联网时代，不少公司都制定“移动优先”的战略，甚至只开发移动端，没有Web端。移动互联网的时代造就“大移动端”，Flutter作为一款能做到媲美原生的高性能跨平台技术方案，或许一统天下。</p>
-<p>在跨平台技术领域，只要挑战在，技术就不会停滞，伴随着技术不断演进与革新，终将走向美好。</p>
-<h4 id="6-Flutter技术优势"><a href="#6-Flutter技术优势" class="headerlink" title="6. Flutter技术优势"></a>6. Flutter技术优势</h4><p>Flutter是彻底的跨平台方案，既没有采用webView，也没有采用JS桥接原生控件，而是自行实现一套UI框架，在引擎底层通过Skia渲染到屏幕。对于UI之外所需要使用的移动设备自身提供的服务，比如相机、定位、屏幕触摸等，则采用Platform Channels跟原生系统通信的方式来实现。</p>
-<p>对于Flutter优势，回到前面讲到移动端技术选型的4要素，研发效率、动态性、多端一致性、性能体验，分别对应下面这一组词语。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/4.png" alt="img"></p>
-<ol>
-<li>高效率：采用dart语言编写代码，虽然刚开始上手需要点时间，但熟练后效率比较高。一套代码适用多个平台(Android、iOS、Web)，以及高效的Hot Reload能快速辅助调试；</li>
-<li>动态化：2017年3月苹果下发警告邮件，禁止JSPatch等 iOS App热更新方案，从此iOS动态化成为一个不宜公开讨论的话题。同样地，Flutter引擎在某一个官方版本对动态化做过一些尝试，但后续基于风险考虑移除，当然并没有阻碍大家对技术的探索，这里不方便展开讨论；</li>
-<li>高一致性：实现UI像素级的控制，Flutter渲染引擎依靠跨平台Skia图形库来实现，仅依赖系统图形绘制相关的接口，比如未来Android会支持vulkan，iOS会支持metal，这些都是通过skia封装调用。可最大程度上保证不同平台的体验一致性，见下图所示。</li>
-</ol>
-<p><img src="http://gityuan.com/img/flutter-arch/5.png" alt="img"></p>
-<ol>
-<li>高性能：渲染性能优于现有的各种跨平台框架，可媲美原生性能的跨平台技术方案，Dart代码执行效率比JS高，通过AOT编译成平台原生代码，渲染采用自渲染skia方案，既不需要JS Bridge桥接，也不需要Art虚拟机参与。再从渲染原理来看看Flutter的高性能的底气在哪里。</li>
-</ol>
-<p><img src="http://gityuan.com/img/flutter-arch/6_flutter_compare.png" alt="img"></p>
-<p>图解：</p>
-<ul>
-<li>Android原生框架，通过调用Java Framework层，再调用到skia来渲染界面；</li>
-<li>其他跨平台方案(如RN)，通过JSBridge中间层来将JS写的APP转换成相应的原生渲染逻辑，可见比Native代码增加了更多逻辑，性能逊色差于原生框架；</li>
-<li>Flutter框架，APP通过调用Dart Framework层，再直接调用到skia来渲染界面，并没有经过原生Framework过程，可见其渲染性能并不会弱于Native技术，这是一个性能上限很高的跨平台技术。</li>
-</ul>
-<p>当然，不得不说目前的Flutter确实不够尽善尽美，会存在一些不够尽善尽美之处，比如生态不够健全，包体积问题，但其该方案的上限比较高，想象空间比较大，相信更多开发者参与进来，经过更多打磨，未来会做得更好。</p>
-<h4 id="7-业界发展近况"><a href="#7-业界发展近况" class="headerlink" title="7. 业界发展近况"></a>7. 业界发展近况</h4><p>2017年5月Google I/O大会正式对外公布Flutter，到2018年12月发布Flutter1.0，引发全球大量的开发者和企业开始研究Flutter。StackOverflow 2019年的全球开发者文件调查中，Flutter被评选为最受开发者欢迎的框架之一，超过了TensorFlow和Node.js。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/7_flutter_rank.png" alt="img"></p>
-<p>到目前，全球越来越多的公司已经在大家耳熟能详的知名APP中使用Flutter技术并落地，尤其国内知名互联网公司对Flutter投入度很大，社区也是非常活跃。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/8_flutter_company.png" alt="img"></p>
-<h4 id="8-Flutter未来趋势"><a href="#8-Flutter未来趋势" class="headerlink" title="8. Flutter未来趋势"></a>8. Flutter未来趋势</h4><p>目前Flutter主要在移动端Android/iOS双端跨端，Flutter 的愿景是成为一个多端运行的 UI 框架，能够支持不仅仅是移动端，还包括Web、桌面、甚至嵌入式设备。在2019 Google I/O 开发者大会上推出的使用 Flutter 开发 Web 应用的框架，同年9月发布Flutter 1.9，并将Flutter web合入Flutter主仓库。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/9_flutter_multi_arch.png" alt="img"></p>
-<p>从架构图看，Flutter采用同一个Dart Framework层来统一Flutter C++引擎和Web引擎，最终可以运行在Android，iOS，Browser上，从Flutter引擎代码不难看出Flutter也是支持Fuchsia操作系统。</p>
-<p>Fuchsia是Google内部正在开发的一款新的操作系统，采用Flutter作为系统默认的UI框架，也就是说Flutter天然支持Fuchsia，这无疑让Flutter在众多的跨平台方案更有优势。</p>
-<p>从Fuchsia技术架构来看，内核层zircon的基础LK是专为嵌入式应用中小型系统设计的内核，代码简洁，适合嵌入式设备和高性能设备，比如IOT、移动可穿戴设备等，目前这些领域还没有标准化级别的垄断者。以及在框架层中有着语音交互、云端以及智能化等模块，由此笔者揣测未来Fuchsia率先应用在音控等智能嵌入式设备。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/10_fuchsia.png" alt="img"></p>
-<p>目前大家普遍比较看好的未来两个技术就是5G和IoT时代。对于5G的需求，很大程度上是因为移动互联网发展到“IoT时代”的阶段。这个发展阶段，全球上网设备的数量可能会达到500亿个。随着5G+IOT时代的到来，现在大家比较关注的Flutter包大小也同样不再是一个问题，或许Flutter技术的生命期比客户端更长，或许Fuchsia正在驰骋IOT疆场，你所掌握的Flutter技术栈可以无缝迁移，一次弯道超车的机会。</p>
-<p>到此，介绍完跨平台技术演进以及Flutter的优势。看到这，相信你可能对Flutter技术有一定兴趣，为了能让大家快速了解Flutter内部原理而不枯燥，Gityuan通过一系列图来帮大家从整体架构来快速理解Flutter。</p>
-<h2 id="二、Flutter引擎架构"><a href="#二、Flutter引擎架构" class="headerlink" title="二、Flutter引擎架构"></a>二、Flutter引擎架构</h2><h4 id="1-Flutter技术架构"><a href="#1-Flutter技术架构" class="headerlink" title="1. Flutter技术架构"></a>1. Flutter技术架构</h4><p>先来看看Flutter整体的技术架构，分为四层，从上之下依次是Dart APP，Dart Framework， C++ Engine，Platform。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/11_flutter_arch.png" alt="img"></p>
-<p>Flutter架构最核心的便是Framework（框架）和Engine（引擎）：</p>
-<ul>
-<li>Flutter Framework层：用Dart编写，封装整个Flutter架构的核心功能，包括Widget、动画、绘制、手势等功能，有Material（Android风格UI）和Cupertino（iOS风格）的UI界面， 可构建Widget控件以及实现UI布局。</li>
-<li>Flutter Engine层：用C++编写，用于高质量移动应用的轻量级运行时环境，实现了Flutter的核心库，包括Dart虚拟机、动画和图形、文字渲染、通信通道、事件通知、插件架构等。引擎渲染采用的是2D图形渲染库Skia，虚拟机采用的是面向对象语言Dart VM，并将它们托管到Flutter的嵌入层。shell实现了平台相关的代码，比如跟屏幕键盘IME和系统应用生命周期事件的交互。不同平台有不同的shell，比如Android和iOS的shell。</li>
-</ul>
-<h4 id="2-Flutter编译产物"><a href="#2-Flutter编译产物" class="headerlink" title="2. Flutter编译产物"></a>2. Flutter编译产物</h4><p>看完Flutter内部架构，或许你好奇，Flutter不用Android/iOS的本地语言技术开发，Dart编写完的代码如何让不同系统可以识别，最终编译后得到的产物是什么呢？</p>
-<p><img src="http://gityuan.com/img/flutter-arch/12_flutter_artifact.png" alt="img"></p>
-<p>Flutter产物分为Dart业务代码和Engine代码各自生成的产物，图中的Dart Code包含开发者编写的业务代码，Engine Code是引擎代码，如果并没有定制化引擎，则无需重新编译引擎代码。</p>
-<p>一份Dart代码，可编译生成双端产物，实现跨平台的能力。经过编译工具处理后可生成双端产物，图中便是release模式的编译产物，Android产物是由vm、isolate各自的指令段和数据段以及flutter.jar组成的app.apk，iOS产物是由App.framework和Flutter.framework组成的Runner.app。</p>
-<p>这个过程涉及frontend_server、gen_snapshot、xcrun、ninja编译工具。frontend_server前端编译器会进行词法分析、语法分析以及相关全局转换等工作，将dart代码转换为AST(抽象语法树)，并生成app.dill格式的dart kernel。gen_snapshot经过CHA、内联等一系列执行流的优化，根据中间代码生成优化后的FlowGraph对象，再转换为具体相应系统架构（arm/arm64等）的二进制指令。</p>
-<h4 id="3-Flutter引擎启动"><a href="#3-Flutter引擎启动" class="headerlink" title="3. Flutter引擎启动"></a>3. Flutter引擎启动</h4><p>既然了解了Flutter的编译产物，那你或许又好奇，Flutter这台引擎如何发动的，怎么跟Native衔接呢？</p>
-<p><img src="http://gityuan.com/img/flutter-arch/13_flutter_engine_startup.png" alt="img"></p>
-<p>这里以Android为例，熟悉Android的开发者，应该都了解APP启动过程，会执行Application和Activity的onCreate()方法，FlutterApplication和FlutterActivity的onCreate()方法正是连接Native和Flutter的枢纽。</p>
-<ul>
-<li>FlutterApplication.java的onCreate过程主要完成初始化配置、加载引擎libflutter.so、注册JNI方法；</li>
-<li>FlutterActivity.java的onCreate过程，通过FlutterJNI的AttachJNI()方法来初始化引擎Engine、Dart虚拟机、Isolate、taskRunner等对象。再经过层层处理最终调用main.dart中main()方法，执行runApp(Widget app)来处理整个Dart业务代码。</li>
-</ul>
-<p>Flutter引擎启动中会创建有4个TaskRunner以及创建虚拟机，分别来看看它们的工作原理。</p>
-<h4 id="4-TaskRunner工作原理"><a href="#4-TaskRunner工作原理" class="headerlink" title="4. TaskRunner工作原理"></a>4. TaskRunner工作原理</h4><p>Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，会为这些线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列(或任务队列)以及Looper；有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/14_task_loop.png" alt="img"></p>
-<p>上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。</p>
-<p>每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。</p>
-<ul>
-<li>Step 1: 检查task，当task队列不为空，先执行一个task；</li>
-<li>Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；</li>
-</ul>
-<p>可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</p>
-<p>了解了其工作机制，再来看看这4个Task Runner的具体工作内容。</p>
-<ul>
-<li>Platform Task Runner：运行在Android或者iOS的主线程，尽管阻塞该线程并不会影响Flutter渲染管道，平台线程建议不要执行耗时操作；否则可能触发watchdog来结束该应用。比如Android、iOS都是使用平台线程来传递用户输入事件，一旦平台线程被阻塞则会引起手势事件丢失。</li>
-<li>UI Task Runner: 运行在ui线程，比如1.ui，用于引擎执行root isolate中的所有Dart代码，执行渲染与处理Vsync信号，将widget转换生成Layer Tree。除了渲染之外，还有处理Native Plugins消息、Timers、Microtasks等工作；</li>
-<li>GPU Task Runner：运行在gpu线程，比如1.gpu，用于将Layer Tree转换为具体GPU指令，执行设备GPU相关的skia调用，转换相应平台的绘制方式，比如OpenGL, vulkan, metal等。每一帧的绘制需要UI Runner和GPU Runner配合完成，任何一个环节延迟都可能导致掉帧；</li>
-<li>IO Task Runner：运行在io线程，比如1.io，前3个Task Runner都不允许执行耗时操作，该Runner用于将图片从磁盘读取出来，解压转换为GPU可识别的格式后，再上传给GPU线程。为了能访问GPU，IO Runner跟GPU Runner的Context在同一个ShareGroup。比如ui.image通过异步调用让IO Runner来异步加载图片，该线程不能执行其他耗时操作，否则可能会影响图片加载的性能。</li>
-</ul>
-<h4 id="5-Dart虚拟机工作"><a href="#5-Dart虚拟机工作" class="headerlink" title="5. Dart虚拟机工作"></a>5. Dart虚拟机工作</h4><p>Flutter引擎启动会创建Dart虚拟机以及Root Isolate。DartVM自身也拥有自己的Isolate，完全由虚拟机自己管理的，Flutter引擎也无法直接访问。Dart的UI相关操作，是由Root Isolate通过Dart的C++调用，或者是发送消息通知的方式，将UI渲染相关的任务提交到UIRunner执行，这样就可以跟Flutter引擎相关模块进行交互。</p>
-<p>何为Isolate，从字面上理解是“隔离”，isolate之间是逻辑隔离的。Isolate中的代码也是按顺序执行，因为Dart没有共享内存的并发，没有竞争的可能性，故不需要加锁，也没有死锁风险。对于Dart程序的并发则需要依赖多个isolate来实现。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/15_isolate_heap.png" alt="img"></p>
-<p>图解：</p>
-<ul>
-<li>isolate堆是运该isolate中代码分配的所有对象的GC管理的内存存储；</li>
-<li>vm isolate是一个伪isolate，里面包含不可变对象，比如null，true，false；</li>
-<li>isolate堆能引用vm isolate堆中的对象，但vm isolate不能引用isolate堆；</li>
-<li>isolate彼此之间不能相互引用；</li>
-<li>每个isolate都有一个执行dart代码的Mutator thread，一个处理虚拟机内部任务(比如GC, JIT等)的helper thread； 可见，isolate是拥有内存堆和控制线程，虚拟机中可以有很多isolate，但彼此之间内存不共享，无法直接访问，只能通过dart特有的Port端口通信；isolate除了拥有一个mutator控制线程，还有一些其他辅助线程，比如后台JIT编译线程、GC清理/并发标记线程；</li>
-</ul>
-<h4 id="6-Widget架构概览"><a href="#6-Widget架构概览" class="headerlink" title="6. Widget架构概览"></a>6. Widget架构概览</h4><p>Flutter引擎启动后执行Dart业务，是通过runApp(Widget app)方法，那Widget又是什么呢？</p>
-<p><img src="http://gityuan.com/img/flutter-arch/16_widget_arch.png" alt="img"></p>
-<p>Widget是所有Flutter应用程序的基石，Widget可以是一个按钮，一种字体或者颜色，一个布局属性等，在Flutter的UI世界可谓是“万物皆Widget”。常见的Widget子类为StatelessWidget(无状态)和StatefulWidget(有状态)；</p>
-<ul>
-<li>StatelessWidget：内部没有保存状态，UI界面创建后不会发生改变；</li>
-<li>StatefulWidget：内部有保存状态，当状态发生改变，调用setState()方法会触发StatefulWidget的UI发生更新，对于自定义继承自StatefulWidget的子类，必须要重写createState()方法。</li>
-</ul>
-<p><strong>三棵树</strong></p>
-<p><img src="http://gityuan.com/img/flutter-arch/17_three_tree.png" alt="img"></p>
-<p>图解：</p>
-<ul>
-<li>Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。</li>
-<li>Element表示Widget配置树的特定位置的一个实例，同时持有Widget和RenderObject，负责管理Widget配置和RenderObject渲染。Element状态由Flutter Framework管理， 开发人员只需更改Widget即可。</li>
-<li>RenderObject表示渲染树的一个对象，负责真正的渲染工作，比如测量大小、位置、绘制等都由RenderObject完成。</li>
-</ul>
-<p>可见，开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。</p>
-<h4 id="7-渲染原理"><a href="#7-渲染原理" class="headerlink" title="7. 渲染原理"></a>7. 渲染原理</h4><p>Dart的UI采用Widget来实现，最终转换为RenderObject，那界面又是如何渲染的呢？</p>
-<p><img src="http://gityuan.com/img/flutter-arch/18_gpu_pipeline.png" alt="img"></p>
-<p>渲染过程，UI线程完成布局、绘制操作，生成Layer Tree；GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步骤：</p>
-<ul>
-<li>Animate: 遍历_transientCallbacks，执行动画回调方法；</li>
-<li>Build: 对于dirty的元素会执行build构造，没有dirty元素则不会执行，对应于buildScope()</li>
-<li>Layout: 计算渲染对象的大小和位置，对应于flushLayout()，这个过程可能会嵌套再调用build操作；</li>
-<li>Compositing bits: 更新具有脏合成位的任何渲染对象， 对应于flushCompositingBits()；</li>
-<li>Paint: 将绘制命令记录到Layer， 对应于flushPaint()；</li>
-<li>Compositing: 将Compositing bits发送给GPU， 对应于compositeFrame()；</li>
-</ul>
-<p>GPU线程通过skia向GPU硬件绘制一帧的数据，GPU将帧信息保存到FrameBuffer里面，然后视频控制器会根据VSync信号从FrameBuffer取帧数据传递给显示器，从而显示出最终的画面。</p>
-<h4 id="8-Platform-Channels"><a href="#8-Platform-Channels" class="headerlink" title="8. Platform Channels"></a>8. Platform Channels</h4><p>Flutter框架提供了UI的控件支持，对于APP除了UI还有其他依赖于Native平台的支持，比如调用Camera的功能，该怎么办呢？为此，Flutter通过提供Platform Channel的功能，使得Dart代码具备与Native交互的能力。</p>
-<p><img src="http://gityuan.com/img/flutter-arch/19_platform_channels.png" alt="img"></p>
-<p>Platform Channel用于Flutter与Native之间的消息传递，整个过程的消息与响应是异步执行，不会阻塞用户界面。Flutter引擎框架已完成桥接的通道，这样开发者只需在Native层编写定制的Android/iOS代码，即可在Dart代码中直接调用，这也就是Flutter Plugin插件的一种形式。</p>
-<h2 id="三、Flutter源码解读"><a href="#三、Flutter源码解读" class="headerlink" title="三、Flutter源码解读"></a>三、Flutter源码解读</h2><p>笔者(Gityuan)之前一直从事于Android操作系统底层研发工作，今年刚接触Flutter，Flutter作为一门全新的跨平台技术框架，不断深究会发现这是一个小型系统，涉及到的技术很广：</p>
-<ul>
-<li>编译技术如何将dart代码转换为AST(抽象语法树)，如何汇编转换为机器码，打包产物是什么？</li>
-<li>Flutter这台引擎如何发动的，怎么跟Native原生系统衔接运行，如何识别产物并加载到内存？</li>
-<li>引擎启动后，TaskRunner如何分发任务，跟原生系统消息机制有什么关系？</li>
-<li>Dart虚拟机如何管理内存，跟isolate又有什么关系？</li>
-<li>开发者编写的Widget控件如何渲染到屏幕上？</li>
-<li>Flutter如何通过plugin支持移动设备提供的服务？</li>
-</ul>
-<p>这些疑问在前面都逐一简要解答，如果仅仅是用Flutter做业务开发，并不需要掌握这么深度技术，不过，知其然知其所以然，能让你游刃有余。</p>
-<p>本文同步在我的公号<a href="https://mp.weixin.qq.com/s/UZQU-PWM5JEb3dYtZKT6Cw" target="_blank" rel="noopener">《跨平台技术演进及Flutter未来》</a>，另外为大家创建了Flutter微信交流群，想加入可添加Gityuan微信好友，备注flutter即可，如发现任何文章有问题欢迎大家直接跟我反馈。</p>
-<h4 id="启动篇"><a href="#启动篇" class="headerlink" title="启动篇"></a>启动篇</h4><ul>
-<li><a href="http://gityuan.com/2019/06/22/flutter_booting/" target="_blank" rel="noopener">深入理解Flutter引擎启动</a></li>
-<li><a href="http://gityuan.com/2019/06/23/dart-vm/" target="_blank" rel="noopener">深入理解Dart虚拟机启动</a></li>
-<li><a href="http://gityuan.com/2019/06/29/flutter_run_app/" target="_blank" rel="noopener">深入理解Flutter应用启动</a></li>
-</ul>
-<h4 id="通信篇"><a href="#通信篇" class="headerlink" title="通信篇"></a>通信篇</h4><ul>
-<li><a href="http://gityuan.com/2019/07/20/flutter_message_loop/" target="_blank" rel="noopener">深入理解Flutter消息机制</a></li>
-<li><a href="http://gityuan.com/2019/08/10/flutter_channel/" target="_blank" rel="noopener">深入理解Flutter的Platform Channel机制</a></li>
-<li><a href="http://gityuan.com/2019/07/21/flutter_future/" target="_blank" rel="noopener">深入理解Flutter异步Future机制</a></li>
-<li><a href="http://gityuan.com/2019/07/27/flutter-isolate/" target="_blank" rel="noopener">深入理解Flutter的Isolate创建过程</a></li>
-</ul>
-<h4 id="渲染篇"><a href="#渲染篇" class="headerlink" title="渲染篇"></a>渲染篇</h4><ul>
-<li><a href="http://gityuan.com/2019/06/15/flutter_ui_draw/" target="_blank" rel="noopener">Flutter渲染机制—UI线程</a></li>
-<li><a href="http://gityuan.com/2019/06/16/flutter_gpu_draw/" target="_blank" rel="noopener">Flutter渲染机制—GPU线程</a></li>
-<li><a href="http://gityuan.com/2019/07/06/flutter_set_state/" target="_blank" rel="noopener">深入理解setState更新机制</a></li>
-<li><a href="http://gityuan.com/2019/07/13/flutter_animator/" target="_blank" rel="noopener">深入理解Flutter动画原理</a></li>
-</ul>
-<p>后续笔者将持续研究与梳理Flutter内部机制的文章。</p>
-<h2 id="四、结束语"><a href="#四、结束语" class="headerlink" title="四、结束语"></a>四、结束语</h2><p>本文分为三部分全方位逐级深入的分析Flutter技术，先讲述跨平台技术的过去与未来，再解读Flutter架构设计原理，最后剖析Flutter内部源码，后续将持续更新更多剖析技术深度细节以及实战经验，以彻底揭秘更多Flutter技术。</p>
-<p>科技不断在进步，技术不断发展，移动跨平台技术几乎从Android、iOS诞生不久便出现，已发展快10年。时至今日，兼具跨端高效率与高性能体验的Flutter力压群雄，崭露头角，已然成为当下最热门的移动端新技术，全球越来越多的公司在Flutter技术布局并落地产品应用，社区也非常活跃。</p>
-<p>随着5G+IOT时代的到来，Fuchsia系统或许发力IOT新战场，你所掌握的Flutter技术栈可以无缝迁移，这是一次弯道超车的机会。即便Fuchsia落败，相信只要深扎Flutter系统技术的精髓，其他任何的移动端新技术都可以轻松快速地掌握。</p>
-<p>最后，用一句话来结束本次分享，“有时候，你选择一个方向，不是因为它一定会成为未来，而是它有可能成为不一样的未来。”</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>一篇文章搞定 macOS 截图</title>
-    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
-<h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
-<h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" />
-
-
-<h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
-<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
-<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
-<p>也可以在终端执行一条命令永久去除软阴影：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
-<h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
-<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
-<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" />
-
-
-<h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
-<h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
-<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" />
-
-
-<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
-<h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p>
-<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
-<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
-<h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
-<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" />
-
-
-<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
-<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
-<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>安装 Git。终端执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
-<p>命令执行完成后，文件夹的结构如下图所示。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
-
-
-<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
-"></p>
-<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
-<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
-
-
-<p>这样便成功地修改了博客的主题。</p>
-<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>您的名字</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>主题文件夹名称</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署信息</td>
-</tr>
-</tbody></table>
-<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
-<p>在 GitHub 上创建一个 <code>repository</code></p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
-
-
-<p>其命名方式为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>username</code> 为 GitHub 用户名。</p>
-<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
-<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
-<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
-<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
-<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>网站</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>与 Apple Music 一同优雅地享受音乐</title>
     <url>/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
     <content><![CDATA[<hr>
@@ -1642,211 +1848,5 @@
         <tag>Apple</tag>
         <tag>音乐</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>【转载】理解Android P内部API的限制调用机制</title>
-    <url>/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E7%90%86%E8%A7%A3Android%20P%E5%86%85%E9%83%A8API%E7%9A%84%E9%99%90%E5%88%B6%E8%B0%83%E7%94%A8%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<blockquote>
-<p>本文基于原生Android 9.0源码来解读hidden API的限制调用机制</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">libcore/ojluni/src/main/java/java/lang/Class.java</span><br><span class="line">art/runtime/<span class="keyword">native</span>/java_lang_Class.cc</span><br><span class="line">art/runtime/hidden_api.h</span><br><span class="line">art/runtime/runtime.h</span><br></pre></td></tr></table></figure>
-
-<h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>每一次Android大版本的升级，往往会有大量的APP出现兼容性问题，导致这个情况的主要原因是由于APP的热修复SDKs以及依赖Android internal API(内部API)，也就是非SDK API。这些API是指标记@hide的类、方法以及字段，它们不属于官方Android SDK的字段与函数。</p>
-<p>Google希望未来Android大版本升级，APP都能正常运行，而很多APP对内部API的调用通过反射或JNI间接调用的方法来调用，破坏兼容性。 为此Google从Android P开始限制对内部API的使用，继续使用则抛出如下异常。</p>
-<p><img src="http://gityuan.com/images/hidden-api/hidden-api-exp.png" alt="hidden-api-exp"></p>
-<p>虽然Google目前对这个限制使用不是很完善，存在一些漏洞，可能有些APP会利用漏洞继续使用，但这是不推荐的方式，标记@hide的类、方法以及字段在跨版本之间的兼容性将会无法保障，如果继续使用，那么后续出现兼容性问题将不再另行通知。因此，建议APP减少使用非SDK接口以提升稳定性。开发者都是按Google的预期使用公平的SDK或者NDK，对于开发者便于维护，对于用户体验更一致，大大有利于Android生态的健康发展。</p>
-<p>Android 7.0对Native的NDK的调用限制是手铐，而Android 9.0对Java层SDK的调用限制就是脚铐，那么对于Android应用想再搞一些插件化之类的黑科技便是带着脚手铐跳舞，即便能跳但舞姿已不太优雅了。</p>
-<h2 id="二、内部API限制"><a href="#二、内部API限制" class="headerlink" title="二、内部API限制"></a>二、内部API限制</h2><p>Android P限制APP对内部API的调用，而内部API只能通过反射或JNI间接调用，那么限制机制必然是在反射和JNI方法调用链中插入判断逻辑。 在下面小节2.4.2会讲述到所有的限制场景，这里以反射获取方法的getDeclaredMethod()为例来展开说明，其他反射或JNI调用也是类似的逻辑。</p>
-<h3 id="2-1-getDeclaredMethod"><a href="#2-1-getDeclaredMethod" class="headerlink" title="2.1 getDeclaredMethod"></a>2.1 getDeclaredMethod</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getMethod(name, parameterTypes, <span class="keyword">false</span>);  <span class="comment">//【见小节2.2】</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-getMethod"><a href="#2-2-getMethod" class="headerlink" title="2.2 getMethod"></a>2.2 getMethod</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;[] parameterTypes, <span class="keyword">boolean</span> recursivePublicMethods)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;  <span class="comment">//方法名不能为空</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"name == null"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (parameterTypes == <span class="keyword">null</span>) &#123;</span><br><span class="line">        parameterTypes = EmptyArray.CLASS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Class&lt;?&gt; c : parameterTypes) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;  <span class="comment">//参数不能为空</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(<span class="string">"parameter type is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//非public方法，则执行getDeclaredMethodInternal【见小节2.3】</span></span><br><span class="line">    Method result = recursivePublicMethods ? getPublicMethodRecursive(name, parameterTypes)</span><br><span class="line">                                           : getDeclaredMethodInternal(name, parameterTypes);</span><br><span class="line">    <span class="comment">//找不到，则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span> ||</span><br><span class="line">        (recursivePublicMethods &amp;&amp; !Modifier.isPublic(result.getAccessFlags()))) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(name + <span class="string">" "</span> + Arrays.toString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-getDeclaredMethodInternal"><a href="#2-3-getDeclaredMethodInternal" class="headerlink" title="2.3 getDeclaredMethodInternal"></a>2.3 getDeclaredMethodInternal</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FastNative</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> Method <span class="title">getDeclaredMethodInternal</span><span class="params">(String name, Class&lt;?&gt;[] args)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>getDeclaredMethodInternal这是一个native方法，经过JNI调用，进入如下方法：</p>
-<p>[-&gt; java_lang_Class.cc]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> jobject <span class="title">Class_getDeclaredMethodInternal</span><span class="params">(JNIEnv* env, jobject javaThis,</span></span></span><br><span class="line"><span class="function"><span class="params">                                               jstring name, jobjectArray args)</span> </span>&#123;</span><br><span class="line">  <span class="function">ScopedFastNativeObjectAccess <span class="title">soa</span><span class="params">(env)</span></span>;</span><br><span class="line">  <span class="function">StackHandleScope&lt;1&gt; <span class="title">hs</span><span class="params">(soa.Self())</span></span>;</span><br><span class="line">  DCHECK_EQ(Runtime::Current()-&gt;GetClassLinker()-&gt;GetImagePointerSize(), kRuntimePointerSize);</span><br><span class="line">  DCHECK(!Runtime::Current()-&gt;IsActiveTransaction());</span><br><span class="line">  Handle&lt;mirror::Method&gt; result = hs.NewHandle(</span><br><span class="line">      mirror::Class::GetDeclaredMethodInternal&lt;kRuntimePointerSize, <span class="literal">false</span>&gt;(</span><br><span class="line">          soa.Self(),</span><br><span class="line">          DecodeClass(soa, javaThis),</span><br><span class="line">          soa.Decode&lt;mirror::String&gt;(name),</span><br><span class="line">          soa.Decode&lt;mirror::ObjectArray&lt;mirror::Class&gt;&gt;(args)));</span><br><span class="line">  <span class="comment">//检测该方法是否允许访问【小节2.4】</span></span><br><span class="line">  <span class="keyword">if</span> (result == <span class="literal">nullptr</span> || ShouldBlockAccessToMember(result-&gt;GetArtMethod(), soa.Self())) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> soa.AddLocalReference&lt;jobject&gt;(result.Get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4-ShouldBlockAccessToMember"><a href="#2-4-ShouldBlockAccessToMember" class="headerlink" title="2.4 ShouldBlockAccessToMember"></a>2.4 ShouldBlockAccessToMember</h3><p>[-&gt; java_lang_Class.cc]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">ALWAYS_INLINE <span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">ShouldBlockAccessToMember</span><span class="params">(T* member, Thread* self)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//【小节2.5】</span></span><br><span class="line">  hiddenapi::Action action = hiddenapi::GetMemberAction(</span><br><span class="line">      member, self, IsCallerTrusted, hiddenapi::kReflection);</span><br><span class="line">  <span class="comment">//对于不是允许级别的接口，则通知相应监听器</span></span><br><span class="line">  <span class="keyword">if</span> (action != hiddenapi::kAllow) &#123;</span><br><span class="line">    hiddenapi::NotifyHiddenApiListener(member);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> action == hiddenapi::kDeny;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里是限制反射访问，此处的access_method等于hiddenapi::kReflection，除此之外还有其他几种模式，如下</p>
-<h4 id="2-4-1-AccessMethod"><a href="#2-4-1-AccessMethod" class="headerlink" title="2.4.1 AccessMethod"></a>2.4.1 AccessMethod</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AccessMethod &#123;</span><br><span class="line">  kNone,        <span class="comment">// 测试模式，不会出现在实际场景访问权限</span></span><br><span class="line">  kReflection,  <span class="comment">// Java反射调用</span></span><br><span class="line">  kJNI,         <span class="comment">// JNI调用过程</span></span><br><span class="line">  kLinking,     <span class="comment">// 动态链接过程</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-4-2-限制场景"><a href="#2-4-2-限制场景" class="headerlink" title="2.4.2 限制场景"></a>2.4.2 限制场景</h4><p>ShouldBlockAccessToMember是限制内部API访问的核心路径</p>
-<ul>
-<li>kReflection反射过程：<ul>
-<li>Class_newInstance：对象实例化</li>
-<li>Class_getDeclaredConstructorInternal：构造方法</li>
-<li>Class_getDeclaredMethodInternal：获取方法</li>
-<li>Class_getDeclaredField：获取字段</li>
-<li>Class_getPublicFieldRecursive：获取字段</li>
-</ul>
-</li>
-<li>kJNI的JNI调用过程：<ul>
-<li>FindMethodID：查找方法</li>
-<li>FindFieldID：查找字段</li>
-</ul>
-</li>
-<li>kLinking动态链接：<ul>
-<li>UnstartedClassNewInstance</li>
-<li>UnstartedClassGetDeclaredConstructor</li>
-<li>UnstartedClassGetDeclaredMethod</li>
-<li>UnstartedClassGetDeclaredField</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-5-GetMemberAction"><a href="#2-5-GetMemberAction" class="headerlink" title="2.5 GetMemberAction"></a>2.5 GetMemberAction</h3><p>[-&gt; hidden_api.h]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetMemberAction</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                              Thread* self,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="built_in">std</span>::function&lt;<span class="keyword">bool</span>(Thread*)&gt; fn_caller_is_trusted,</span></span></span><br><span class="line"><span class="function"><span class="params">                              AccessMethod access_method)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取hidenn API的可访问标识</span></span><br><span class="line">  HiddenApiAccessFlags::ApiList api_list = member-&gt;GetHiddenApiAccessFlags();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取相应的访问行为【小节2.6】</span></span><br><span class="line">  Action action = GetActionFromAccessFlags(member-&gt;GetHiddenApiAccessFlags());</span><br><span class="line">  <span class="keyword">if</span> (action == kAllow) &#123;  <span class="comment">//允许则直接返回</span></span><br><span class="line">    <span class="keyword">return</span> action;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//检测是否平台调用【小节2.7】</span></span><br><span class="line">  <span class="keyword">if</span> (fn_caller_is_trusted(self)) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//对于hidden接口，且非平台调用【小节2.8】</span></span><br><span class="line">  <span class="keyword">return</span> detail::GetMemberActionImpl(member, api_list, action, access_method);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>功能说明：</p>
-<ul>
-<li>当Action=kAllow，则直接返回；否则执行如下：</li>
-<li>通过fn_caller_is_trusted看当前是否是系统调用的，如果是系统调用则返回，否则执行如下：</li>
-<li>通过GetMemberActionImpl()做进一步判断</li>
-</ul>
-<p>此处的fn_caller_is_trusted是指IsCallerTrusted</p>
-<h3 id="2-6-GetActionFromAccessFlags"><a href="#2-6-GetActionFromAccessFlags" class="headerlink" title="2.6 GetActionFromAccessFlags"></a>2.6 GetActionFromAccessFlags</h3><p>[-&gt; hidden_api.h]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetActionFromAccessFlags</span><span class="params">(HiddenApiAccessFlags::ApiList api_list)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (api_list == HiddenApiAccessFlags::kWhitelist) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;   <span class="comment">//位于白名单，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  EnforcementPolicy policy = Runtime::Current()-&gt;GetHiddenApiEnforcementPolicy();</span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kNoChecks) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;  <span class="comment">//非强制执行策略，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kJustWarn) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllowButWarn;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//执行到这，policy&gt;=kDarkGreyAndBlackList</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(policy) &gt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(api_list)) &#123;</span><br><span class="line">    <span class="keyword">return</span> api_list == HiddenApiAccessFlags::kDarkGreylist</span><br><span class="line">        ? kAllowButWarnAndToast : kAllowButWarn;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> kDeny;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上逻辑用图来展示EnforcementPolicy和HiddenApiAccessFlags在不同取值的情况下，所对应的Action值。 纵轴代表强制策略级别，横轴代表隐藏API的标识，表中数据代表Action，如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>-</th>
-<th>kWhitelist</th>
-<th>kLightGreylist</th>
-<th>kDarkGreylist</th>
-<th>kBlacklist</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kNoChecks</td>
-<td>kAllow</td>
-<td>kAllow</td>
-<td>kAllow</td>
-<td>kAllow</td>
-</tr>
-<tr>
-<td>kJustWarn</td>
-<td>kAllow</td>
-<td>kAllowButWarn</td>
-<td>kAllowButWarn</td>
-<td>kAllowButWarn</td>
-</tr>
-<tr>
-<td>kDarkGreyAndBlackList</td>
-<td>kAllow</td>
-<td>kAllowButWarn</td>
-<td>kDeny</td>
-<td>kDeny</td>
-</tr>
-<tr>
-<td>kBlacklistOnly</td>
-<td>kAllow</td>
-<td>kAllowButWarn</td>
-<td>kAllowButWarnAndToast</td>
-<td>kDeny</td>
-</tr>
-</tbody></table>
-<p>图解：</p>
-<ul>
-<li>当HiddenApiAccessFlags等于kWhitelist，则Action=kAllow，否则如下</li>
-<li>当EnforcementPolicy等于kNoChecks，则Action=kAllow，否则如下</li>
-<li>当EnforcementPolicy等于kJustWarn，则Action=kAllowButWarn，否则如下</li>
-<li>当HiddenApiAccessFlags等于kLightGreylist，则Action=kAllowButWarn，否则如下</li>
-<li>当HiddenApiAccessFlags等于kDarkGreylist，且等于EnforcementPolicy=kBlacklistOnly，则kAllowButWarnAndToast，否则如下</li>
-<li>否则Action=kDeny</li>
-</ul>
-<h4 id="2-6-1-EnforcementPolicy"><a href="#2-6-1-EnforcementPolicy" class="headerlink" title="2.6.1 EnforcementPolicy"></a>2.6.1 EnforcementPolicy</h4><p>EnforcementPolicy的级别如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">EnforcementPolicy</span> &#123;</span></span><br><span class="line">  kNoChecks             = <span class="number">0</span>,</span><br><span class="line">  kJustWarn             = <span class="number">1</span>,  <span class="comment">// 保持检查，一切都允许(仅仅记录日志)</span></span><br><span class="line">  kDarkGreyAndBlackList = <span class="number">2</span>,  <span class="comment">// 禁止深灰色和黑名单</span></span><br><span class="line">  kBlacklistOnly        = <span class="number">3</span>,  <span class="comment">// 只禁止黑名单</span></span><br><span class="line">  kMax = kBlacklistOnly,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>可通过SetHiddenApiEnforcementPolicy()来修改Runtime中的成员变量hidden_api_policy_。</p>
-<h4 id="2-6-2-HiddenApiAccessFlags"><a href="#2-6-2-HiddenApiAccessFlags" class="headerlink" title="2.6.2 HiddenApiAccessFlags"></a>2.6.2 HiddenApiAccessFlags</h4><p>HiddenApiAccessFlags的级别如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HiddenApiAccessFlags</span> </span>&#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">enum</span> ApiList &#123;</span><br><span class="line">    kWhitelist = <span class="number">0</span>,</span><br><span class="line">    kLightGreylist,</span><br><span class="line">    kDarkGreylist,</span><br><span class="line">    kBlacklist,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-6-3-Action"><a href="#2-6-3-Action" class="headerlink" title="2.6.3 Action"></a>2.6.3 Action</h4><p>Action级别如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> Action &#123;</span><br><span class="line">  kAllow,         <span class="comment">//通过</span></span><br><span class="line">  kAllowButWarn,  <span class="comment">//通过，但日志警告</span></span><br><span class="line">  kAllowButWarnAndToast,  <span class="comment">//通过，且日志警告和弹窗</span></span><br><span class="line">  kDeny   <span class="comment">//拒绝访问</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-7-IsCallerTrusted"><a href="#2-7-IsCallerTrusted" class="headerlink" title="2.7 IsCallerTrusted"></a>2.7 IsCallerTrusted</h3><p>[-&gt; java_lang_Class.cc]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(Thread* self)</span> <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function">FirstExternalCallerVisitor <span class="title">visitor</span><span class="params">(self)</span></span>;</span><br><span class="line">    visitor.WalkStack();</span><br><span class="line">    <span class="comment">//【见小节2.7.1】</span></span><br><span class="line">    <span class="keyword">return</span> visitor.caller != <span class="literal">nullptr</span> &amp;&amp;</span><br><span class="line">           hiddenapi::IsCallerTrusted(visitor.caller-&gt;GetDeclaringClass());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-7-1-IsCallerTrusted"><a href="#2-7-1-IsCallerTrusted" class="headerlink" title="2.7.1 IsCallerTrusted"></a>2.7.1 IsCallerTrusted</h4><p>[-&gt; hidden_api.h]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ALWAYS_INLINE</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(ObjPtr&lt;mirror::Class&gt; caller,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::ClassLoader&gt; caller_class_loader,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::DexCache&gt; caller_dex_cache)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (caller_class_loader.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// Boot classloader，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller_dex_cache.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">const</span> DexFile* caller_dex_file = caller_dex_cache-&gt;GetDexFile();</span><br><span class="line">    <span class="keyword">if</span> (caller_dex_file != <span class="literal">nullptr</span> &amp;&amp; caller_dex_file-&gt;IsPlatformDexFile()) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// caller是平台dex文件，则返回true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller.IsNull() &amp;&amp;</span><br><span class="line">      caller-&gt;ShouldSkipHiddenApiChecks() &amp;&amp;</span><br><span class="line">      Runtime::Current()-&gt;IsJavaDebuggable()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">//处于debuggable调试模式且caller已被标记可信任，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>caller被认为是可信任的场景如下：</p>
-<ul>
-<li>当类加载器是Boot classloader，则返回true</li>
-<li>当caller是平台dex文件，则返回true</li>
-<li>处于debuggable调试模式且caller已被标记可信任，则返回true</li>
-</ul>
-<h3 id="2-8-GetMemberActionImpl"><a href="#2-8-GetMemberActionImpl" class="headerlink" title="2.8 GetMemberActionImpl"></a>2.8 GetMemberActionImpl</h3><p>[-&gt; hidden_api.cc]</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line"><span class="function">Action <span class="title">GetMemberActionImpl</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                           HiddenApiAccessFlags::ApiList api_list,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Action action,</span></span></span><br><span class="line"><span class="function"><span class="params">                           AccessMethod access_method)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取签名</span></span><br><span class="line">  <span class="function">MemberSignature <span class="title">member_signature</span><span class="params">(member)</span></span>;</span><br><span class="line">  Runtime* runtime = Runtime::Current();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> bool shouldWarn = kLogAllAccesses || runtime-&gt;IsJavaDebuggable();</span><br><span class="line">  <span class="keyword">if</span> (shouldWarn || action == kDeny) &#123;</span><br><span class="line">    <span class="comment">//判断是否为可豁免接口【小节2.8.1】</span></span><br><span class="line">    <span class="keyword">if</span> (member_signature.IsExempted(runtime-&gt;GetHiddenApiExemptions())) &#123;</span><br><span class="line">      action = kAllow;</span><br><span class="line">      MaybeWhitelistMember(runtime, member);</span><br><span class="line">      <span class="keyword">return</span> kAllow;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">      <span class="comment">//打印包含有关此类成员访问信息的日志消息【小节2.8.2】</span></span><br><span class="line">      member_signature.WarnAboutAccess(access_method, api_list);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (action == kDeny) &#123;</span><br><span class="line">    <span class="keyword">return</span> action; <span class="comment">//拒绝调用</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">    <span class="comment">// 根据运行时标志的不同，我们可以将成员移动到白名单中，并在下次访问成员时跳过警告。</span></span><br><span class="line">    MaybeWhitelistMember(runtime, member);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果此操作需要UI警告，设置适当的标志</span></span><br><span class="line">    <span class="keyword">if</span> (shouldWarn &amp;&amp;</span><br><span class="line">        (action == kAllowButWarnAndToast || runtime-&gt;ShouldAlwaysSetHiddenApiWarningFlag())) &#123;</span><br><span class="line">      runtime-&gt;SetPendingHiddenApiWarning(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-8-1-GetHiddenApiExemptions"><a href="#2-8-1-GetHiddenApiExemptions" class="headerlink" title="2.8.1 GetHiddenApiExemptions"></a>2.8.1 GetHiddenApiExemptions</h4><p>[-&gt; runtime.h]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Runtime</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// SetHiddenApiEnforcementPolicy()可修改该值</span></span><br><span class="line">    hiddenapi::EnforcementPolicy hidden_api_policy_;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//SetHiddenApiExemptions()可修改该值</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; hidden_api_exemptions_;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>GetHiddenApiExemptions()是获取Runtime里面的成员变量hidden_api_exemptions_</p>
-<h4 id="2-8-2-WarnAboutAccess"><a href="#2-8-2-WarnAboutAccess" class="headerlink" title="2.8.2 WarnAboutAccess"></a>2.8.2 WarnAboutAccess</h4><p>[-&gt; hidden_api.cc]</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemberSignature::WarnAboutAccess</span><span class="params">(AccessMethod access_method,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      HiddenApiAccessFlags::ApiList <span class="built_in">list</span>)</span> </span>&#123;</span><br><span class="line">  LOG(WARNING) &lt;&lt; <span class="string">"Accessing hidden "</span> &lt;&lt; (type_ == kField ? <span class="string">"field "</span> : <span class="string">"method "</span>)</span><br><span class="line">               &lt;&lt; Dumpable&lt;MemberSignature&gt;(*<span class="keyword">this</span>) &lt;&lt; <span class="string">" ("</span> &lt;&lt; <span class="built_in">list</span> &lt;&lt; ", " &lt;&lt; access_method &lt;&lt; ")";</span><br></pre></td></tr></table></figure>
-
-<p>打印包含有关此类成员访问信息的日志消息</p>
-<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><h4 id="3-1-限制原理总结"><a href="#3-1-限制原理总结" class="headerlink" title="3.1 限制原理总结"></a>3.1 限制原理总结</h4><p>（1）从前面的内部API限制过程，可知主要控制逻辑在方法ShouldBlockAccessToMember，调用该方法的核心路径如下：</p>
-<ul>
-<li>kReflection反射过程：<ul>
-<li>Class_newInstance：对象实例化</li>
-<li>Class_getDeclaredConstructorInternal：构造方法</li>
-<li>Class_getDeclaredMethodInternal：获取方法</li>
-<li>Class_getDeclaredField：获取字段</li>
-<li>Class_getPublicFieldRecursive：获取字段</li>
-</ul>
-</li>
-<li>kJNI的JNI调用过程：<ul>
-<li>FindMethodID：查找方法</li>
-<li>FindFieldID：查找字段</li>
-</ul>
-</li>
-<li>kLinking动态链接：<ul>
-<li>UnstartedClassNewInstance</li>
-<li>UnstartedClassGetDeclaredConstructor</li>
-<li>UnstartedClassGetDeclaredMethod</li>
-<li>UnstartedClassGetDeclaredField</li>
-</ul>
-</li>
-</ul>
-<p>（2）ShouldBlockAccessToMember过程是否运行主要有如下情况：</p>
-<ul>
-<li>当EnforcementPolicy强制不限制的情况</li>
-<li>当类加载器是Boot classloader的情况</li>
-<li>当caller是平台dex文件的情况</li>
-<li>当处于debuggable调试模式且caller已被标记可信任的情况</li>
-<li>当GetHiddenApiExemptions为豁免情况</li>
-</ul>
-<p>（3）掌握了ShouldBlockAccessToMember原理，也就可以有的放矢了，突破限制方案，比如：</p>
-<ul>
-<li>修改ART的EnforcementPolicy，也就是Runtime中的成员变量hidden_api_policy_，可以基于地址偏移找到相应的成员，这就不就细说</li>
-<li>修改隐藏API豁免变量，也就是Runtime中的成员变量hidden_api_exemptions_</li>
-<li>修改classLoader为BootClassLoader</li>
-</ul>
-<h4 id="3-2-黑白名单"><a href="#3-2-黑白名单" class="headerlink" title="3.2 黑白名单"></a>3.2 黑白名单</h4><p>关于在Android P的几个预览版本一直在不断调整，目前主要是黑名单、浅灰名单、vendor名单这3个名单，对应文件名：hiddenapi-force-blacklist.txt，hiddenapi-light-greylist.txt，hiddenapi-vendor-list.txt。这些文件在编译阶段生成为hiddenapi，记录在access_flags_字段值。整个过程是在hiddenapi.cc过程的CategorizeAllClasses()中完成的。</p>
-<p><img src="http://gityuan.com/images/hidden-api/android_hideapi.png" alt="hidden-api-exp"></p>
-<p>目前主要使用的是黑名单和浅灰名单，深灰名单暂没有使用：</p>
-<ul>
-<li>黑名单内容：setHiddenApiExemptions</li>
-<li>浅灰名单内容：Activity, Service，ContentProvider，ActivityManager, ActivityThread，Application，ContextImpl，Intent等</li>
-</ul>
-<h4 id="3-3-非SDK接口说明"><a href="#3-3-非SDK接口说明" class="headerlink" title="3.3 非SDK接口说明"></a>3.3 非SDK接口说明</h4><ol>
-<li>非SDK接口限制适用于所有应用，但是会豁免使用平台密钥签署的应用，并且针对系统app的白名单</li>
-<li>如果你的应用有必须使用非SDK接口的充分理由，可以向Google提交<a href="https://issuetracker.google.com/issues/new?component=328403&template=1027267" target="_blank" rel="noopener">功能请求</a>，并提供用例详情;</li>
-<li>如果你的应用使用很多第三方库，而又难以排除是否正在使用非SDK接口，可以尝试使用AOSP提供的静态分析工具<a href="https://android.googlesource.com/platform/prebuilts/runtime/+/master/appcompat" target="_blank" rel="noopener">veridex</a>;</li>
-<li>应用运行时检测到非SDK接口的使用，会打印一条<code>Accessing hidden field|method ...</code> 形式的logcat警告。当然对于设置android:debuggable=true的可调试应用会显示toast消息，并打印logcat日志。</li>
-<li>黑名单/灰名单编码在平台dex文件的字段和函数访问标志位中，无法从系统镜像中找到单独包含这些名单的文件。</li>
-<li>黑名单/灰名单在采用相同Android版本是一致的。手机厂商可以向黑名单添加自己的API，但无法从AOSP黑名单或灰名单中移除，Google兼容性定义文件(CDD)来保障这一工作，并在测试过程通过CTS来确保Android运行时强制执行名单。</li>
-<li>目前，Google对Android暂时没有限制访问dex2oat二进制文件的计划，但是dex文件格式无法保证会稳定，可能随时会修改或删除dex2oat以及dex衍生文件。</li>
-</ol>
-<p>Android 7.0针对Native lib引入了namespace来限制平台lib对外的可见性，普通APP在Android N上不能直接调用系统私有库，Android系统允许调用的公用库定义在<a href="https://android.googlesource.com/platform/system/core/+/refs/heads/master/rootdir/etc/public.libraries.android.txt" target="_blank" rel="noopener">public.libraries.android.txt</a>。 这个feature只针对target SDK为24及以上的APP。</p>
-<p>Android 7.0限制对C/C++代码的NDK，Android 9.0限制对Java的SDK。这一以来APP想利用内部API搞黑科技的难度以及不稳定性都会有所增加。</p>
-<p>最后说一点，目前网络有一些开发者发表了关于非SDK接口限制的绕过技术，但基本没有APP是通过这些漏洞方式来突破隐藏API的访问，说明大家有所顾忌，这对生态来说是好事。另外关于绕过技术对于Google和手机厂商都已注意到，要简单封杀容易但可能会带来调试与复杂度的提升，所以Google正在积极寻找平衡接口限制与运行时易于调试之间的平衡，相信很快Google会有更完善的解决方案。</p>
-]]></content>
   </entry>
 </search>
