@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wildptr.cn/"/>
-  <updated>2020-04-23T11:25:00.782Z</updated>
+  <updated>2020-04-23T11:24:13.814Z</updated>
   <id>https://www.wildptr.cn/</id>
   
   <author>
@@ -15,36 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>一篇文章搞定 macOS 截图</title>
-    <link href="https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/"/>
-    <id>https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</id>
-    <published>2020-04-23T01:43:00.000Z</published>
-    <updated>2020-04-23T11:25:00.782Z</updated>
-    
-    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p><h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p><h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" /><h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p><p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p><p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p><p>也可以在终端执行一条命令永久去除软阴影：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure><p>如果要把软阴影找回来，同样也只需要一条命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure><p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p><h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p><p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p><p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" /><h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p><h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p><p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" /><p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p><h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p><p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p><p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p><h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p><p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" /><p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。
-
-普通系统截图
-系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。
-
-Command + Shift + 3 截取整个屏幕
-使用此快
-    
-    </summary>
-    
-    
-      <category term="数码生活" scheme="https://www.wildptr.cn/categories/%E6%95%B0%E7%A0%81%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="macOS" scheme="https://www.wildptr.cn/tags/macOS/"/>
-    
-  </entry>
   
   <entry>
     <title>与 Apple Music 一同优雅地享受音乐</title>
@@ -95,6 +65,36 @@ Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插
     
     
       <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一篇文章搞定 macOS 截图</title>
+    <link href="https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/"/>
+    <id>https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</id>
+    <published>2020-04-23T01:43:00.000Z</published>
+    <updated>2020-04-23T11:25:00.782Z</updated>
+    
+    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p><h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p><h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" /><h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p><p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p><p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p><p>也可以在终端执行一条命令永久去除软阴影：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure><p>如果要把软阴影找回来，同样也只需要一条命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure><p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p><h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p><p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p><p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" /><h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p><h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p><p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" /><p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p><h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p><p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p><p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p><h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p><p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" /><p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。
+
+普通系统截图
+系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。
+
+Command + Shift + 3 截取整个屏幕
+使用此快
+    
+    </summary>
+    
+    
+      <category term="数码生活" scheme="https://www.wildptr.cn/categories/%E6%95%B0%E7%A0%81%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="macOS" scheme="https://www.wildptr.cn/tags/macOS/"/>
     
   </entry>
   
