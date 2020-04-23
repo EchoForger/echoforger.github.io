@@ -105,15 +105,20 @@
 
 
 
-<meta name="description" content="00 后计算机专业本科在读，热爱代码、音乐和生活。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WildPtr 野指针">
-<meta property="og:url" content="https://www.wildptr.cn/archives/2020/04/index.html">
+<meta name="description" content="it：用于源码的版本控制;  * ssh client：用于Github的认证;  * IDE: 带有Flutter插件的Android Studio，这是官方推荐的旗舰IDE;  * depot_tools：内含gclient命令；  * Python: 很多工具都需要用到Python，比如gclient;  * JDK：Java开发工具;  1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】搭建Flutter Engine源码编译环境">
+<meta property="og:url" content="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E6%90%AD%E5%BB%BAFlutter%20Engine%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="WildPtr 野指针">
-<meta property="og:description" content="00 后计算机专业本科在读，热爱代码、音乐和生活。">
+<meta property="og:description" content="it：用于源码的版本控制;  * ssh client：用于Github的认证;  * IDE: 带有Flutter插件的Android Studio，这是官方推荐的旗舰IDE;  * depot_tools：内含gclient命令；  * Python: 很多工具都需要用到Python，比如gclient;  * JDK：Java开发工具;  1.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://gityuan.com/img/flutter_engine_env/flutter_engine_src.png">
+<meta property="og:image" content="http://gityuan.com/img/flutter_engine_env/gn_cmd_help.png">
+<meta property="article:published_time" content="2020-04-23T14:50:10.928Z">
+<meta property="article:modified_time" content="2020-04-23T14:50:17.768Z">
 <meta property="article:author" content="EchoForger">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gityuan.com/img/flutter_engine_env/flutter_engine_src.png">
 
 
 
@@ -143,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="https://www.wildptr.cn/archives/2020/04/"/>
+  <link rel="canonical" href="https://www.wildptr.cn/2020/04/23/【转载】搭建Flutter Engine源码编译环境/"/>
 
 
 
 
 
-  <title>Archive | WildPtr 野指针</title>
+  <title>【转载】搭建Flutter Engine源码编译环境 | WildPtr 野指针</title>
   
 
 
@@ -168,7 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -306,407 +311,258 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E6%90%AD%E5%BB%BAFlutter%20Engine%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">【转载】搭建Flutter Engine源码编译环境</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T22:50:10+08:00">
+                2020-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 10 posts in total. Keep on posting.
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E6%90%AD%E5%BB%BAFlutter%20Engine%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">【转载】搭建Flutter Engine源码编译环境</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  1.2k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:50:10+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%E8%BF%9B%E7%A8%8B%E7%BB%9D%E6%9D%80%E6%8A%80--forceStop/" itemprop="url">
-              
-                <span itemprop="name">【转载】Android进程绝杀技--forceStop</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:49:36+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><h4 id="1-1-准备"><a href="#1-1-准备" class="headerlink" title="1.1 准备"></a>1.1 准备</h4><ul>
+<li>OS：MacOS同时支持Android和iOS的交叉编译功能，Linux只支持Android产物的交叉编译；</li>
+<li>git：用于源码的版本控制;</li>
+<li>ssh client：用于Github的认证;</li>
+<li>IDE: <a href="https://flutter.dev/docs/development/tools/android-studio" target="_blank" rel="noopener">带有Flutter插件的Android Studio</a>，这是官方推荐的旗舰IDE;</li>
+<li>depot_tools：内含gclient命令；</li>
+<li>Python: 很多工具都需要用到Python，比如gclient;</li>
+<li>JDK：Java开发工具;</li>
+</ul>
+<h4 id="1-2-安装depot-tools"><a href="#1-2-安装depot-tools" class="headerlink" title="1.2 安装depot_tools"></a>1.2 安装depot_tools</h4><p>1)克隆depot_tools仓库， 获取gclient命令，执行如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//chromium.googlesource.com/chromium/tools/depot_tools.git</span></span><br></pre></td></tr></table></figure>
 
-        
-        
+<p>2) 设置环境变量，编辑 ~/.bashrc或者 ~/.zshrc，添加如下内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> PATH=$PATH:/path/to/depot_tools</span><br></pre></td></tr></table></figure>
 
-        
+<h4 id="1-3-安装Homebrew"><a href="#1-3-安装Homebrew" class="headerlink" title="1.3 安装Homebrew"></a>1.3 安装Homebrew</h4><p>打开终端，输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h4 id="1-4-安装ant和ninja"><a href="#1-4-安装ant和ninja" class="headerlink" title="1.4 安装ant和ninja"></a>1.4 安装ant和ninja</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install ant</span><br><span class="line">brew install ninja</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E7%90%86%E8%A7%A3Android%20P%E5%86%85%E9%83%A8API%E7%9A%84%E9%99%90%E5%88%B6%E8%B0%83%E7%94%A8%E6%9C%BA%E5%88%B6/" itemprop="url">
-              
-                <span itemprop="name">【转载】理解Android P内部API的限制调用机制</span>
-              
-            </a>
-        
-      </h2>
+<h2 id="二、引擎代码下载"><a href="#二、引擎代码下载" class="headerlink" title="二、引擎代码下载"></a>二、引擎代码下载</h2><p>Step 1: 创建名为engine的空文件夹;<br>Step 2: 在engine目录下新建.gclient配置文件，文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">solutions &#x3D; [</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;managed&quot;: False,</span><br><span class="line">    &quot;name&quot;: &quot;src&#x2F;flutter&quot;,</span><br><span class="line">    &#x2F;&#x2F;此处url需改为真实的个人或者公司引擎地址</span><br><span class="line">    &quot;url&quot;: &quot;git@github.com:&lt;your_name_here&gt;&#x2F;engine.git&quot;,</span><br><span class="line">    &quot;custom_deps&quot;: &#123;&#125;,</span><br><span class="line">    &quot;deps_file&quot;: &quot;DEPS&quot;,</span><br><span class="line">    &quot;safesync_url&quot;: &quot;&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:49:11+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
+<p>Step 3. 拉取flutter引擎以及相关依赖</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd engine</span><br><span class="line">gclient sync  <span class="comment">//拉取Flutter引擎所有依赖的关联库</span></span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>gclient执行完成后，获取flutter引擎的源码目录结构如下所示：</p>
+<p><img src="http://gityuan.com/img/flutter_engine_env/flutter_engine_src.png" alt="flutter_engine_src"></p>
+<ul>
+<li>src/flutter是引擎所对应的源码；</li>
+<li>src/third_party是引擎所需要的三方库，包括dart, skia, libcxx等三方库</li>
+</ul>
+<h2 id="三、-引擎代码编译"><a href="#三、-引擎代码编译" class="headerlink" title="三、 引擎代码编译"></a>三、 引擎代码编译</h2><h4 id="3-1-编译Android引擎"><a href="#3-1-编译Android引擎" class="headerlink" title="3.1 编译Android引擎"></a>3.1 编译Android引擎</h4><p><strong>Step 1: 准备构建文件</strong><br>执行./flutter/tools/gn命令会在src/out目录下生成相应的文件夹，用于存放该平台的编译产物。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd src  <span class="comment">//进入src目录</span></span><br><span class="line">./flutter/tools/gn --runtime-mode profile <span class="comment">//生成Host编译产物存放文件</span></span><br><span class="line">./flutter/tools/gn --android --runtime-mode profile <span class="comment">//生成Android编译产物存放文件</span></span><br></pre></td></tr></table></figure>
 
+<p><img src="http://gityuan.com/img/flutter_engine_env/gn_cmd_help.png" alt="gn_cmd_help"></p>
+<p>gn参数说明：</p>
+<ul>
+<li>unoptimized：是否优化性能，加上该参数则意味着运行性能会降低，但会大幅度提升编译速度</li>
+<li>runtime-mode：制定Flutter的运行模式，可取值{debug,profile,release}；</li>
+<li>android-cpu: 指定Android产物所运行的平台，可取值{arm,x64,x86,arm64}</li>
+<li>ios-cpu: 指定iOS产物所运行的平台，可取值{arm,arm64}</li>
+</ul>
+<p><strong>Step 2: 构建可执行文件</strong><br>执行ninja命令，开始真正的构建过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ninja -C out/host_profile -j <span class="number">6</span></span><br><span class="line">ninja -C out/android_profile -j <span class="number">6</span></span><br></pre></td></tr></table></figure>
 
+<p>说明：</p>
+<ul>
+<li>构造Android或者iOS引擎版本，需要同步构建一个相应版本的host。比如使用android_debug_unopt，则需要同时构建host_debug_unopt；</li>
+<li>-C：紧跟着的参数便是gn命令所生成的目录路径</li>
+<li>-j：指定并发编译的进程个数，该值不宜超过PC的CPU核数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//也支持同时执行多个ninja任务</span></span><br><span class="line">ninja -C out/host_profile &amp;&amp; ninja -C out/android_profile -j <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-编译iOS引擎"><a href="#3-2-编译iOS引擎" class="headerlink" title="3.2 编译iOS引擎"></a>3.2 编译iOS引擎</h4><p><strong>Step 1: 准备构建文件</strong><br>执行./flutter/tools/gn命令会在src/out目录下生成相应的文件夹，用于存放该平台的编译产物。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd src  <span class="comment">//进入src目录</span></span><br><span class="line">./flutter/tools/gn --runtime-mode profile <span class="comment">//生成Host编译产物存放文件</span></span><br><span class="line">./flutter/tools/gn --ios --runtime-mode profile <span class="comment">//生成iOS编译产物存放文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 2: 构建可执行文件</strong><br>执行ninja命令，开始真正的构建过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ninja -C out/host_profile -j <span class="number">6</span></span><br><span class="line">ninja -C out/ios_profile -j <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-使用本地引擎运行Flutter应用"><a href="#3-3-使用本地引擎运行Flutter应用" class="headerlink" title="3.3 使用本地引擎运行Flutter应用"></a>3.3 使用本地引擎运行Flutter应用</h4><p><strong>1) 构建本地引擎后，使用以下命令运行Flutter应用：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter run --local-engine-src-path &lt;FLUTTER_ENGINE_ROOT&gt;/engine/src --local-engine=android_profile</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>local-engine-src-path：指定Flutter引擎存储库的路径，也就是src根目录的绝对路径</li>
+<li>local-engine：指定使用哪个引擎版本，比如android_profile</li>
+</ul>
+<p>这一点非常重要：使用保存有host_xxx引擎构建版本，当使用本地引擎，因为Flutter使用host构建版本中的dart，这是flutter tools会自动在host中寻找。</p>
+<p><strong>2) 修改Dart文件:</strong></p>
+<p>当引擎中修改了Dart源代码，则需要在pubspec.yaml中添加dependency_overrides部分，指定新的sky_engine和sky_services路径，以用于使用自定义引擎的flutter应用程序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependency_overrides:</span><br><span class="line">  sky_engine:</span><br><span class="line">    path: &lt;FLUTTER_ENGINE_ROOT&gt;/engine/src/out/host_profile/gen/dart-pkg/sky_engine</span><br><span class="line">  sky_services:</span><br><span class="line">    path: &lt;FLUTTER_ENGINE_ROOT&gt;/engine/src/out/host_profile/gen/dart-pkg/sky_services</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-IDE配置"><a href="#3-4-IDE配置" class="headerlink" title="3.4 IDE配置"></a>3.4 IDE配置</h4><p>推荐用Clion，查看C++代码比较方便。</p>
+<ul>
+<li>先使用./flutter/tools/gn编译引擎后，会在src/out目录下生成compile_commands.json 文件，Clion通过该文件可完成C++源码的方法跳转功能</li>
+<li>进入src/flutter目录，将 compile_commands.json 软连接到 flutter 目录，或者直接拷贝到该目录；</li>
+<li>使用Clion打开 src/flutter 目录，则能识别到compile_commands.json，可以开始阅读源码了；</li>
+</ul>
+<p>如果还是没有代码跳转的能力，则用clion的open,直接选中compile_commands.json打开。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://github.com/flutter/flutter/wiki/Setting-up-the-Engine-development-environment" target="_blank" rel="noopener">https://github.com/flutter/flutter/wiki/Setting-up-the-Engine-development-environment</a></li>
+<li><a href="https://github.com/flutter/flutter/wiki/Compiling-the-engine" target="_blank" rel="noopener">https://github.com/flutter/flutter/wiki/Compiling-the-engine</a></li>
+<li><a href="https://github.com/flutter/flutter/wiki/The-flutter-tool" target="_blank" rel="noopener">https://github.com/flutter/flutter/wiki/The-flutter-tool</a></li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Dart%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86/" itemprop="url">
-              
-                <span itemprop="name">【转载】Dart虚拟机运行原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:48:08+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Flutter%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/" itemprop="url">
-              
-                <span itemprop="name">【转载】Flutter 跨平台演进及架构开篇</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:47:12+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/" itemprop="url">
-              
-                <span itemprop="name">【转载】Android 操作系统架构开篇</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:46:12+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8Flutter%EF%BC%9A%E5%B9%B6%E9%9D%9E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BB%88%E6%9E%81%E4%B9%8B%E9%80%89%EF%BC%8C%E4%BD%86%E5%AE%83%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E6%9C%AA%E6%9D%A5/" itemprop="url">
-              
-                <span itemprop="name">【转载】字节跳动为什么选用Flutter：并非跨平台终极之选，但它可能是不一样的未来</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T22:45:09+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/" itemprop="url">
-              
-                <span itemprop="name">一篇文章搞定 macOS 截图</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T09:43:00+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/" itemprop="url">
-              
-                <span itemprop="name">与 Apple Music 一同优雅地享受音乐</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T09:43:00+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/" itemprop="url">
-              
-                <span itemprop="name">使用 Hexo 和 GitHub 搭建自己的个人博客平台</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-23T09:43:00+08:00"
-              content="2020-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wechatOfficial/QRCode.jpg" alt="EchoForger wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅“WildPtr 野指针”官方公众号</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%E8%BF%9B%E7%A8%8B%E7%BB%9D%E6%9D%80%E6%8A%80--forceStop/" rel="next" title="【转载】Android进程绝杀技--forceStop">
+                <i class="fa fa-chevron-left"></i> 【转载】Android进程绝杀技--forceStop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -714,6 +570,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -983,6 +843,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
