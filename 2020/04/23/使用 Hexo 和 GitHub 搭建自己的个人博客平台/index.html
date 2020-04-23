@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网站," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。  Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Hexo 和 GitHub 搭建自己的个人博客平台">
+<meta property="og:url" content="https://www.wildptr.cn/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="WildPtr 野指针">
+<meta property="og:description" content="版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。  Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png">
+<meta property="article:published_time" content="2020-04-23T01:43:00.000Z">
+<meta property="article:modified_time" content="2020-04-23T04:28:06.106Z">
+<meta property="article:author" content="EchoForger">
+<meta property="article:tag" content="网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.wildptr.cn/2020/04/23/使用 Hexo 和 GitHub 搭建自己的个人博客平台/"/>
+
+
+
+
+
+  <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台 | WildPtr 野指针</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WildPtr 野指针</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">WildPtr 野指针 - Created by EchoForger</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用 Hexo 和 GitHub 搭建自己的个人博客平台</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T09:43:00+08:00">
+                2020-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构"></p>
+<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值"></p>
+<p>这样便成功地修改了博客的主题。</p>
+<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository"></p>
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BD%91%E7%AB%99/" rel="tag"># 网站</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/" rel="prev" title="与 Apple Music 一同优雅地享受音乐">
+                与 Apple Music 一同优雅地享受音乐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/about/avatar.jpg"
+                alt="EchoForger" />
+            
+              <p class="site-author-name" itemprop="name">EchoForger</p>
+              <p class="site-description motion-element" itemprop="description">00 后计算机专业本科在读，热爱代码、音乐和生活。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Node-js"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Git"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.3.</span> <span class="nav-text">安装 Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建站"><span class="nav-number">2.</span> <span class="nav-text">建站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建网站文件夹"><span class="nav-number">2.1.</span> <span class="nav-text">创建网站文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选取主题"><span class="nav-number">2.2.</span> <span class="nav-text">选取主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网站"><span class="nav-number">2.3.</span> <span class="nav-text">配置网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署至-GitHub"><span class="nav-number">3.</span> <span class="nav-text">部署至 GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建仓库"><span class="nav-number">3.1.</span> <span class="nav-text">创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网站-1"><span class="nav-number">3.2.</span> <span class="nav-text">配置网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Deployer-Git"><span class="nav-number">3.3.</span> <span class="nav-text">安装 Deployer Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">3.4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新网站内容"><span class="nav-number">3.5.</span> <span class="nav-text">更新网站内容</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoForger</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

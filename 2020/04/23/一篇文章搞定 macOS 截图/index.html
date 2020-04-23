@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="macOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。  截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。  普通系统截图 系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一篇文章搞定 macOS 截图">
+<meta property="og:url" content="https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/index.html">
+<meta property="og:site_name" content="WildPtr 野指针">
+<meta property="og:description" content="版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。  截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。  普通系统截图 系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png">
+<meta property="article:published_time" content="2020-04-23T01:43:00.000Z">
+<meta property="article:modified_time" content="2020-04-23T04:27:16.358Z">
+<meta property="article:author" content="EchoForger">
+<meta property="article:tag" content="macOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.wildptr.cn/2020/04/23/一篇文章搞定 macOS 截图/"/>
+
+
+
+
+
+  <title>一篇文章搞定 macOS 截图 | WildPtr 野指针</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WildPtr 野指针</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">WildPtr 野指针 - Created by EchoForger</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一篇文章搞定 macOS 截图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T09:43:00+08:00">
+                2020-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E7%A0%81%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">数码生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
+<h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
+<h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸"></p>
+<h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
+<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
+<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
+<p>也可以在终端执行一条命令永久去除软阴影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
+<h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
+<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
+<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键"></p>
+<h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
+<h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
+<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项"></p>
+<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
+<h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮"></p>
+<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
+<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
+<h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
+<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif"></p>
+<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/macOS/" rel="tag"># macOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/" rel="next" title="与 Apple Music 一同优雅地享受音乐">
+                <i class="fa fa-chevron-left"></i> 与 Apple Music 一同优雅地享受音乐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/about/avatar.jpg"
+                alt="EchoForger" />
+            
+              <p class="site-author-name" itemprop="name">EchoForger</p>
+              <p class="site-description motion-element" itemprop="description">00 后计算机专业本科在读，热爱代码、音乐和生活。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通系统截图"><span class="nav-number">1.</span> <span class="nav-text">普通系统截图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Shift-3-截取整个屏幕"><span class="nav-number">1.1.</span> <span class="nav-text">Command + Shift + 3 截取整个屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Shift-4-截取部分屏幕"><span class="nav-number">1.2.</span> <span class="nav-text">Command + Shift + 4 截取部分屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Shift-5-打开截图工具栏"><span class="nav-number">1.3.</span> <span class="nav-text">Command + Shift + 5 打开截图工具栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Shift-6-截取触控栏"><span class="nav-number">1.4.</span> <span class="nav-text">Command + Shift + 6 截取触控栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统自带的“截屏”app"><span class="nav-number">1.5.</span> <span class="nav-text">系统自带的“截屏”app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截图缩略图"><span class="nav-number">1.6.</span> <span class="nav-text">截图缩略图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长截图"><span class="nav-number">2.</span> <span class="nav-text">长截图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截取动图"><span class="nav-number">3.</span> <span class="nav-text">截取动图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoForger</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
