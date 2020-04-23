@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="索文章  一、引言 众所周知，Android是谷歌开发的一款基于Linux的开源操作系统，从诞生至今已有10余年，这一路走来Android遇到哪些问题？大版本升级朝着什么方向演进？Android的未来如何？我的公号《Android 技术架构演进与未来》 讲解了Android一路走来，在用户体验、性能、功耗、安全、隐私等方面取得的很大进步，以及未来可能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】Android 操作系统架构开篇">
+<meta property="og:url" content="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/index.html">
+<meta property="og:site_name" content="WildPtr 野指针">
+<meta property="og:description" content="索文章  一、引言 众所周知，Android是谷歌开发的一款基于Linux的开源操作系统，从诞生至今已有10余年，这一路走来Android遇到哪些问题？大版本升级朝着什么方向演进？Android的未来如何？我的公号《Android 技术架构演进与未来》 讲解了Android一路走来，在用户体验、性能、功耗、安全、隐私等方面取得的很大进步，以及未来可能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/android-stack.png">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/android-boot.jpg">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/IPC-Binder.jpg">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/handler_thread_commun.jpg">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/android_os.png">
+<meta property="og:image" content="http://gityuan.com/images/android-arch/android-booting.jpg">
+<meta property="article:published_time" content="2020-04-23T14:46:12.805Z">
+<meta property="article:modified_time" content="2020-04-23T14:48:58.726Z">
+<meta property="article:author" content="EchoForger">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gityuan.com/images/android-arch/android-stack.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.wildptr.cn/2020/04/23/【转载】Android 操作系统架构开篇/"/>
+
+
+
+
+
+  <title>【转载】Android 操作系统架构开篇 | WildPtr 野指针</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WildPtr 野指针</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Created by EchoForger</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【转载】Android 操作系统架构开篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T22:46:12+08:00">
+                2020-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  5.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><strong>版权声明：</strong> 本站所有博文内容均为原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
+</blockquote>
+<p>为便于日常查阅本博客，可通过 <strong><a href="http://gityuan.com/archive/" target="_blank" rel="noopener">Gityuan博客导航</a></strong> 方便检索文章</p>
+<h3 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h3><p>众所周知，Android是谷歌开发的一款基于Linux的开源操作系统，从诞生至今已有10余年，这一路走来Android遇到哪些问题？大版本升级朝着什么方向演进？Android的未来如何？我的公号<a href="https://mp.weixin.qq.com/s/W38aauoCEEUbL8KvUkb_Rw" target="_blank" rel="noopener">《Android 技术架构演进与未来》</a> 讲解了Android一路走来，在用户体验、性能、功耗、安全、隐私等方面取得的很大进步，以及未来可能的方向。</p>
+<p>本文作为Android系统架构的开篇，起到提纲挈领的作用，从系统整体架构角度概要讲解Android系统的核心技术点，带领大家初探Android系统全貌以及内部运作机制。虽然Android系统非常庞大且错综复杂，需要具备全面的技术栈，但整体架构设计清晰。Android底层内核空间以Linux Kernel作为基石，上层用户空间由Native系统库、虚拟机运行环境、框架层组成，通过系统调用(Syscall)连通系统的内核空间与用户空间。对于用户空间主要采用C++和Java代码编写，通过JNI技术打通用户空间的Java层和Native层(C++/C)，从而连通整个系统。</p>
+<p>为了能让大家整体上大致了解Android系统涉及的知识层面，先来看一张Google官方提供的经典分层架构图，从下往上依次分为Linux内核、HAL、系统Native库和Android运行时环境、Java框架层以及应用层这5层架构，其中每一层都包含大量的子模块或子系统。</p>
+<p><img src="http://gityuan.com/images/android-arch/android-stack.png" alt="android-stack"></p>
+<p>上图采用静态分层方式的架构划分，众所周知，程序代码是死的，系统运转是活的，各模块代码运行在不同的进程(线程)中，相互之间进行着各种错终复杂的信息传递与交互流，从这个角度来说此图并没能体现Android整个系统的内部架构、运行机理，以及各个模块之间是如何衔接与配合工作的。</p>
+<p><strong>为了更深入地掌握Android整个架构思想以及各个模块在Android系统所处的地位与价值，计划以Android系统启动过程为主线，以进程的视角来诠释Android M系统全貌</strong>，全方位的深度剖析各个模块功能，争取各个击破。这样才能犹如庖丁解牛，解决、分析问题则能游刃有余。</p>
+<h3 id="二、Android架构"><a href="#二、Android架构" class="headerlink" title="二、Android架构"></a>二、Android架构</h3><p>Google提供的5层架构图很经典，但为了更进一步透视Android系统架构，本文更多的是以进程的视角，以分层的架构来诠释Android系统的全貌，阐述Android内部的环环相扣的内在联系。</p>
+<p><strong>系统启动架构图</strong></p>
+<p>点击查看<a href="http://gityuan.com/images/android-arch/android-boot.jpg" target="_blank" rel="noopener">大图</a></p>
+<p><img src="http://gityuan.com/images/android-arch/android-boot.jpg" alt="process_status"></p>
+<p><strong>图解：</strong> Android系统启动过程由上图从下往上的一个过程是由Boot Loader引导开机，然后依次进入 -&gt; <code>Kernel</code> -&gt; <code>Native</code> -&gt; <code>Framework</code> -&gt; <code>App</code>，接来下简要说说每个过程：</p>
+<p>关于Loader层：</p>
+<ul>
+<li>Boot ROM: 当手机处于关机状态时，长按Power键开机，引导芯片开始从固化在<code>ROM</code>里的预设代码开始执行，然后加载引导程序到<code>RAM</code>；</li>
+<li>Boot Loader：这是启动Android系统之前的引导程序，主要是检查RAM，初始化硬件参数等功能。</li>
+</ul>
+<h4 id="2-1-Linux内核层"><a href="#2-1-Linux内核层" class="headerlink" title="2.1 Linux内核层"></a>2.1 Linux内核层</h4><p>Android平台的基础是Linux内核，比如ART虚拟机最终调用底层Linux内核来执行功能。Linux内核的安全机制为Android提供相应的保障，也允许设备制造商为内核开发硬件驱动程序。</p>
+<ul>
+<li>启动Kernel的swapper进程(pid=0)：该进程又称为idle进程, 系统初始化过程Kernel由无到有开创的第一个进程, 用于初始化进程管理、内存管理，加载Display,Camera Driver，Binder Driver等相关工作；</li>
+<li>启动kthreadd进程（pid=2）：是Linux系统的内核进程，会创建内核工作线程kworkder，软中断线程ksoftirqd，thermal等内核守护进程。<code>kthreadd进程是所有内核进程的鼻祖</code>。</li>
+</ul>
+<h4 id="2-2-硬件抽象层-HAL"><a href="#2-2-硬件抽象层-HAL" class="headerlink" title="2.2 硬件抽象层 (HAL)"></a>2.2 硬件抽象层 (HAL)</h4><p>硬件抽象层 (HAL) 提供标准接口，HAL包含多个库模块，其中每个模块都为特定类型的硬件组件实现一组接口，比如WIFI/蓝牙模块，当框架API请求访问设备硬件时，Android系统将为该硬件加载相应的库模块。</p>
+<h4 id="2-3-Android-Runtime-amp-系统库"><a href="#2-3-Android-Runtime-amp-系统库" class="headerlink" title="2.3 Android Runtime &amp; 系统库"></a>2.3 Android Runtime &amp; 系统库</h4><p>每个应用都在其自己的进程中运行，都有自己的虚拟机实例。ART通过执行DEX文件可在设备运行多个虚拟机，DEX文件是一种专为Android设计的字节码格式文件，经过优化，使用内存很少。ART主要功能包括：预先(AOT)和即时(JIT)编译，优化的垃圾回收(GC)，以及调试相关的支持。</p>
+<p>这里的Native系统库主要包括init孵化来的用户空间的守护进程、HAL层以及开机动画等。启动init进程(pid=1),是Linux系统的用户进程，<code>init进程是所有用户进程的鼻祖</code>。</p>
+<ul>
+<li>init进程会孵化出ueventd、logd、healthd、installd、adbd、lmkd等用户守护进程；</li>
+<li>init进程还启动<code>servicemanager</code>(binder服务管家)、<code>bootanim</code>(开机动画)等重要服务</li>
+<li>init进程孵化出Zygote进程，Zygote进程是Android系统的第一个Java进程(即虚拟机进程)，<code>Zygote是所有Java进程的父进程</code>，Zygote进程本身是由init进程孵化而来的。</li>
+</ul>
+<h4 id="2-4-Framework层"><a href="#2-4-Framework层" class="headerlink" title="2.4 Framework层"></a>2.4 Framework层</h4><ul>
+<li>Zygote进程，是由init进程通过解析init.rc文件后fork生成的，Zygote进程主要包含：<ul>
+<li>加载ZygoteInit类，注册Zygote Socket服务端套接字</li>
+<li>加载虚拟机</li>
+<li>提前加载类preloadClasses</li>
+<li>提前加载资源preloadResouces</li>
+</ul>
+</li>
+<li>System Server进程，是由Zygote进程fork而来，<code>System Server是Zygote孵化的第一个进程</code>，System Server负责启动和管理整个Java framework，包含ActivityManager，WindowManager，PackageManager，PowerManager等服务。</li>
+<li>Media Server进程，是由init进程fork而来，负责启动和管理整个C++ framework，包含AudioFlinger，Camera Service等服务。</li>
+</ul>
+<h4 id="2-5-App层"><a href="#2-5-App层" class="headerlink" title="2.5 App层"></a>2.5 App层</h4><ul>
+<li>Zygote进程孵化出的第一个App进程是Launcher，这是用户看到的桌面App；</li>
+<li>Zygote进程还会创建Browser，Phone，Email等App进程，每个App至少运行在一个进程上。</li>
+<li>所有的App进程都是由Zygote进程fork生成的。</li>
+</ul>
+<h4 id="2-6-Syscall-amp-amp-JNI"><a href="#2-6-Syscall-amp-amp-JNI" class="headerlink" title="2.6 Syscall &amp;&amp; JNI"></a>2.6 Syscall &amp;&amp; JNI</h4><ul>
+<li>Native与Kernel之间有一层系统调用(SysCall)层，见<a href="http://gityuan.com/2016/05/21/syscall/" target="_blank" rel="noopener">Linux系统调用(Syscall)原理</a>;</li>
+<li>Java层与Native(C/C++)层之间的纽带JNI，见<a href="http://gityuan.com/2016/05/28/android-jni/" target="_blank" rel="noopener">Android JNI原理分析</a>。</li>
+</ul>
+<h3 id="三、通信方式"><a href="#三、通信方式" class="headerlink" title="三、通信方式"></a>三、通信方式</h3><p>无论是Android系统，还是各种Linux衍生系统，各个组件、模块往往运行在各种不同的进程和线程内，这里就必然涉及进程/线程之间的通信。对于IPC(Inter-Process Communication, 进程间通信)，Linux现有管道、消息队列、共享内存、套接字、信号量、信号这些IPC机制，Android额外还有Binder IPC机制，Android OS中的Zygote进程的IPC采用的是Socket机制，在上层system server、media server以及上层App之间更多的是采用Binder IPC方式来完成跨进程间的通信。对于Android上层架构中，很多时候是在同一个进程的线程之间需要相互通信，例如同一个进程的主线程与工作线程之间的通信，往往采用的Handler消息机制。</p>
+<p>想深入理解Android内核层架构，必须先深入理解Linux现有的IPC机制；对于Android上层架构，则最常用的通信方式是Binder、Socket、Handler，当然也有少量其他的IPC方式，比如杀进程Process.killProcess()采用的是signal方式。下面说说Binder、Socket、Handler：</p>
+<h4 id="3-1-Binder"><a href="#3-1-Binder" class="headerlink" title="3.1 Binder"></a>3.1 Binder</h4><p>Binder作为Android系统提供的一种IPC机制，无论从系统开发还是应用开发，都是Android系统中最重要的组成，也是最难理解的一块知识点，想了解<a href="https://www.zhihu.com/question/39440766/answer/89210950" target="_blank" rel="noopener">为什么Android要采用Binder作为IPC机制？</a> 可查看我在知乎上的回答。深入了解Binder机制，最好的方法便是阅读源码，借用Linux鼻祖Linus Torvalds曾说过的一句话：Read The Fucking Source Code。下面简要说说Binder IPC原理。</p>
+<p><strong>Binder IPC原理</strong></p>
+<p>Binder通信采用c/s架构，从组件视角来说，包含Client、Server、ServiceManager以及binder驱动，其中ServiceManager用于管理系统中的各种服务。</p>
+<p><img src="http://gityuan.com/images/android-arch/IPC-Binder.jpg" alt="ServiceManager"></p>
+<ul>
+<li>想进一步了解Binder，可查看<a href="http://gityuan.com/2015/10/31/binder-prepare/" target="_blank" rel="noopener">Binder系列—开篇</a>，Binder系列花费了13篇文章的篇幅，从源码角度出发来讲述Driver、Native、Framework、App四个层面的整个完整流程。根据有些读者反馈这个系列还是不好理解，这个binder涉及的层次跨度比较大，知识量比较广，建议大家先知道binder是用于进程间通信，有个大致概念就可以先去学习系统基本知识，等后面有一定功力再进一步深入研究Binder机制。</li>
+</ul>
+<p><strong>Binder原理篇</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">概述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left"><a href="http://gityuan.com/2015/10/31/binder-prepare/" target="_blank" rel="noopener">Binder系列—开篇</a></td>
+<td align="left">Binder概述</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2015/11/07/binder-start-sm/" target="_blank" rel="noopener">Binder系列3—启动Service Manager</a></td>
+<td align="left">ServiceManager守护进程 注册和查询服务</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2015/11/08/binder-get-sm/" target="_blank" rel="noopener">Binder系列4—获取Service Manager</a></td>
+<td align="left">获取代理对象BpServiceManager</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2015/11/14/binder-add-service/" target="_blank" rel="noopener">Binder系列5—注册服务(addService)</a></td>
+<td align="left">注册Media服务</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2015/11/15/binder-get-service/" target="_blank" rel="noopener">Binder系列6—获取服务(getService)</a></td>
+<td align="left">获取Media代理，以及DeathRecipient</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2015/11/21/binder-framework/" target="_blank" rel="noopener">Binder系列7—framework层分析</a></td>
+<td align="left">framework层服务注册和查询，Binder注册</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/10/29/binder-thread-pool/" target="_blank" rel="noopener">理解Binder线程池的管理</a></td>
+<td align="left">Binder的startThreadPool过程</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2016/09/04/binder-start-service/" target="_blank" rel="noopener">彻底理解Android Binder通信架构</a></td>
+<td align="left">startService为主线</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="http://gityuan.com/2015/11/28/binder-summary/" target="_blank" rel="noopener">Binder系列10—总结</a></td>
+<td align="left">Binder的简单总结</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="http://gityuan.com/2016/03/05/binder-clearCallingIdentity/" target="_blank" rel="noopener">Binder IPC的权限控制</a></td>
+<td align="left">clearCallingIdentity/restoreCallingIdentity</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a href="http://gityuan.com/2016/10/03/binder_linktodeath/" target="_blank" rel="noopener">Binder死亡通知机制之linkToDeath</a></td>
+<td align="left">Binder死亡通知机制</td>
+</tr>
+</tbody></table>
+<p><strong>Binder驱动篇:</strong></p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th><a href="http://gityuan.com/2015/11/01/binder-driver/" target="_blank" rel="noopener">Binder系列1—Binder Driver初探</a></th>
+<th>驱动open/mmap/ioctl，以及binder结构体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td><a href="http://gityuan.com/2015/11/02/binder-driver-2/" target="_blank" rel="noopener">Binder系列2—Binder Driver再探</a></td>
+<td>Binder通信协议，内存机制</td>
+</tr>
+</tbody></table>
+<p><strong>Binder使用篇:</strong></p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th><a href="http://gityuan.com/2015/11/22/binder-use/" target="_blank" rel="noopener">Binder系列8—如何使用Binder</a></th>
+<th>Native层、Framwrok层自定义Binder服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td><a href="http://gityuan.com/2015/11/23/binder-aidl/" target="_blank" rel="noopener">Binder系列9—如何使用AIDL</a></td>
+<td>App层自定义Binder服务</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-Socket"><a href="#3-2-Socket" class="headerlink" title="3.2 Socket"></a>3.2 Socket</h4><p>Socket通信方式也是C/S架构，比Binder简单很多。在Android系统中采用Socket通信方式的主要有：</p>
+<ul>
+<li>zygote：用于孵化进程，system_server创建进程是通过socket向zygote进程发起请求；</li>
+<li>installd：用于安装App的守护进程，上层PackageManagerService很多实现最终都是交给它来完成；</li>
+<li>lmkd：lowmemorykiller的守护进程，Java层的LowMemoryKiller最终都是由lmkd来完成；</li>
+<li>adbd：这个也不用说，用于服务adb；</li>
+<li>logcatd:这个不用说，用于服务logcat；</li>
+<li>vold：即volume Daemon，是存储类的守护进程，用于负责如USB、Sdcard等存储设备的事件处理。</li>
+</ul>
+<p>等等还有很多，这里不一一列举，Socket方式更多的用于Android framework层与native层之间的通信。Socket通信方式相对于binder比较简单，这里省略。</p>
+<h4 id="3-3-Handler"><a href="#3-3-Handler" class="headerlink" title="3.3 Handler"></a>3.3 Handler</h4><p><strong>Binder/Socket用于进程间通信，而Handler消息机制用于同进程的线程间通信</strong>，Handler消息机制是由一组MessageQueue、Message、Looper、Handler共同组成的，为了方便且称之为Handler消息机制。</p>
+<p>有人可能会疑惑，为何Binder/Socket用于进程间通信，能否用于线程间通信呢？答案是肯定，对于两个具有独立地址空间的进程通信都可以，当然也能用于共享内存空间的两个线程间通信，这就好比杀鸡用牛刀。接着可能还有人会疑惑，那handler消息机制能否用于进程间通信？答案是不能，Handler只能用于共享内存地址空间的两个线程间通信，即同进程的两个线程间通信。很多时候，Handler是工作线程向UI主线程发送消息，即App应用中只有主线程能更新UI，其他工作线程往往是完成相应工作后，通过Handler告知主线程需要做出相应地UI更新操作，Handler分发相应的消息给UI主线程去完成，如下图：</p>
+<p><img src="http://gityuan.com/images/android-arch/handler_thread_commun.jpg" alt="handler_communication"></p>
+<p>由于工作线程与主线程共享地址空间，即Handler实例对象mHandler位于线程间共享的内存堆上，工作线程与主线程都能直接使用该对象，只需要注意多线程的同步问题。工作线程通过mHandler向其成员变量MessageQueue中添加新Message，主线程一直处于loop()方法内，当收到新的Message时按照一定规则分发给相应的handleMessage()方法来处理。所以说，Handler消息机制用于同进程的线程间通信，其核心是线程间共享内存空间，而不同进程拥有不同的地址空间，也就不能用handler来实现进程间通信。</p>
+<p>上图只是Handler消息机制的一种处理流程，是不是只能工作线程向UI主线程发消息呢，其实不然，可以是UI线程向工作线程发送消息，也可以是多个工作线程之间通过handler发送消息。更多关于Handler消息机制文章：</p>
+<ul>
+<li><a href="http://gityuan.com/2015/12/26/handler-message-framework/" target="_blank" rel="noopener">Android消息机制-Handler(framework篇)</a></li>
+<li><a href="http://gityuan.com/2015/12/27/handler-message-native/" target="_blank" rel="noopener">Android消息机制-Handler(native篇)</a></li>
+<li><a href="http://gityuan.com/2016/01/01/handler-message-usage/" target="_blank" rel="noopener">Android消息机制3-Handler(实战)</a></li>
+</ul>
+<p>要理解framework层源码，掌握这3种基本的进程/线程间通信方式是非常有必要，当然Linux还有不少其他的IPC机制，比如共享内存、信号、信号量，在源码中也有体现，如果想全面彻底地掌握Android系统，还是需要对每一种IPC机制都有所了解。</p>
+<h3 id="四、核心提纲"><a href="#四、核心提纲" class="headerlink" title="四、核心提纲"></a>四、核心提纲</h3><p>博主对于Android从系统底层一路到上层都有自己的理解和沉淀，通过前面对系统启动的介绍，相信大家对Android系统有了一个整体观。接下来需抓核心、理思路，争取各个击破。后续将持续更新和完善整个大纲，不限于进程、内存、IO、系统服务架构以及分析实战等文章。</p>
+<p>当然本站有一些文章没来得及进一步加工，有时间根据大家的反馈，不断修正和完善所有文章，争取给文章，再进一步精简非核心代码，增加可视化图表以及文字的结论性分析。基于<strong>Android 6.0的源码</strong>，专注于分享Android系统原理、架构分析的原创文章。</p>
+<p><strong>建议阅读群体</strong>： 适合于正从事或者有兴趣研究Android系统的工程师或者技术爱好者，也适合Android App高级工程师；对于尚未入门或者刚入门的App工程师阅读可能会有点困难，建议先阅读更基础的资料，再来阅读本站博客。</p>
+<p>看到Android整个系统架构是如此庞大的, 该问如何学习Android系统, 以下是我自己的Android的学习和研究论，仅供参考<a href="http://gityuan.com/2016/04/24/how-to-study-android/" target="_blank" rel="noopener">如何自学Android</a>。</p>
+<p>从整理上来列举一下Android系统的核心知识点概览：</p>
+<p><img src="http://gityuan.com/images/android-arch/android_os.png" alt="Android_os"></p>
+<h4 id="4-1-系统启动系列"><a href="#4-1-系统启动系列" class="headerlink" title="4.1 系统启动系列"></a>4.1 系统启动系列</h4><p><img src="http://gityuan.com/images/android-arch/android-booting.jpg" alt="android-booting"></p>
+<p><a href="http://gityuan.com/2016/02/01/android-booting/" target="_blank" rel="noopener">Android系统启动-概述</a>: Android系统中极其重要进程：init, zygote, system_server, servicemanager 进程:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">进程启动</th>
+<th align="left">概述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2016/02/05/android-init/" target="_blank" rel="noopener">init进程</a></td>
+<td align="left">Linux系统中用户空间的第一个进程, Init.main</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2016/02/13/android-zygote/" target="_blank" rel="noopener">zygote进程</a></td>
+<td align="left">所有Ａpp进程的父进程, ZygoteInit.main</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2016/02/14/android-system-server/" target="_blank" rel="noopener">system_server进程(上篇)</a></td>
+<td align="left">系统各大服务的载体, forkSystemServer过程</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2016/02/20/android-system-server-2/" target="_blank" rel="noopener">system_server进程(下篇)</a></td>
+<td align="left">系统各大服务的载体, SystemServer.main</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2015/11/07/binder-start-sm/" target="_blank" rel="noopener">servicemanager进程</a></td>
+<td align="left">binder服务的大管家, 守护进程循环运行在binder_loop</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/03/26/app-process-create/" target="_blank" rel="noopener">app进程</a></td>
+<td align="left">通过Process.start启动App进程, ActivityThread.main</td>
+</tr>
+</tbody></table>
+<p>再来看看守护进程(也就是进程名一般以d为后缀，比如logd，此处d是指daemon的简称), 下面介绍部分守护进程：</p>
+<ul>
+<li><a href="http://gityuan.com/2016/06/15/android-debuggerd/" target="_blank" rel="noopener">debuggerd</a></li>
+<li><a href="http://gityuan.com/2016/11/13/android-installd" target="_blank" rel="noopener">installd</a></li>
+<li><a href="http://gityuan.com/2016/09/17/android-lowmemorykiller/" target="_blank" rel="noopener">lmkd</a></li>
+<li><a href="http://gityuan.com/2018/01/27/android-log/" target="_blank" rel="noopener">logd</a></li>
+</ul>
+<h4 id="4-2-系统稳定性系列"><a href="#4-2-系统稳定性系列" class="headerlink" title="4.2 系统稳定性系列"></a>4.2 系统稳定性系列</h4><p><a href="http://gityuan.com/2016/06/19/stability_summary/" target="_blank" rel="noopener">Android系统稳定性</a>主要是异常崩溃(crash)和执行超时(timeout),:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">概述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2016/07/02/android-anr/" target="_blank" rel="noopener">理解Android ANR的触发原理</a></td>
+<td align="left">触发ANR的场景以及机理</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2017/01/01/input-anr/" target="_blank" rel="noopener">Input系统—ANR原理分析</a></td>
+<td align="left">input触发ANR的原理</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2016/12/02/app-not-response/" target="_blank" rel="noopener">理解Android ANR的信息收集过程</a></td>
+<td align="left">AMS.appNotResponding过程分析,收集traces</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2016/11/26/art-trace/" target="_blank" rel="noopener">解读Java进程的Trace文件</a></td>
+<td align="left">kill -3 信息收集过程</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2016/11/27/native-traces/" target="_blank" rel="noopener">Native进程之Trace原理</a></td>
+<td align="left">debuggerd -b 信息收集过程</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/06/21/watchdog/" target="_blank" rel="noopener">WatchDog工作原理</a></td>
+<td align="left">WatchDog触发机制</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2016/06/24/app-crash/" target="_blank" rel="noopener">理解Java Crash处理流程</a></td>
+<td align="left">AMS.handleApplicationCrash过程分析</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="http://gityuan.com/2016/06/25/android-native-crash/" target="_blank" rel="noopener">理解Native Crash处理流程</a></td>
+<td align="left">debuggerd守护进程</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="http://gityuan.com/2019/01/19/global_ref/" target="_blank" rel="noopener">global reference限制策略</a></td>
+<td align="left">global reference</td>
+</tr>
+</tbody></table>
+<h4 id="4-3-Android进程系列"><a href="#4-3-Android进程系列" class="headerlink" title="4.3 Android进程系列"></a>4.3 Android进程系列</h4><p>进程/线程是操作系统的魂，各种服务、组件、子系统都是依附于具体的进程实体。深入理解进程机制对于掌握Android系统整体架构和运转机制是非常有必要的，是系统工程师的基本功，下面列举进程相关的文章：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">概述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2016/03/26/app-process-create/" target="_blank" rel="noopener">理解Android进程创建流程</a></td>
+<td align="left">Process.start过程分析</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2016/04/16/kill-signal/" target="_blank" rel="noopener">理解杀进程的实现原理</a></td>
+<td align="left">Process.killProcess过程分析</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2016/10/09/app-process-create-2/" target="_blank" rel="noopener">Android四大组件与进程启动的关系</a></td>
+<td align="left">AMS.startProcessLocked过程分析组件与进程</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2016/10/22/force-stop/" target="_blank" rel="noopener">Android进程绝杀技–forceStop</a></td>
+<td align="left">force-stop过程分析彻底移除组件与杀进程</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2016/09/24/android-thread/" target="_blank" rel="noopener">理解Android线程创建流程</a></td>
+<td align="left">3种不同线程的创建过程</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/09/04/binder-start-service/" target="_blank" rel="noopener">彻底理解Android Binder通信架构</a></td>
+<td align="left">以start-service为线,阐述进程间通信机理</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2016/10/29/binder-thread-pool/" target="_blank" rel="noopener">理解Binder线程池的管理</a></td>
+<td align="left">Zygote fork的进程都默认开启binder线程池</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="http://gityuan.com/2015/10/01/process-lifecycle/" target="_blank" rel="noopener">Android进程生命周期与ADJ</a></td>
+<td align="left">进程adj, processState以及lmk</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="http://gityuan.com/2016/09/17/android-lowmemorykiller/" target="_blank" rel="noopener">Android LowMemoryKiller原理分析</a></td>
+<td align="left">lmk原理分析</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a href="http://gityuan.com/2015/10/01/process-priority/" target="_blank" rel="noopener">进程优先级</a></td>
+<td align="left">进程nice,thread priority以及scheduler</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><a href="http://gityuan.com/2016/08/07/android-adj/" target="_blank" rel="noopener">Android进程调度之adj算法</a></td>
+<td align="left">updateOomAdjLocked过程</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left"><a href="http://gityuan.com/2015/12/19/android-process-category/" target="_blank" rel="noopener">Android进程整理</a></td>
+<td align="left">整理系统的所有进程/线程</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left"><a href="http://gityuan.com/2018/05/19/android-process-adj/" target="_blank" rel="noopener">解读Android进程优先级ADJ算法</a></td>
+<td align="left">Android进程ADJ优先级</td>
+</tr>
+</tbody></table>
+<h4 id="4-4-四大组件系列"><a href="#4-4-四大组件系列" class="headerlink" title="4.4 四大组件系列"></a>4.4 四大组件系列</h4><p>对于App来说，Android应用的四大组件Activity，Service，Broadcast Receiver， Content Provider最为核心，接下分别展开介绍：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">类别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2016/03/12/start-activity/" target="_blank" rel="noopener">startActivity启动过程分析</a></td>
+<td align="left">Activity</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2016/03/18/start-activity-cycle/" target="_blank" rel="noopener">简述Activity生命周期</a></td>
+<td align="left">Activity</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2016/03/06/start-service/" target="_blank" rel="noopener">startService启动过程分析</a></td>
+<td align="left">Service</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2016/05/01/bind-service/" target="_blank" rel="noopener">bindService启动过程分析</a></td>
+<td align="left">Service</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2016/09/04/binder-start-service/" target="_blank" rel="noopener">以Binder视角来看Service启动</a></td>
+<td align="left">Service</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/06/04/broadcast-receiver/" target="_blank" rel="noopener">Android Broadcast广播机制分析</a></td>
+<td align="left">Broadcast</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2016/07/30/content-provider/" target="_blank" rel="noopener">理解ContentProvider原理</a></td>
+<td align="left">ContentProvider</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="http://gityuan.com/2016/05/03/content_provider_release/" target="_blank" rel="noopener">ContentProvider引用计数</a></td>
+<td align="left">ContentProvider</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="http://gityuan.com/2015/05/31/android-lifecycle/" target="_blank" rel="noopener">Activity与Service生命周期</a></td>
+<td align="left">Activity&amp;&amp;Service</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a href="http://gityuan.com/2017/04/16/activity-with-window/" target="_blank" rel="noopener">简述Activity与Window关系</a></td>
+<td align="left">Activity&amp;&amp;Window</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><a href="http://gityuan.com/2017/05/19/ams-abstract/" target="_blank" rel="noopener">四大组件之综述</a></td>
+<td align="left">AMS</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left"><a href="http://gityuan.com/2017/05/25/service_record/" target="_blank" rel="noopener">四大组件之ServiceRecord</a></td>
+<td align="left">Service</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left"><a href="http://gityuan.com/2017/06/03/broadcast_record/" target="_blank" rel="noopener">四大组件之BroadcastRecord</a></td>
+<td align="left">Broadcast</td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="left"><a href="http://gityuan.com/2017/06/04/content_provider_record/" target="_blank" rel="noopener">四大组件之ContentProviderRecord</a></td>
+<td align="left">ContentProvider</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left"><a href="http://gityuan.com/2017/04/09/android_context/" target="_blank" rel="noopener">理解Android Context</a></td>
+<td align="left">Context</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left"><a href="http://gityuan.com/2017/04/02/android-application/" target="_blank" rel="noopener">理解Application创建过程</a></td>
+<td align="left">Application</td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left"><a href="http://gityuan.com/2016/05/02/unbind-service/" target="_blank" rel="noopener">unbindService流程分析</a></td>
+<td align="left">Service</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left"><a href="http://gityuan.com/2017/06/11/activity_record/" target="_blank" rel="noopener">四大组件之ActivityRecord</a></td>
+<td align="left">Activity</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left"><a href="http://gityuan.com/2017/06/25/ams_summary_1/" target="_blank" rel="noopener">AMS总结(一)</a></td>
+<td align="left">AMS</td>
+</tr>
+</tbody></table>
+<h4 id="4-5-图形系统系列"><a href="#4-5-图形系统系列" class="headerlink" title="4.5 图形系统系列"></a>4.5 图形系统系列</h4><p>图形也是整个系统非常复杂且重要的一个系列，涉及WindowManager,SurfaceFlinger服务。</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">类别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2017/01/08/windowmanger/" target="_blank" rel="noopener">WindowManager启动篇</a></td>
+<td align="left">Window</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2017/01/15/wms_starting_window/" target="_blank" rel="noopener">WMS之启动窗口篇</a></td>
+<td align="left">Window</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2017/01/22/start-activity-wms/" target="_blank" rel="noopener">以Window视角来看startActivity</a></td>
+<td align="left">Window</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2017/02/05/graphic_arch/" target="_blank" rel="noopener">Android图形系统概述</a></td>
+<td align="left">SurfaceFlinger</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2017/02/11/surface_flinger/" target="_blank" rel="noopener">SurfaceFlinger启动篇</a></td>
+<td align="left">SurfaceFlinger</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2017/02/18/surface_flinger_2/" target="_blank" rel="noopener">SurfaceFlinger绘图篇</a></td>
+<td align="left">SurfaceFlinger</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2017/02/25/choreographer/" target="_blank" rel="noopener">Choreographer原理</a></td>
+<td align="left">Choreographer</td>
+</tr>
+</tbody></table>
+<h4 id="4-6-系统服务篇"><a href="#4-6-系统服务篇" class="headerlink" title="4.6 系统服务篇"></a>4.6 系统服务篇</h4><p>再则就是在整个架构中有大量的服务，都是基于<a href="http://gityuan.com/2015/10/31/binder-prepare/" target="_blank" rel="noopener">Binder</a>来交互的，<a href="http://gityuan.com/2016/10/01/system_service_common/" target="_blank" rel="noopener">Android系统服务的注册过程</a>也是在此之上的构建的。计划针对部分核心服务来重点分析：</p>
+<ul>
+<li>AMS服务<ul>
+<li><a href="http://gityuan.com/2016/02/21/activity-manager-service/" target="_blank" rel="noopener">AMS启动过程（一）</a></li>
+<li>更多组件篇[见小节4.3]</li>
+</ul>
+</li>
+<li>Input系统<ul>
+<li><a href="http://gityuan.com/2016/12/10/input-manager/" target="_blank" rel="noopener">Input系统—启动篇</a></li>
+<li><a href="http://gityuan.com/2016/12/11/input-reader/" target="_blank" rel="noopener">Input系统—InputReader线程</a></li>
+<li><a href="http://gityuan.com/2016/12/17/input-dispatcher/" target="_blank" rel="noopener">Input系统—InputDispatcher线程</a></li>
+<li><a href="http://gityuan.com/2016/12/24/input-ui/" target="_blank" rel="noopener">Input系统—UI线程</a></li>
+<li><a href="http://gityuan.com/2016/12/31/input-ipc/" target="_blank" rel="noopener">Input系统—进程交互</a></li>
+<li><a href="http://gityuan.com/2017/01/01/input-anr/" target="_blank" rel="noopener">Input系统—ANR原理分析</a></li>
+</ul>
+</li>
+<li>PKMS服务<ul>
+<li><a href="http://gityuan.com/2016/11/06/packagemanager" target="_blank" rel="noopener">PackageManager启动篇</a></li>
+<li><a href="http://gityuan.com/2016/11/13/android-installd" target="_blank" rel="noopener">Installd守护进程</a></li>
+</ul>
+</li>
+<li>Alarm服务<ul>
+<li><a href="http://gityuan.com/2017/03/12/alarm_manager_service/" target="_blank" rel="noopener">理解AlarmManager机制</a></li>
+</ul>
+</li>
+<li>JobScheduler服务<ul>
+<li><a href="http://gityuan.com/2017/03/10/job_scheduler_service/" target="_blank" rel="noopener">理解JobScheduler机制</a></li>
+</ul>
+</li>
+<li>BatteryService<ul>
+<li><a href="http://gityuan.com/2016/01/10/power_rank/" target="_blank" rel="noopener">Android耗电统计算法</a></li>
+</ul>
+</li>
+<li>PMS服务</li>
+<li>DropBox服务<ul>
+<li><a href="http://gityuan.com/2016/06/12/DropBoxManagerService/" target="_blank" rel="noopener">DropBoxManager启动篇</a></li>
+</ul>
+</li>
+<li>UserManagerService<ul>
+<li><a href="http://gityuan.com/2016/11/20/user_manager/" target="_blank" rel="noopener">多用户管理UserManager</a></li>
+</ul>
+</li>
+<li>更多系统服务</li>
+</ul>
+<h4 id="4-7-内存-amp-amp-存储篇"><a href="#4-7-内存-amp-amp-存储篇" class="headerlink" title="4.7 内存&amp;&amp;存储篇"></a>4.7 内存&amp;&amp;存储篇</h4><ul>
+<li>内存篇<ul>
+<li><a href="http://gityuan.com/2016/09/17/android-lowmemorykiller/" target="_blank" rel="noopener">Android LowMemoryKiller原理分析</a></li>
+<li><a href="http://gityuan.com/2015/10/30/kernel-memory/" target="_blank" rel="noopener">Linux内存管理</a></li>
+<li><a href="http://gityuan.com/2016/01/02/memory-analysis-command/" target="_blank" rel="noopener">Android内存分析命令</a></li>
+</ul>
+</li>
+<li>存储篇<ul>
+<li><a href="http://gityuan.com/2016/07/17/android-io/" target="_blank" rel="noopener">Android存储系统之源码篇</a></li>
+<li><a href="http://gityuan.com/2016/07/23/android-io-arch" target="_blank" rel="noopener">Android存储系统之架构篇</a></li>
+</ul>
+</li>
+<li>Linux驱动篇</li>
+<li>dalvik/art<ul>
+<li><a href="http://gityuan.com/2016/11/26/art-trace/" target="_blank" rel="noopener">解读Java进程的Trace文件</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="4-8-工具篇"><a href="#4-8-工具篇" class="headerlink" title="4.8 工具篇"></a>4.8 工具篇</h4><p>再来说说Android相关的一些常用命令和工具以及调试手段.</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">类别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2016/03/19/android-build/" target="_blank" rel="noopener">理解Android编译命令</a></td>
+<td align="left">build</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2018/06/02/android-bp/" target="_blank" rel="noopener">理解Android.bp</a></td>
+<td align="left">build</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2016/01/17/systrace/" target="_blank" rel="noopener">性能工具Systrace</a></td>
+<td align="left">systrace</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2016/01/02/memory-analysis-command/" target="_blank" rel="noopener">Android内存分析命令</a></td>
+<td align="left">Memory</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2015/10/11/ps-command/" target="_blank" rel="noopener">ps进程命令</a></td>
+<td align="left">Process</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2016/02/27/am-command/" target="_blank" rel="noopener">Am命令用法</a></td>
+<td align="left">Am</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2016/02/28/pm-command/" target="_blank" rel="noopener">Pm命令用法</a></td>
+<td align="left">Pm</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="http://gityuan.com/2016/06/10/bugreport/" target="_blank" rel="noopener">调试系列1：bugreport源码篇</a></td>
+<td align="left">bugreport</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="http://gityuan.com/2016/06/11/bugreport-2/" target="_blank" rel="noopener">调试系列2：bugreport实战篇</a></td>
+<td align="left">bugreport</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="http://gityuan.com/2016/05/14/dumpsys-command/" target="_blank" rel="noopener">dumpsys命令用法</a></td>
+<td align="left">dumpsys</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a href="http://gityuan.com/2018/01/27/android-log/" target="_blank" rel="noopener">Android logd日志原理</a></td>
+<td align="left">logd</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><a href="http://gityuan.com/2017/09/09/gdb/" target="_blank" rel="noopener">介绍gdb调试工具</a></td>
+<td align="left">gdb</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left"><a href="http://gityuan.com/2017/09/02/addr2line/" target="_blank" rel="noopener">介绍addr2line调试命令</a></td>
+<td align="left">addr2line</td>
+</tr>
+</tbody></table>
+<h4 id="4-9-实战篇"><a href="#4-9-实战篇" class="headerlink" title="4.9 实战篇"></a>4.9 实战篇</h4><p>下面列举处理过的部分较为典型的案例，供大家参考</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">文章名</th>
+<th align="left">类别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://gityuan.com/2018/05/12/binder-driver-bug/" target="_blank" rel="noopener">Binder Driver缺陷导致定屏的案例</a></td>
+<td align="left">binder</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://gityuan.com/2019/01/13/arraymap/" target="_blank" rel="noopener">深度解读ArrayMap优势与缺陷</a></td>
+<td align="left">ArrayMap</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="http://gityuan.com/2018/02/10/reboot-locked-method/" target="_blank" rel="noopener">数组越界导致系统重启的案例</a></td>
+<td align="left">数组越界</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="http://gityuan.com/2018/02/03/log-fc/" target="_blank" rel="noopener">一行Log引发多线程并发问题的案例</a></td>
+<td align="left">多线程并发</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="http://gityuan.com/2018/02/17/monkey-deadlock/" target="_blank" rel="noopener">跑monkey压力测试过程的冻屏案例</a></td>
+<td align="left">monkey冻屏</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="http://gityuan.com/2018/02/24/process-keep-forever/" target="_blank" rel="noopener">深度剖析APP保活案例</a></td>
+<td align="left">保活</td>
+</tr>
+</tbody></table>
+<h3 id="五、结束语"><a href="#五、结束语" class="headerlink" title="五、结束语"></a>五、结束语</h3><p>Android系统之博大精深，包括Linux内核、Native、虚拟机、Framework，通过系统调用连通内核与用户空间，通过JNI打通用户空间的Java层和Native层，通过Binder、Socket、Handler等打通跨进程、跨线程的信息交换。只有真正阅读并理解系统核心架构的设计，解决问题和设计方案才能做到心中无剑胜有剑，才能做到知其然知其所以然。当修炼到此，恭喜你对系统有了更高一个层次的理解，正如太极剑法，忘记了所有招式，也就练成了太极剑法。</p>
+<p>再回过头去看看那些API，看到的将不再是一行行代码、一个个接口的调用，而是各种信息的传递与交互工作，而是背后成千上万个小蝌蚪的动态执行流。记得《侠客行》里面的龙木二岛主终其一生也无法参透太玄经，石破天却短短数日练成绝世神功，究其根源是龙木二岛主以静态视角去解读太玄经，而石破天把墙壁的图案想象成无数游动的蝌蚪，最终成就绝世神功。一言以蔽之，程序代码是死的，系统运转是活的，要以动态视角去理解系统架构。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wechatOfficial/QRCode.jpg" alt="EchoForger wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅“WildPtr 野指针”官方公众号</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8Flutter%EF%BC%9A%E5%B9%B6%E9%9D%9E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BB%88%E6%9E%81%E4%B9%8B%E9%80%89%EF%BC%8C%E4%BD%86%E5%AE%83%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E6%9C%AA%E6%9D%A5/" rel="next" title="【转载】字节跳动为什么选用Flutter：并非跨平台终极之选，但它可能是不一样的未来">
+                <i class="fa fa-chevron-left"></i> 【转载】字节跳动为什么选用Flutter：并非跨平台终极之选，但它可能是不一样的未来
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Flutter%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9E%B6%E6%9E%84%E5%BC%80%E7%AF%87/" rel="prev" title="【转载】Flutter 跨平台演进及架构开篇">
+                【转载】Flutter 跨平台演进及架构开篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/about/avatar.jpg"
+                alt="EchoForger" />
+            
+              <p class="site-author-name" itemprop="name">EchoForger</p>
+              <p class="site-description motion-element" itemprop="description">00 后计算机专业本科在读，热爱代码、音乐和生活。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="/wechatOfficial" target="_blank" title="WeChat">
+                      
+                        <i class="fa fa-fw fa-wechat"></i>WeChat</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/echoforger" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:echoforger@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/echoforger" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoForger</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Site words total count">38.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

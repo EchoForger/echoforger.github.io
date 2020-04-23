@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ava&#x2F;java&#x2F;lang&#x2F;Class.java art&#x2F;runtime&#x2F;native&#x2F;java_lang_Class.cc art&#x2F;runtime&#x2F;hidden_api.h art&#x2F;runtime&#x2F;runtime.h   一、引言 每一次Android大版本的升级，往往会有大量的APP出现兼容性问题，导致这个情况的主要原因是由于APP的热修复SDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】理解Android P内部API的限制调用机制">
+<meta property="og:url" content="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E7%90%86%E8%A7%A3Android%20P%E5%86%85%E9%83%A8API%E7%9A%84%E9%99%90%E5%88%B6%E8%B0%83%E7%94%A8%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="WildPtr 野指针">
+<meta property="og:description" content="ava&#x2F;java&#x2F;lang&#x2F;Class.java art&#x2F;runtime&#x2F;native&#x2F;java_lang_Class.cc art&#x2F;runtime&#x2F;hidden_api.h art&#x2F;runtime&#x2F;runtime.h   一、引言 每一次Android大版本的升级，往往会有大量的APP出现兼容性问题，导致这个情况的主要原因是由于APP的热修复SDK">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://gityuan.com/images/hidden-api/hidden-api-exp.png">
+<meta property="og:image" content="http://gityuan.com/images/hidden-api/android_hideapi.png">
+<meta property="article:published_time" content="2020-04-23T14:49:11.177Z">
+<meta property="article:modified_time" content="2020-04-23T14:49:23.623Z">
+<meta property="article:author" content="EchoForger">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gityuan.com/images/hidden-api/hidden-api-exp.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.wildptr.cn/2020/04/23/【转载】理解Android P内部API的限制调用机制/"/>
+
+
+
+
+
+  <title>【转载】理解Android P内部API的限制调用机制 | WildPtr 野指针</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WildPtr 野指针</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Created by EchoForger</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E7%90%86%E8%A7%A3Android%20P%E5%86%85%E9%83%A8API%E7%9A%84%E9%99%90%E5%88%B6%E8%B0%83%E7%94%A8%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【转载】理解Android P内部API的限制调用机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-23T22:49:11+08:00">
+                2020-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文基于原生Android 9.0源码来解读hidden API的限制调用机制</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">libcore/ojluni/src/main/java/java/lang/Class.java</span><br><span class="line">art/runtime/<span class="keyword">native</span>/java_lang_Class.cc</span><br><span class="line">art/runtime/hidden_api.h</span><br><span class="line">art/runtime/runtime.h</span><br></pre></td></tr></table></figure>
+
+<h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>每一次Android大版本的升级，往往会有大量的APP出现兼容性问题，导致这个情况的主要原因是由于APP的热修复SDKs以及依赖Android internal API(内部API)，也就是非SDK API。这些API是指标记@hide的类、方法以及字段，它们不属于官方Android SDK的字段与函数。</p>
+<p>Google希望未来Android大版本升级，APP都能正常运行，而很多APP对内部API的调用通过反射或JNI间接调用的方法来调用，破坏兼容性。 为此Google从Android P开始限制对内部API的使用，继续使用则抛出如下异常。</p>
+<p><img src="http://gityuan.com/images/hidden-api/hidden-api-exp.png" alt="hidden-api-exp"></p>
+<p>虽然Google目前对这个限制使用不是很完善，存在一些漏洞，可能有些APP会利用漏洞继续使用，但这是不推荐的方式，标记@hide的类、方法以及字段在跨版本之间的兼容性将会无法保障，如果继续使用，那么后续出现兼容性问题将不再另行通知。因此，建议APP减少使用非SDK接口以提升稳定性。开发者都是按Google的预期使用公平的SDK或者NDK，对于开发者便于维护，对于用户体验更一致，大大有利于Android生态的健康发展。</p>
+<p>Android 7.0对Native的NDK的调用限制是手铐，而Android 9.0对Java层SDK的调用限制就是脚铐，那么对于Android应用想再搞一些插件化之类的黑科技便是带着脚手铐跳舞，即便能跳但舞姿已不太优雅了。</p>
+<h2 id="二、内部API限制"><a href="#二、内部API限制" class="headerlink" title="二、内部API限制"></a>二、内部API限制</h2><p>Android P限制APP对内部API的调用，而内部API只能通过反射或JNI间接调用，那么限制机制必然是在反射和JNI方法调用链中插入判断逻辑。 在下面小节2.4.2会讲述到所有的限制场景，这里以反射获取方法的getDeclaredMethod()为例来展开说明，其他反射或JNI调用也是类似的逻辑。</p>
+<h3 id="2-1-getDeclaredMethod"><a href="#2-1-getDeclaredMethod" class="headerlink" title="2.1 getDeclaredMethod"></a>2.1 getDeclaredMethod</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getMethod(name, parameterTypes, <span class="keyword">false</span>);  <span class="comment">//【见小节2.2】</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-getMethod"><a href="#2-2-getMethod" class="headerlink" title="2.2 getMethod"></a>2.2 getMethod</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;[] parameterTypes, <span class="keyword">boolean</span> recursivePublicMethods)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;  <span class="comment">//方法名不能为空</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"name == null"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (parameterTypes == <span class="keyword">null</span>) &#123;</span><br><span class="line">        parameterTypes = EmptyArray.CLASS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Class&lt;?&gt; c : parameterTypes) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;  <span class="comment">//参数不能为空</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(<span class="string">"parameter type is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//非public方法，则执行getDeclaredMethodInternal【见小节2.3】</span></span><br><span class="line">    Method result = recursivePublicMethods ? getPublicMethodRecursive(name, parameterTypes)</span><br><span class="line">                                           : getDeclaredMethodInternal(name, parameterTypes);</span><br><span class="line">    <span class="comment">//找不到，则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span> ||</span><br><span class="line">        (recursivePublicMethods &amp;&amp; !Modifier.isPublic(result.getAccessFlags()))) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodException(name + <span class="string">" "</span> + Arrays.toString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-getDeclaredMethodInternal"><a href="#2-3-getDeclaredMethodInternal" class="headerlink" title="2.3 getDeclaredMethodInternal"></a>2.3 getDeclaredMethodInternal</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FastNative</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> Method <span class="title">getDeclaredMethodInternal</span><span class="params">(String name, Class&lt;?&gt;[] args)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>getDeclaredMethodInternal这是一个native方法，经过JNI调用，进入如下方法：</p>
+<p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> jobject <span class="title">Class_getDeclaredMethodInternal</span><span class="params">(JNIEnv* env, jobject javaThis,</span></span></span><br><span class="line"><span class="function"><span class="params">                                               jstring name, jobjectArray args)</span> </span>&#123;</span><br><span class="line">  <span class="function">ScopedFastNativeObjectAccess <span class="title">soa</span><span class="params">(env)</span></span>;</span><br><span class="line">  <span class="function">StackHandleScope&lt;1&gt; <span class="title">hs</span><span class="params">(soa.Self())</span></span>;</span><br><span class="line">  DCHECK_EQ(Runtime::Current()-&gt;GetClassLinker()-&gt;GetImagePointerSize(), kRuntimePointerSize);</span><br><span class="line">  DCHECK(!Runtime::Current()-&gt;IsActiveTransaction());</span><br><span class="line">  Handle&lt;mirror::Method&gt; result = hs.NewHandle(</span><br><span class="line">      mirror::Class::GetDeclaredMethodInternal&lt;kRuntimePointerSize, <span class="literal">false</span>&gt;(</span><br><span class="line">          soa.Self(),</span><br><span class="line">          DecodeClass(soa, javaThis),</span><br><span class="line">          soa.Decode&lt;mirror::String&gt;(name),</span><br><span class="line">          soa.Decode&lt;mirror::ObjectArray&lt;mirror::Class&gt;&gt;(args)));</span><br><span class="line">  <span class="comment">//检测该方法是否允许访问【小节2.4】</span></span><br><span class="line">  <span class="keyword">if</span> (result == <span class="literal">nullptr</span> || ShouldBlockAccessToMember(result-&gt;GetArtMethod(), soa.Self())) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> soa.AddLocalReference&lt;jobject&gt;(result.Get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-ShouldBlockAccessToMember"><a href="#2-4-ShouldBlockAccessToMember" class="headerlink" title="2.4 ShouldBlockAccessToMember"></a>2.4 ShouldBlockAccessToMember</h3><p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">ALWAYS_INLINE <span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">ShouldBlockAccessToMember</span><span class="params">(T* member, Thread* self)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//【小节2.5】</span></span><br><span class="line">  hiddenapi::Action action = hiddenapi::GetMemberAction(</span><br><span class="line">      member, self, IsCallerTrusted, hiddenapi::kReflection);</span><br><span class="line">  <span class="comment">//对于不是允许级别的接口，则通知相应监听器</span></span><br><span class="line">  <span class="keyword">if</span> (action != hiddenapi::kAllow) &#123;</span><br><span class="line">    hiddenapi::NotifyHiddenApiListener(member);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> action == hiddenapi::kDeny;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是限制反射访问，此处的access_method等于hiddenapi::kReflection，除此之外还有其他几种模式，如下</p>
+<h4 id="2-4-1-AccessMethod"><a href="#2-4-1-AccessMethod" class="headerlink" title="2.4.1 AccessMethod"></a>2.4.1 AccessMethod</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> AccessMethod &#123;</span><br><span class="line">  kNone,        <span class="comment">// 测试模式，不会出现在实际场景访问权限</span></span><br><span class="line">  kReflection,  <span class="comment">// Java反射调用</span></span><br><span class="line">  kJNI,         <span class="comment">// JNI调用过程</span></span><br><span class="line">  kLinking,     <span class="comment">// 动态链接过程</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-2-限制场景"><a href="#2-4-2-限制场景" class="headerlink" title="2.4.2 限制场景"></a>2.4.2 限制场景</h4><p>ShouldBlockAccessToMember是限制内部API访问的核心路径</p>
+<ul>
+<li>kReflection反射过程：<ul>
+<li>Class_newInstance：对象实例化</li>
+<li>Class_getDeclaredConstructorInternal：构造方法</li>
+<li>Class_getDeclaredMethodInternal：获取方法</li>
+<li>Class_getDeclaredField：获取字段</li>
+<li>Class_getPublicFieldRecursive：获取字段</li>
+</ul>
+</li>
+<li>kJNI的JNI调用过程：<ul>
+<li>FindMethodID：查找方法</li>
+<li>FindFieldID：查找字段</li>
+</ul>
+</li>
+<li>kLinking动态链接：<ul>
+<li>UnstartedClassNewInstance</li>
+<li>UnstartedClassGetDeclaredConstructor</li>
+<li>UnstartedClassGetDeclaredMethod</li>
+<li>UnstartedClassGetDeclaredField</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-GetMemberAction"><a href="#2-5-GetMemberAction" class="headerlink" title="2.5 GetMemberAction"></a>2.5 GetMemberAction</h3><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetMemberAction</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                              Thread* self,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="built_in">std</span>::function&lt;<span class="keyword">bool</span>(Thread*)&gt; fn_caller_is_trusted,</span></span></span><br><span class="line"><span class="function"><span class="params">                              AccessMethod access_method)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取hidenn API的可访问标识</span></span><br><span class="line">  HiddenApiAccessFlags::ApiList api_list = member-&gt;GetHiddenApiAccessFlags();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取相应的访问行为【小节2.6】</span></span><br><span class="line">  Action action = GetActionFromAccessFlags(member-&gt;GetHiddenApiAccessFlags());</span><br><span class="line">  <span class="keyword">if</span> (action == kAllow) &#123;  <span class="comment">//允许则直接返回</span></span><br><span class="line">    <span class="keyword">return</span> action;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//检测是否平台调用【小节2.7】</span></span><br><span class="line">  <span class="keyword">if</span> (fn_caller_is_trusted(self)) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//对于hidden接口，且非平台调用【小节2.8】</span></span><br><span class="line">  <span class="keyword">return</span> detail::GetMemberActionImpl(member, api_list, action, access_method);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>功能说明：</p>
+<ul>
+<li>当Action=kAllow，则直接返回；否则执行如下：</li>
+<li>通过fn_caller_is_trusted看当前是否是系统调用的，如果是系统调用则返回，否则执行如下：</li>
+<li>通过GetMemberActionImpl()做进一步判断</li>
+</ul>
+<p>此处的fn_caller_is_trusted是指IsCallerTrusted</p>
+<h3 id="2-6-GetActionFromAccessFlags"><a href="#2-6-GetActionFromAccessFlags" class="headerlink" title="2.6 GetActionFromAccessFlags"></a>2.6 GetActionFromAccessFlags</h3><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> Action <span class="title">GetActionFromAccessFlags</span><span class="params">(HiddenApiAccessFlags::ApiList api_list)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (api_list == HiddenApiAccessFlags::kWhitelist) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;   <span class="comment">//位于白名单，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  EnforcementPolicy policy = Runtime::Current()-&gt;GetHiddenApiEnforcementPolicy();</span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kNoChecks) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllow;  <span class="comment">//非强制执行策略，则允许访问</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (policy == EnforcementPolicy::kJustWarn) &#123;</span><br><span class="line">    <span class="keyword">return</span> kAllowButWarn;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//执行到这，policy&gt;=kDarkGreyAndBlackList</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(policy) &gt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(api_list)) &#123;</span><br><span class="line">    <span class="keyword">return</span> api_list == HiddenApiAccessFlags::kDarkGreylist</span><br><span class="line">        ? kAllowButWarnAndToast : kAllowButWarn;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> kDeny;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上逻辑用图来展示EnforcementPolicy和HiddenApiAccessFlags在不同取值的情况下，所对应的Action值。 纵轴代表强制策略级别，横轴代表隐藏API的标识，表中数据代表Action，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>kWhitelist</th>
+<th>kLightGreylist</th>
+<th>kDarkGreylist</th>
+<th>kBlacklist</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kNoChecks</td>
+<td>kAllow</td>
+<td>kAllow</td>
+<td>kAllow</td>
+<td>kAllow</td>
+</tr>
+<tr>
+<td>kJustWarn</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarn</td>
+</tr>
+<tr>
+<td>kDarkGreyAndBlackList</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kDeny</td>
+<td>kDeny</td>
+</tr>
+<tr>
+<td>kBlacklistOnly</td>
+<td>kAllow</td>
+<td>kAllowButWarn</td>
+<td>kAllowButWarnAndToast</td>
+<td>kDeny</td>
+</tr>
+</tbody></table>
+<p>图解：</p>
+<ul>
+<li>当HiddenApiAccessFlags等于kWhitelist，则Action=kAllow，否则如下</li>
+<li>当EnforcementPolicy等于kNoChecks，则Action=kAllow，否则如下</li>
+<li>当EnforcementPolicy等于kJustWarn，则Action=kAllowButWarn，否则如下</li>
+<li>当HiddenApiAccessFlags等于kLightGreylist，则Action=kAllowButWarn，否则如下</li>
+<li>当HiddenApiAccessFlags等于kDarkGreylist，且等于EnforcementPolicy=kBlacklistOnly，则kAllowButWarnAndToast，否则如下</li>
+<li>否则Action=kDeny</li>
+</ul>
+<h4 id="2-6-1-EnforcementPolicy"><a href="#2-6-1-EnforcementPolicy" class="headerlink" title="2.6.1 EnforcementPolicy"></a>2.6.1 EnforcementPolicy</h4><p>EnforcementPolicy的级别如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">EnforcementPolicy</span> &#123;</span></span><br><span class="line">  kNoChecks             = <span class="number">0</span>,</span><br><span class="line">  kJustWarn             = <span class="number">1</span>,  <span class="comment">// 保持检查，一切都允许(仅仅记录日志)</span></span><br><span class="line">  kDarkGreyAndBlackList = <span class="number">2</span>,  <span class="comment">// 禁止深灰色和黑名单</span></span><br><span class="line">  kBlacklistOnly        = <span class="number">3</span>,  <span class="comment">// 只禁止黑名单</span></span><br><span class="line">  kMax = kBlacklistOnly,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可通过SetHiddenApiEnforcementPolicy()来修改Runtime中的成员变量hidden_api_policy_。</p>
+<h4 id="2-6-2-HiddenApiAccessFlags"><a href="#2-6-2-HiddenApiAccessFlags" class="headerlink" title="2.6.2 HiddenApiAccessFlags"></a>2.6.2 HiddenApiAccessFlags</h4><p>HiddenApiAccessFlags的级别如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HiddenApiAccessFlags</span> </span>&#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">enum</span> ApiList &#123;</span><br><span class="line">    kWhitelist = <span class="number">0</span>,</span><br><span class="line">    kLightGreylist,</span><br><span class="line">    kDarkGreylist,</span><br><span class="line">    kBlacklist,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-3-Action"><a href="#2-6-3-Action" class="headerlink" title="2.6.3 Action"></a>2.6.3 Action</h4><p>Action级别如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Action &#123;</span><br><span class="line">  kAllow,         <span class="comment">//通过</span></span><br><span class="line">  kAllowButWarn,  <span class="comment">//通过，但日志警告</span></span><br><span class="line">  kAllowButWarnAndToast,  <span class="comment">//通过，且日志警告和弹窗</span></span><br><span class="line">  kDeny   <span class="comment">//拒绝访问</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-IsCallerTrusted"><a href="#2-7-IsCallerTrusted" class="headerlink" title="2.7 IsCallerTrusted"></a>2.7 IsCallerTrusted</h3><p>[-&gt; java_lang_Class.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(Thread* self)</span> <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function">FirstExternalCallerVisitor <span class="title">visitor</span><span class="params">(self)</span></span>;</span><br><span class="line">    visitor.WalkStack();</span><br><span class="line">    <span class="comment">//【见小节2.7.1】</span></span><br><span class="line">    <span class="keyword">return</span> visitor.caller != <span class="literal">nullptr</span> &amp;&amp;</span><br><span class="line">           hiddenapi::IsCallerTrusted(visitor.caller-&gt;GetDeclaringClass());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-7-1-IsCallerTrusted"><a href="#2-7-1-IsCallerTrusted" class="headerlink" title="2.7.1 IsCallerTrusted"></a>2.7.1 IsCallerTrusted</h4><p>[-&gt; hidden_api.h]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ALWAYS_INLINE</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsCallerTrusted</span><span class="params">(ObjPtr&lt;mirror::Class&gt; caller,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::ClassLoader&gt; caller_class_loader,</span></span></span><br><span class="line"><span class="function"><span class="params">                            ObjPtr&lt;mirror::DexCache&gt; caller_dex_cache)</span></span></span><br><span class="line"><span class="function">    <span class="title">REQUIRES_SHARED</span><span class="params">(Locks::mutator_lock_)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (caller_class_loader.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// Boot classloader，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller_dex_cache.IsNull()) &#123;</span><br><span class="line">    <span class="keyword">const</span> DexFile* caller_dex_file = caller_dex_cache-&gt;GetDexFile();</span><br><span class="line">    <span class="keyword">if</span> (caller_dex_file != <span class="literal">nullptr</span> &amp;&amp; caller_dex_file-&gt;IsPlatformDexFile()) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">// caller是平台dex文件，则返回true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!caller.IsNull() &amp;&amp;</span><br><span class="line">      caller-&gt;ShouldSkipHiddenApiChecks() &amp;&amp;</span><br><span class="line">      Runtime::Current()-&gt;IsJavaDebuggable()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">//处于debuggable调试模式且caller已被标记可信任，则返回true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caller被认为是可信任的场景如下：</p>
+<ul>
+<li>当类加载器是Boot classloader，则返回true</li>
+<li>当caller是平台dex文件，则返回true</li>
+<li>处于debuggable调试模式且caller已被标记可信任，则返回true</li>
+</ul>
+<h3 id="2-8-GetMemberActionImpl"><a href="#2-8-GetMemberActionImpl" class="headerlink" title="2.8 GetMemberActionImpl"></a>2.8 GetMemberActionImpl</h3><p>[-&gt; hidden_api.cc]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line"><span class="function">Action <span class="title">GetMemberActionImpl</span><span class="params">(T* member,</span></span></span><br><span class="line"><span class="function"><span class="params">                           HiddenApiAccessFlags::ApiList api_list,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Action action,</span></span></span><br><span class="line"><span class="function"><span class="params">                           AccessMethod access_method)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取签名</span></span><br><span class="line">  <span class="function">MemberSignature <span class="title">member_signature</span><span class="params">(member)</span></span>;</span><br><span class="line">  Runtime* runtime = Runtime::Current();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> bool shouldWarn = kLogAllAccesses || runtime-&gt;IsJavaDebuggable();</span><br><span class="line">  <span class="keyword">if</span> (shouldWarn || action == kDeny) &#123;</span><br><span class="line">    <span class="comment">//判断是否为可豁免接口【小节2.8.1】</span></span><br><span class="line">    <span class="keyword">if</span> (member_signature.IsExempted(runtime-&gt;GetHiddenApiExemptions())) &#123;</span><br><span class="line">      action = kAllow;</span><br><span class="line">      MaybeWhitelistMember(runtime, member);</span><br><span class="line">      <span class="keyword">return</span> kAllow;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">      <span class="comment">//打印包含有关此类成员访问信息的日志消息【小节2.8.2】</span></span><br><span class="line">      member_signature.WarnAboutAccess(access_method, api_list);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (action == kDeny) &#123;</span><br><span class="line">    <span class="keyword">return</span> action; <span class="comment">//拒绝调用</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (access_method != kNone) &#123;</span><br><span class="line">    <span class="comment">// 根据运行时标志的不同，我们可以将成员移动到白名单中，并在下次访问成员时跳过警告。</span></span><br><span class="line">    MaybeWhitelistMember(runtime, member);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果此操作需要UI警告，设置适当的标志</span></span><br><span class="line">    <span class="keyword">if</span> (shouldWarn &amp;&amp;</span><br><span class="line">        (action == kAllowButWarnAndToast || runtime-&gt;ShouldAlwaysSetHiddenApiWarningFlag())) &#123;</span><br><span class="line">      runtime-&gt;SetPendingHiddenApiWarning(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-8-1-GetHiddenApiExemptions"><a href="#2-8-1-GetHiddenApiExemptions" class="headerlink" title="2.8.1 GetHiddenApiExemptions"></a>2.8.1 GetHiddenApiExemptions</h4><p>[-&gt; runtime.h]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Runtime</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// SetHiddenApiEnforcementPolicy()可修改该值</span></span><br><span class="line">    hiddenapi::EnforcementPolicy hidden_api_policy_;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//SetHiddenApiExemptions()可修改该值</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; hidden_api_exemptions_;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GetHiddenApiExemptions()是获取Runtime里面的成员变量hidden_api_exemptions_</p>
+<h4 id="2-8-2-WarnAboutAccess"><a href="#2-8-2-WarnAboutAccess" class="headerlink" title="2.8.2 WarnAboutAccess"></a>2.8.2 WarnAboutAccess</h4><p>[-&gt; hidden_api.cc]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemberSignature::WarnAboutAccess</span><span class="params">(AccessMethod access_method,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      HiddenApiAccessFlags::ApiList <span class="built_in">list</span>)</span> </span>&#123;</span><br><span class="line">  LOG(WARNING) &lt;&lt; <span class="string">"Accessing hidden "</span> &lt;&lt; (type_ == kField ? <span class="string">"field "</span> : <span class="string">"method "</span>)</span><br><span class="line">               &lt;&lt; Dumpable&lt;MemberSignature&gt;(*<span class="keyword">this</span>) &lt;&lt; <span class="string">" ("</span> &lt;&lt; <span class="built_in">list</span> &lt;&lt; ", " &lt;&lt; access_method &lt;&lt; ")";</span><br></pre></td></tr></table></figure>
+
+<p>打印包含有关此类成员访问信息的日志消息</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><h4 id="3-1-限制原理总结"><a href="#3-1-限制原理总结" class="headerlink" title="3.1 限制原理总结"></a>3.1 限制原理总结</h4><p>（1）从前面的内部API限制过程，可知主要控制逻辑在方法ShouldBlockAccessToMember，调用该方法的核心路径如下：</p>
+<ul>
+<li>kReflection反射过程：<ul>
+<li>Class_newInstance：对象实例化</li>
+<li>Class_getDeclaredConstructorInternal：构造方法</li>
+<li>Class_getDeclaredMethodInternal：获取方法</li>
+<li>Class_getDeclaredField：获取字段</li>
+<li>Class_getPublicFieldRecursive：获取字段</li>
+</ul>
+</li>
+<li>kJNI的JNI调用过程：<ul>
+<li>FindMethodID：查找方法</li>
+<li>FindFieldID：查找字段</li>
+</ul>
+</li>
+<li>kLinking动态链接：<ul>
+<li>UnstartedClassNewInstance</li>
+<li>UnstartedClassGetDeclaredConstructor</li>
+<li>UnstartedClassGetDeclaredMethod</li>
+<li>UnstartedClassGetDeclaredField</li>
+</ul>
+</li>
+</ul>
+<p>（2）ShouldBlockAccessToMember过程是否运行主要有如下情况：</p>
+<ul>
+<li>当EnforcementPolicy强制不限制的情况</li>
+<li>当类加载器是Boot classloader的情况</li>
+<li>当caller是平台dex文件的情况</li>
+<li>当处于debuggable调试模式且caller已被标记可信任的情况</li>
+<li>当GetHiddenApiExemptions为豁免情况</li>
+</ul>
+<p>（3）掌握了ShouldBlockAccessToMember原理，也就可以有的放矢了，突破限制方案，比如：</p>
+<ul>
+<li>修改ART的EnforcementPolicy，也就是Runtime中的成员变量hidden_api_policy_，可以基于地址偏移找到相应的成员，这就不就细说</li>
+<li>修改隐藏API豁免变量，也就是Runtime中的成员变量hidden_api_exemptions_</li>
+<li>修改classLoader为BootClassLoader</li>
+</ul>
+<h4 id="3-2-黑白名单"><a href="#3-2-黑白名单" class="headerlink" title="3.2 黑白名单"></a>3.2 黑白名单</h4><p>关于在Android P的几个预览版本一直在不断调整，目前主要是黑名单、浅灰名单、vendor名单这3个名单，对应文件名：hiddenapi-force-blacklist.txt，hiddenapi-light-greylist.txt，hiddenapi-vendor-list.txt。这些文件在编译阶段生成为hiddenapi，记录在access_flags_字段值。整个过程是在hiddenapi.cc过程的CategorizeAllClasses()中完成的。</p>
+<p><img src="http://gityuan.com/images/hidden-api/android_hideapi.png" alt="hidden-api-exp"></p>
+<p>目前主要使用的是黑名单和浅灰名单，深灰名单暂没有使用：</p>
+<ul>
+<li>黑名单内容：setHiddenApiExemptions</li>
+<li>浅灰名单内容：Activity, Service，ContentProvider，ActivityManager, ActivityThread，Application，ContextImpl，Intent等</li>
+</ul>
+<h4 id="3-3-非SDK接口说明"><a href="#3-3-非SDK接口说明" class="headerlink" title="3.3 非SDK接口说明"></a>3.3 非SDK接口说明</h4><ol>
+<li>非SDK接口限制适用于所有应用，但是会豁免使用平台密钥签署的应用，并且针对系统app的白名单</li>
+<li>如果你的应用有必须使用非SDK接口的充分理由，可以向Google提交<a href="https://issuetracker.google.com/issues/new?component=328403&template=1027267" target="_blank" rel="noopener">功能请求</a>，并提供用例详情;</li>
+<li>如果你的应用使用很多第三方库，而又难以排除是否正在使用非SDK接口，可以尝试使用AOSP提供的静态分析工具<a href="https://android.googlesource.com/platform/prebuilts/runtime/+/master/appcompat" target="_blank" rel="noopener">veridex</a>;</li>
+<li>应用运行时检测到非SDK接口的使用，会打印一条<code>Accessing hidden field|method ...</code> 形式的logcat警告。当然对于设置android:debuggable=true的可调试应用会显示toast消息，并打印logcat日志。</li>
+<li>黑名单/灰名单编码在平台dex文件的字段和函数访问标志位中，无法从系统镜像中找到单独包含这些名单的文件。</li>
+<li>黑名单/灰名单在采用相同Android版本是一致的。手机厂商可以向黑名单添加自己的API，但无法从AOSP黑名单或灰名单中移除，Google兼容性定义文件(CDD)来保障这一工作，并在测试过程通过CTS来确保Android运行时强制执行名单。</li>
+<li>目前，Google对Android暂时没有限制访问dex2oat二进制文件的计划，但是dex文件格式无法保证会稳定，可能随时会修改或删除dex2oat以及dex衍生文件。</li>
+</ol>
+<p>Android 7.0针对Native lib引入了namespace来限制平台lib对外的可见性，普通APP在Android N上不能直接调用系统私有库，Android系统允许调用的公用库定义在<a href="https://android.googlesource.com/platform/system/core/+/refs/heads/master/rootdir/etc/public.libraries.android.txt" target="_blank" rel="noopener">public.libraries.android.txt</a>。 这个feature只针对target SDK为24及以上的APP。</p>
+<p>Android 7.0限制对C/C++代码的NDK，Android 9.0限制对Java的SDK。这一以来APP想利用内部API搞黑科技的难度以及不稳定性都会有所增加。</p>
+<p>最后说一点，目前网络有一些开发者发表了关于非SDK接口限制的绕过技术，但基本没有APP是通过这些漏洞方式来突破隐藏API的访问，说明大家有所顾忌，这对生态来说是好事。另外关于绕过技术对于Google和手机厂商都已注意到，要简单封杀容易但可能会带来调试与复杂度的提升，所以Google正在积极寻找平衡接口限制与运行时易于调试之间的平衡，相信很快Google会有更完善的解决方案。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wechatOfficial/QRCode.jpg" alt="EchoForger wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅“WildPtr 野指针”官方公众号</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Dart%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86/" rel="next" title="【转载】Dart虚拟机运行原理">
+                <i class="fa fa-chevron-left"></i> 【转载】Dart虚拟机运行原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/23/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91Android%E8%BF%9B%E7%A8%8B%E7%BB%9D%E6%9D%80%E6%8A%80--forceStop/" rel="prev" title="【转载】Android进程绝杀技--forceStop">
+                【转载】Android进程绝杀技--forceStop <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/about/avatar.jpg"
+                alt="EchoForger" />
+            
+              <p class="site-author-name" itemprop="name">EchoForger</p>
+              <p class="site-description motion-element" itemprop="description">00 后计算机专业本科在读，热爱代码、音乐和生活。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="/wechatOfficial" target="_blank" title="WeChat">
+                      
+                        <i class="fa fa-fw fa-wechat"></i>WeChat</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/echoforger" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:echoforger@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/echoforger" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoForger</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Site words total count">38.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
