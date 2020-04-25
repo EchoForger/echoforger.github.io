@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>A + B Problem II</title>
+    <url>/2020/04/25/A%20+%20B%20Problem%20II/</url>
+    <content><![CDATA[<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1002" target="_blank" rel="noopener">HDU 1002</a></center></p>
+
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B = Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">112233445566778899 998877665544332211</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">1 + 2 &#x3D; 3</span><br><span class="line"></span><br><span class="line">Case 2:</span><br><span class="line">112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;<span class="built_in">print</span>;</span><br><span class="line">    <span class="keyword">int</span> n;<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="built_in">string</span> a,b;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        <span class="keyword">while</span> (a.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;a.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            a.erase(a.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (b.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;b.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            b.erase(b.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> oa=a,ob=b;</span><br><span class="line">        <span class="keyword">if</span>(a.<span class="built_in">size</span>()&lt;b.<span class="built_in">size</span>())&#123;</span><br><span class="line">            <span class="built_in">string</span> temp=a;</span><br><span class="line">            a=b;</span><br><span class="line">            b=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> on=<span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">string</span> res=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">while</span> (a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> aL=a.at(a.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>,bL=<span class="number">0</span>;</span><br><span class="line">            a.erase(a.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">if</span> (b.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                bL=b.at(b.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>;</span><br><span class="line">                b.erase(b.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tempSum=aL+bL;</span><br><span class="line">            <span class="keyword">if</span> (on) &#123;</span><br><span class="line">                tempSum++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (tempSum&gt;=<span class="number">10</span>) &#123;</span><br><span class="line">                on=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> on=<span class="literal">false</span>;</span><br><span class="line">            res=to_string(tempSum%<span class="number">10</span>)+res;</span><br><span class="line">            <span class="keyword">if</span> (!a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                res=to_string(tempSum/<span class="number">10</span>)+res;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;res&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (res.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;res.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            res.erase(res.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        res=<span class="string">"Case "</span>+to_string(i)+<span class="string">":\n"</span> + oa+<span class="string">" + "</span>+ob+<span class="string">" = "</span>+res+<span class="string">"\n"</span>;</span><br><span class="line">        <span class="built_in">print</span>.push_back(res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">print</span>.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">print</span>.at(i);</span><br><span class="line">        <span class="keyword">if</span> (i!=<span class="built_in">print</span>.<span class="built_in">size</span>()<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Cable master</title>
+    <url>/2020/04/25/Cable%20master/</url>
+    <content><![CDATA[<p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p>
+
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B = Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">112233445566778899 998877665544332211</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">1 + 2 &#x3D; 3</span><br><span class="line"></span><br><span class="line">Case 2:</span><br><span class="line">112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</span><br></pre></td></tr></table></figure>
+
+<h2 id="My-Solution"><a href="#My-Solution" class="headerlink" title="My Solution"></a>My Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>与 Apple Music 一同优雅地享受音乐</title>
     <url>/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
     <content><![CDATA[<hr>
@@ -104,6 +136,108 @@
         <tag>macOS</tag>
         <tag>截图</tag>
         <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
+
+
+<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
+
+
+<p>这样便成功地修改了博客的主题。</p>
+<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code></p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
+
+
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>网站</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -260,112 +394,10 @@
       </categories>
       <tags>
         <tag>网站</tag>
+        <tag>博客</tag>
         <tag>写作</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
-<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
-<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>安装 Git。终端执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
-<p>命令执行完成后，文件夹的结构如下图所示。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
-
-
-<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
-"></p>
-<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
-<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
-
-
-<p>这样便成功地修改了博客的主题。</p>
-<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>您的名字</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>主题文件夹名称</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署信息</td>
-</tr>
-</tbody></table>
-<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
-<p>在 GitHub 上创建一个 <code>repository</code></p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
-
-
-<p>其命名方式为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>username</code> 为 GitHub 用户名。</p>
-<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
-<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
-<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
-<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
-<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>网站</tag>
-        <tag>博客</tag>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
 </search>
