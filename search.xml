@@ -31,12 +31,12 @@
     <content><![CDATA[<hr>
 <p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p>
 
-<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B = Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">112233445566778899 998877665544332211</span><br></pre></td></tr></table></figure>
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - i.e. connect them all to a single central hub. To organize a truly honest contest, the Head of the Judging Committee has decreed to place all contestants evenly around the hub on an equal distance from it.<br>To buy network cables, the Judging Committee has contacted a local network solutions provider with a request to sell for them a specified number of cables with equal lengths. The Judging Committee wants the cables to be as long as possible to sit contestants as far from each other as possible.<br>The Cable Master of the company was assigned to the task. He knows the length of each cable in the stock up to a centimeter,and he can cut them with a centimeter precision being told the length of the pieces he must cut. However, this time, the length is not known and the Cable Master is completely puzzled.<br>You are to help the Cable Master, by writing a program that will determine the maximal possible length of a cable piece that can be cut from the cables in the stock, to get the specified number of pieces.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input file contains two integer numb ers N and K, separated by a space. N (1 = N = 10000) is the number of cables in the stock, and K (1 = K = 10000) is the number of requested pieces. The first line is followed by N lines with one number per line, that specify the length of each cable in the stock in meters. All cables are at least 1 meter and at most 100 kilometers in length. All lengths in the input file are written with a centimeter precision, with exactly two digits after a decimal point.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point.<br>If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number “0.00” (without quotes).</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 11</span><br><span class="line">8.02</span><br><span class="line">7.43</span><br><span class="line">4.57</span><br><span class="line">5.39</span><br></pre></td></tr></table></figure>
 
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">1 + 2 &#x3D; 3</span><br><span class="line"></span><br><span class="line">Case 2:</span><br><span class="line">112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</span><br></pre></td></tr></table></figure>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.00</span><br></pre></td></tr></table></figure>
 
 <h2 id="My-Solution"><a href="#My-Solution" class="headerlink" title="My Solution"></a>My Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -48,6 +48,214 @@
         <tag>ACM</tag>
         <tag>算法</tag>
         <tag>POJ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一篇文章搞定 macOS 截图</title>
+    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
+<h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
+<h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" />
+
+
+<h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
+<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
+<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
+<p>也可以在终端执行一条命令永久去除软阴影：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
+<h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
+<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
+<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" />
+
+
+<h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
+<h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
+<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" />
+
+
+<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
+<h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p>
+<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
+<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
+<h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
+<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" />
+
+
+<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+        <tag>截图</tag>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>与 Apple Music 一同优雅地享受音乐</title>
+    <url>/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
+<blockquote>
+<p>你有多久没有认真地听一首歌了。</p>
+</blockquote>
+<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
+<h2 id="建立云端音乐资料库"><a href="#建立云端音乐资料库" class="headerlink" title="建立云端音乐资料库"></a>建立云端音乐资料库</h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
+<h2 id="添加音乐"><a href="#添加音乐" class="headerlink" title="添加音乐"></a>添加音乐</h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
+<h3 id="通过-Apple-Music-在线音乐库添加音乐"><a href="#通过-Apple-Music-在线音乐库添加音乐" class="headerlink" title="通过 Apple Music 在线音乐库添加音乐"></a>通过 Apple Music 在线音乐库添加音乐</h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
+<h3 id="通过其他音乐软件添加音乐"><a href="#通过其他音乐软件添加音乐" class="headerlink" title="通过其他音乐软件添加音乐"></a>通过其他音乐软件添加音乐</h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
+<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
+<blockquote>
+<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
+<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
+</blockquote>
+<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
+<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
+<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
+<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
+<h2 id="整理音乐资料库"><a href="#整理音乐资料库" class="headerlink" title="整理音乐资料库"></a>整理音乐资料库</h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
+<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
+<h3 id="更改歌曲信息"><a href="#更改歌曲信息" class="headerlink" title="更改歌曲信息"></a>更改歌曲信息</h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
+<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;" />
+
+
+<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
+<h3 id="创建智能播放列表"><a href="#创建智能播放列表" class="headerlink" title="创建智能播放列表"></a>创建智能播放列表</h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
+<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;" />
+
+
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
+<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>苹果</tag>
+        <tag>音乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
+
+
+<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
+
+
+<p>这样便成功地修改了博客的主题。</p>
+<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code></p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
+
+
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>网站</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -204,218 +412,10 @@
       </categories>
       <tags>
         <tag>网站</tag>
+        <tag>博客</tag>
         <tag>写作</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一篇文章搞定 macOS 截图</title>
-    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
-<h2 id="普通系统截图"><a href="#普通系统截图" class="headerlink" title="普通系统截图"></a>普通系统截图</h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
-<h3 id="Command-Shift-3-截取整个屏幕"><a href="#Command-Shift-3-截取整个屏幕" class="headerlink" title="Command + Shift + 3 截取整个屏幕"></a><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;" />
-
-
-<h3 id="Command-Shift-4-截取部分屏幕"><a href="#Command-Shift-4-截取部分屏幕" class="headerlink" title="Command + Shift + 4 截取部分屏幕"></a><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
-<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
-<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
-<p>也可以在终端执行一条命令永久去除软阴影：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
-<h3 id="Command-Shift-5-打开截图工具栏"><a href="#Command-Shift-5-打开截图工具栏" class="headerlink" title="Command + Shift + 5 打开截图工具栏"></a><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></h3><h3 id="Command-Shift-6-截取触控栏"><a href="#Command-Shift-6-截取触控栏" class="headerlink" title="Command + Shift + 6 截取触控栏"></a><strong><code>Command + Shift + 6</code> 截取触控栏</strong></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
-<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
-<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;" />
-
-
-<h3 id="系统自带的“截屏”app"><a href="#系统自带的“截屏”app" class="headerlink" title="系统自带的“截屏”app"></a>系统自带的“截屏”app</h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
-<h3 id="截图缩略图"><a href="#截图缩略图" class="headerlink" title="截图缩略图"></a>截图缩略图</h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
-<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;" />
-
-
-<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
-<h2 id="长截图"><a href="#长截图" class="headerlink" title="长截图"></a>长截图</h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;" /></p>
-<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
-<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
-<h2 id="截取动图"><a href="#截取动图" class="headerlink" title="截取动图"></a>截取动图</h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
-<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;" />
-
-
-<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-        <tag>截图</tag>
-        <tag>技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <url>/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
-<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
-<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>安装 Git。终端执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="创建网站文件夹"><a href="#创建网站文件夹" class="headerlink" title="创建网站文件夹"></a>创建网站文件夹</h3><p>新建一个空的文件夹，“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
-<p>命令执行完成后，文件夹的结构如下图所示。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;" />
-
-
-<h3 id="选取主题"><a href="#选取主题" class="headerlink" title="选取主题"></a>选取主题</h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
-"></p>
-<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
-<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;" />
-
-
-<p>这样便成功地修改了博客的主题。</p>
-<h3 id="配置网站"><a href="#配置网站" class="headerlink" title="配置网站"></a>配置网站</h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>您的名字</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>主题文件夹名称</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署信息</td>
-</tr>
-</tbody></table>
-<h2 id="部署至-GitHub"><a href="#部署至-GitHub" class="headerlink" title="部署至 GitHub"></a>部署至 GitHub</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
-<p>在 GitHub 上创建一个 <code>repository</code></p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;" />
-
-
-<p>其命名方式为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>username</code> 为 GitHub 用户名。</p>
-<h3 id="配置网站-1"><a href="#配置网站-1" class="headerlink" title="配置网站"></a>配置网站</h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
-<h3 id="安装-Deployer-Git"><a href="#安装-Deployer-Git" class="headerlink" title="安装 Deployer Git"></a>安装 Deployer Git</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
-<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
-<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
-<h3 id="更新网站内容"><a href="#更新网站内容" class="headerlink" title="更新网站内容"></a>更新网站内容</h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>网站</tag>
-        <tag>博客</tag>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>与 Apple Music 一同优雅地享受音乐</title>
-    <url>/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
-<blockquote>
-<p>你有多久没有认真地听一首歌了。</p>
-</blockquote>
-<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
-<h2 id="建立云端音乐资料库"><a href="#建立云端音乐资料库" class="headerlink" title="建立云端音乐资料库"></a>建立云端音乐资料库</h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
-<h2 id="添加音乐"><a href="#添加音乐" class="headerlink" title="添加音乐"></a>添加音乐</h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
-<h3 id="通过-Apple-Music-在线音乐库添加音乐"><a href="#通过-Apple-Music-在线音乐库添加音乐" class="headerlink" title="通过 Apple Music 在线音乐库添加音乐"></a>通过 Apple Music 在线音乐库添加音乐</h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
-<h3 id="通过其他音乐软件添加音乐"><a href="#通过其他音乐软件添加音乐" class="headerlink" title="通过其他音乐软件添加音乐"></a>通过其他音乐软件添加音乐</h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
-<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
-<blockquote>
-<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
-<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
-</blockquote>
-<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
-<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
-<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
-<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
-<h2 id="整理音乐资料库"><a href="#整理音乐资料库" class="headerlink" title="整理音乐资料库"></a>整理音乐资料库</h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
-<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
-<h3 id="更改歌曲信息"><a href="#更改歌曲信息" class="headerlink" title="更改歌曲信息"></a>更改歌曲信息</h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
-<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;" />
-
-
-<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
-<h3 id="创建智能播放列表"><a href="#创建智能播放列表" class="headerlink" title="创建智能播放列表"></a>创建智能播放列表</h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
-<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;" />
-
-
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
-<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>苹果</tag>
-        <tag>音乐</tag>
       </tags>
   </entry>
 </search>
