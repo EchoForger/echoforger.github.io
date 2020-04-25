@@ -172,13 +172,13 @@ Inhabitants of the Wonderland have decided to hold a regional programming contes
     
       <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
     
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
       <category term="写作" scheme="https://www.wildptr.cn/tags/%E5%86%99%E4%BD%9C/"/>
     
       <category term="Markdown" scheme="https://www.wildptr.cn/tags/Markdown/"/>
     
       <category term="Typora" scheme="https://www.wildptr.cn/tags/Typora/"/>
-    
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
@@ -277,11 +277,11 @@ Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插
     
       <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
     
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="Hexo" scheme="https://www.wildptr.cn/tags/Hexo/"/>
     
       <category term="GitHub" scheme="https://www.wildptr.cn/tags/GitHub/"/>
+    
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
