@@ -117,7 +117,7 @@
 <meta property="og:description" content="版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。  今天来简单聊聊动态规划中典型的背包问题。  01 背包问题 先来看看下面这样一到题目吧。  Problem Description Many years ago , in Teddy’s hometown there was a man who">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-21T12:29:29.000Z">
-<meta property="article:modified_time" content="2020-04-25T17:10:22.308Z">
+<meta property="article:modified_time" content="2020-04-25T17:26:22.987Z">
 <meta property="article:author" content="EchoForger">
 <meta name="twitter:card" content="summary">
 
@@ -426,7 +426,7 @@
 <blockquote>
 <h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p>
 </blockquote>
-<p>题目的意思大概是这样的：有一位“骨头收藏家”喜欢收集骨头，每一块骨头的体积和价值都已知，而他装骨头的袋子容量只有 V，计算他能够获得骨头的最大价值。</p>
+<p>题目的意思大概是这样的：有一位“骨头收藏家”喜欢收集骨头，每一块骨头的体积和价值都已知，而他装骨头的袋子容量只有 V，计算他能够获得骨头的最大价值。你可以<a href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/">查看原题</a>，先思考一下这个问题应该怎么解决。</p>
 <p>“背包问题”获取最大利益，乍一看确实是贪心算法，但这也是一道典型的动态规划问题。动态规划是算法设计方法之一，是用来求得最优解的数学方法。</p>
 <p>假设我们使用一个函数 <code>rec(i,j)</code> 来表示从第 i 块骨头开始拿重量不超过 j 的最大收益，那么对于第 i 块骨头，有如下几种情况。</p>
 <ul>
@@ -448,9 +448,6 @@
 
 <p>此外，除了运用递推方式逐项求解之外，还可以把状态转移想象成从“前 i 个物品中选取总重不超过 j 时的状态”向“前 i+1 个物品中选取总重不超过 j”和“前 i+1 个物品中选取总重不超过 j+w[i] 时的状态”的转移，于是可以实现成如下形式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">            DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i+<span class="number">1</span>][j],DP[i][j]);</span><br><span class="line">            <span class="keyword">if</span> (j+w[i]&lt;=W) DP[i+<span class="number">1</span>][j+w[i]]=<span class="built_in">max</span>(DP[i+<span class="number">1</span>][j+w[i]],DP[]i)[j]+v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上便是关于 01 背包问题的详细解释，</p>
-
       
     </div>
     
@@ -488,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/23/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/" rel="prev" title="与 Apple Music 一同优雅地享受音乐">
-                与 Apple Music 一同优雅地享受音乐 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/23/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/" rel="prev" title="使用 Hexo 和 GitHub 搭建自己的个人博客平台">
+                使用 Hexo 和 GitHub 搭建自己的个人博客平台 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
