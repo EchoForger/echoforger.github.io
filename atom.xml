@@ -27,12 +27,15 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;版权声明：&lt;/strong&gt; &lt;em&gt;本文所有内容均为 @EchoForger 的个人博客 &lt;a href=&quot;https://www.wildptr.cn&quot;&gt;WildPtr 野指针&lt;/a&gt;的原创内容，转载请务必注明作者与原
-      
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+今天来简单聊聊动态规划中典型的背包问题。
+
+01 背包问题
+先来看看下面这样一到题目吧。
+
+Problem Description
+Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also
     
     </summary>
     
@@ -59,12 +62,10 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;&lt;center&gt;Source: &lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=1114&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;HDUOJ 1114&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+      Source: HDUOJ 1114
 
-      
+Problem Description
+Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Bound Money (IBM). The idea behind is simple. Whenever some ACM member has any small money, he takes all
     
     </summary>
     
@@ -93,12 +94,13 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;&lt;center&gt;Source: &lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=1002&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;HDUOJ 1002&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+      Source: HDUOJ 1002
 
-      
+Problem Description
+I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.
+
+Input
+The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two
     
     </summary>
     
@@ -115,39 +117,6 @@
   </entry>
   
   <entry>
-    <title>Cable master</title>
-    <link href="https://www.wildptr.cn/2020/04/25/Cable%20master/"/>
-    <id>https://www.wildptr.cn/2020/04/25/Cable%20master/</id>
-    <published>2020-04-25T12:23:00.000Z</published>
-    <updated>2020-04-25T15:38:27.438Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - i.e. connect them all to a single central hub. To organize a truly honest contest, the Head of the Judging Committee has decreed to place all contestants evenly around the hub on an equal distance from it.<br>To buy network cables, the Judging Committee has contacted a local network solutions provider with a request to sell for them a specified number of cables with equal lengths. The Judging Committee wants the cables to be as long as possible to sit contestants as far from each other as possible.<br>The Cable Master of the company was assigned to the task. He knows the length of each cable in the stock up to a centimeter,and he can cut them with a centimeter precision being told the length of the pieces he must cut. However, this time, the length is not known and the Cable Master is completely puzzled.<br>You are to help the Cable Master, by writing a program that will determine the maximal possible length of a cable piece that can be cut from the cables in the stock, to get the specified number of pieces.</p><h2><span id="input">Input</span></h2><p>The first line of the input file contains two integer numb ers N and K, separated by a space. N (1 = N = 10000) is the number of cables in the stock, and K (1 = K = 10000) is the number of requested pieces. The first line is followed by N lines with one number per line, that specify the length of each cable in the stock in meters. All cables are at least 1 meter and at most 100 kilometers in length. All lengths in the input file are written with a centimeter precision, with exactly two digits after a decimal point.</p><h2><span id="output">Output</span></h2><p>Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point.<br>If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number “0.00” (without quotes).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 11</span><br><span class="line">8.02</span><br><span class="line">7.43</span><br><span class="line">4.57</span><br><span class="line">5.39</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.00</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;&lt;center&gt;Source: &lt;a href=&quot;http://poj.org/problem?id=1064&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;POJ 1064&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;h2&gt;&lt;span id=&quot;pro
-      
-    
-    </summary>
-    
-    
-      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
-    
-      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="POJ" scheme="https://www.wildptr.cn/tags/POJ/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Bone Collector</title>
     <link href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/"/>
     <id>https://www.wildptr.cn/2020/04/25/Bone%20Collector/</id>
@@ -158,12 +127,11 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;&lt;center&gt;Source: &lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=2602&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;HDUOJ 2602&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+      Source: HDUOJ 2602
 
-      
+Problem Description
+Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …
+The bone collector had a big bag with a volume of V ,and along his trip of coll
     
     </summary>
     
@@ -182,6 +150,36 @@
   </entry>
   
   <entry>
+    <title>Cable master</title>
+    <link href="https://www.wildptr.cn/2020/04/25/Cable%20master/"/>
+    <id>https://www.wildptr.cn/2020/04/25/Cable%20master/</id>
+    <published>2020-04-25T12:23:00.000Z</published>
+    <updated>2020-04-25T15:38:27.438Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - i.e. connect them all to a single central hub. To organize a truly honest contest, the Head of the Judging Committee has decreed to place all contestants evenly around the hub on an equal distance from it.<br>To buy network cables, the Judging Committee has contacted a local network solutions provider with a request to sell for them a specified number of cables with equal lengths. The Judging Committee wants the cables to be as long as possible to sit contestants as far from each other as possible.<br>The Cable Master of the company was assigned to the task. He knows the length of each cable in the stock up to a centimeter,and he can cut them with a centimeter precision being told the length of the pieces he must cut. However, this time, the length is not known and the Cable Master is completely puzzled.<br>You are to help the Cable Master, by writing a program that will determine the maximal possible length of a cable piece that can be cut from the cables in the stock, to get the specified number of pieces.</p><h2><span id="input">Input</span></h2><p>The first line of the input file contains two integer numb ers N and K, separated by a space. N (1 = N = 10000) is the number of cables in the stock, and K (1 = K = 10000) is the number of requested pieces. The first line is followed by N lines with one number per line, that specify the length of each cable in the stock in meters. All cables are at least 1 meter and at most 100 kilometers in length. All lengths in the input file are written with a centimeter precision, with exactly two digits after a decimal point.</p><h2><span id="output">Output</span></h2><p>Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point.<br>If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number “0.00” (without quotes).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 11</span><br><span class="line">8.02</span><br><span class="line">7.43</span><br><span class="line">4.57</span><br><span class="line">5.39</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.00</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Source: POJ 1064
+
+Problem Description
+Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - 
+    
+    </summary>
+    
+    
+      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
+    
+      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="POJ" scheme="https://www.wildptr.cn/tags/POJ/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用 Markdown 进行高效写作</title>
     <link href="https://www.wildptr.cn/2020/04/25/%E4%BD%BF%E7%94%A8%20Markdown%20%E8%BF%9B%E8%A1%8C%E9%AB%98%E6%95%88%E5%86%99%E4%BD%9C/"/>
     <id>https://www.wildptr.cn/2020/04/25/%E4%BD%BF%E7%94%A8%20Markdown%20%E8%BF%9B%E8%A1%8C%E9%AB%98%E6%95%88%E5%86%99%E4%BD%9C/</id>
@@ -192,11 +190,11 @@
     
     <summary type="html">
     
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;版权声明：&lt;/strong&gt; &lt;em&gt;本文所有内容均为 @EchoForger 的个人博客 &lt;a href=&quot;https://www.wildptr.cn&quot;&gt;WildPtr 野指针&lt;/a&gt;的原创内容，转载请务必注明作者与原文链接，且
-      
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+在现在这个信息化的时代，用电脑进行写作已经成为了主流。然而，在电脑上写作也有着很多和传统写作中不可避免的缺点，比如说在使用 Word 或者 Pages 等文稿软件进行写作的时候，我们往往要注重排版、文字大小以及图片的处理，而这些其他的因素却会分离我们的注意力，使我们无法真正的集中地进行写作。不仅如此，如果我们的文章需要发布到不同的平台，还往往需要针对不同的平台进行排版，这必会加大我们的时间耗费。
+
+正是由于这些种种不利的原因，“Markdow
     
     </summary>
     
@@ -227,12 +225,15 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;版权声明：&lt;/strong&gt; &lt;em&gt;本文所有内容均为 @EchoForger 的个人博客 &lt;a href=&quot;https://www.wildptr.cn&quot;&gt;WildPtr 野指针&lt;/a&gt;的原创内容，转载请务必注明作者与原
-      
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。
+
+普通系统截图
+系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。
+
+Command + Shift + 3 截取整个屏幕
+使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显
     
     </summary>
     
@@ -261,12 +262,13 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;版权声明：&lt;/strong&gt; &lt;em&gt;本文所有内容均为 @EchoForger 的个人博客 &lt;a href=&quot;https://www.wildptr.cn&quot;&gt;WildPtr 野指针&lt;/a&gt;的原创内容，转载请务必注明作者与原
-      
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。
+
+你有多久没有认真地听一首歌了。
+
+
     
     </summary>
     
@@ -293,12 +295,13 @@
     
     <summary type="html">
     
-      
-      
-        &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;版权声明：&lt;/strong&gt; &lt;em&gt;本文所有内容均为 @EchoForger 的个人博客 &lt;a href=&quot;https://www.wildptr.cn&quot;&gt;WildPtr 野指针&lt;/a&gt;的原创内容，转载请务必注明作者与原
-      
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。
+
+准备工作
+安装 Node.js
+前往 Node.js 官网安装 Node.js (Node.js 版本需
     
     </summary>
     
