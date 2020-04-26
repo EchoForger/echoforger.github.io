@@ -84,39 +84,6 @@ Before ACM can do anything, a budget must be prepared and the necessary financia
   </entry>
   
   <entry>
-    <title>Bone Collector</title>
-    <link href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/"/>
-    <id>https://www.wildptr.cn/2020/04/25/Bone%20Collector/</id>
-    <published>2020-04-25T12:23:00.000Z</published>
-    <updated>2020-04-25T18:04:12.003Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p><img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;"><h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p><h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      Source: HDUOJ 2602
-
-Problem Description
-Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …
-The bone collector had a big bag with a volume of V ,and along his trip of coll
-    
-    </summary>
-    
-    
-      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
-    
-      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
-    
-      <category term="动态规划" scheme="https://www.wildptr.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
     <title>A + B Problem II</title>
     <link href="https://www.wildptr.cn/2020/04/25/A%20+%20B%20Problem%20II/"/>
     <id>https://www.wildptr.cn/2020/04/25/A%20+%20B%20Problem%20II/</id>
@@ -180,6 +147,39 @@ Inhabitants of the Wonderland have decided to hold a regional programming contes
   </entry>
   
   <entry>
+    <title>Bone Collector</title>
+    <link href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/"/>
+    <id>https://www.wildptr.cn/2020/04/25/Bone%20Collector/</id>
+    <published>2020-04-25T12:23:00.000Z</published>
+    <updated>2020-04-25T18:04:12.003Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p><img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;"><h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p><h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Source: HDUOJ 2602
+
+Problem Description
+Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …
+The bone collector had a big bag with a volume of V ,and along his trip of coll
+    
+    </summary>
+    
+    
+      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
+    
+      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
+    
+      <category term="动态规划" scheme="https://www.wildptr.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用 Markdown 进行高效写作</title>
     <link href="https://www.wildptr.cn/2020/04/25/%E4%BD%BF%E7%94%A8%20Markdown%20%E8%BF%9B%E8%A1%8C%E9%AB%98%E6%95%88%E5%86%99%E4%BD%9C/"/>
     <id>https://www.wildptr.cn/2020/04/25/%E4%BD%BF%E7%94%A8%20Markdown%20%E8%BF%9B%E8%A1%8C%E9%AB%98%E6%95%88%E5%86%99%E4%BD%9C/</id>
@@ -204,13 +204,13 @@ Inhabitants of the Wonderland have decided to hold a regional programming contes
     
       <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
     
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
       <category term="写作" scheme="https://www.wildptr.cn/tags/%E5%86%99%E4%BD%9C/"/>
     
       <category term="Markdown" scheme="https://www.wildptr.cn/tags/Markdown/"/>
     
       <category term="Typora" scheme="https://www.wildptr.cn/tags/Typora/"/>
-    
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
@@ -250,6 +250,41 @@ Command + Shift + 3 截取整个屏幕
   </entry>
   
   <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <link href="https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</id>
+    <published>2020-04-22T01:43:00.000Z</published>
+    <updated>2020-04-25T18:05:57.487Z</updated>
+    
+    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p><h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p><h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p><p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure><p>安装 Git。终端执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure><h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure><p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p><p>命令执行完成后，文件夹的结构如下图所示。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;"><h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面"></p><p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p><p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;"><p>这样便成功地修改了博客的主题。</p><h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody><tr><td><code>title</code></td><td>网站标题</td></tr><tr><td><code>subtitle</code></td><td>网站副标题</td></tr><tr><td><code>author</code></td><td>您的名字</td></tr><tr><td><code>theme</code></td><td>主题文件夹名称</td></tr><tr><td><code>deploy</code></td><td>部署信息</td></tr></tbody></table><h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p><p>在 GitHub 上创建一个 <code>repository</code></p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;"><p>其命名方式为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure><p>其中 <code>username</code> 为 GitHub 用户名。</p><h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p><h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3><span id="部署">部署</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p><p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p><p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p><h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。
+
+准备工作
+安装 Node.js
+前往 Node.js 官网安装 Node.js (Node.js 版本需
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://www.wildptr.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="Hexo" scheme="https://www.wildptr.cn/tags/Hexo/"/>
+    
+      <category term="GitHub" scheme="https://www.wildptr.cn/tags/GitHub/"/>
+    
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>与 Apple Music 一同优雅地享受音乐</title>
     <link href="https://www.wildptr.cn/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/"/>
     <id>https://www.wildptr.cn/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</id>
@@ -279,41 +314,6 @@ Command + Shift + 3 截取整个屏幕
       <category term="苹果" scheme="https://www.wildptr.cn/tags/%E8%8B%B9%E6%9E%9C/"/>
     
       <category term="音乐" scheme="https://www.wildptr.cn/tags/%E9%9F%B3%E4%B9%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <link href="https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/"/>
-    <id>https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</id>
-    <published>2020-04-22T01:43:00.000Z</published>
-    <updated>2020-04-25T18:05:57.487Z</updated>
-    
-    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p><h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p><h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p><p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure><p>安装 Git。终端执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure><h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure><p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p><p>命令执行完成后，文件夹的结构如下图所示。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;"><h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面"></p><p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p><p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;"><p>这样便成功地修改了博客的主题。</p><h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody><tr><td><code>title</code></td><td>网站标题</td></tr><tr><td><code>subtitle</code></td><td>网站副标题</td></tr><tr><td><code>author</code></td><td>您的名字</td></tr><tr><td><code>theme</code></td><td>主题文件夹名称</td></tr><tr><td><code>deploy</code></td><td>部署信息</td></tr></tbody></table><h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p><p>在 GitHub 上创建一个 <code>repository</code></p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;"><p>其命名方式为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure><p>其中 <code>username</code> 为 GitHub 用户名。</p><h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p><h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3><span id="部署">部署</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p><p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p><p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p><h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
-
-Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。
-
-准备工作
-安装 Node.js
-前往 Node.js 官网安装 Node.js (Node.js 版本需
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://www.wildptr.cn/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
-    
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="Hexo" scheme="https://www.wildptr.cn/tags/Hexo/"/>
-    
-      <category term="GitHub" scheme="https://www.wildptr.cn/tags/GitHub/"/>
     
   </entry>
   
