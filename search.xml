@@ -26,6 +26,59 @@
       </tags>
   </entry>
   <entry>
+    <title>Cable master</title>
+    <url>/2020/04/25/Cable%20master/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - i.e. connect them all to a single central hub. To organize a truly honest contest, the Head of the Judging Committee has decreed to place all contestants evenly around the hub on an equal distance from it.<br>To buy network cables, the Judging Committee has contacted a local network solutions provider with a request to sell for them a specified number of cables with equal lengths. The Judging Committee wants the cables to be as long as possible to sit contestants as far from each other as possible.<br>The Cable Master of the company was assigned to the task. He knows the length of each cable in the stock up to a centimeter,and he can cut them with a centimeter precision being told the length of the pieces he must cut. However, this time, the length is not known and the Cable Master is completely puzzled.<br>You are to help the Cable Master, by writing a program that will determine the maximal possible length of a cable piece that can be cut from the cables in the stock, to get the specified number of pieces.</p>
+<h2><span id="input">Input</span></h2><p>The first line of the input file contains two integer numb ers N and K, separated by a space. N (1 = N = 10000) is the number of cables in the stock, and K (1 = K = 10000) is the number of requested pieces. The first line is followed by N lines with one number per line, that specify the length of each cable in the stock in meters. All cables are at least 1 meter and at most 100 kilometers in length. All lengths in the input file are written with a centimeter precision, with exactly two digits after a decimal point.</p>
+<h2><span id="output">Output</span></h2><p>Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point.<br>If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number “0.00” (without quotes).</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 11</span><br><span class="line">8.02</span><br><span class="line">7.43</span><br><span class="line">4.57</span><br><span class="line">5.39</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.00</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>POJ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bone Collector</title>
+    <url>/2020/04/25/Bone%20Collector/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p>
+<img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;">
+
+<h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p>
+<h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Piggy-Bank</title>
     <url>/2020/04/26/Piggy-Bank/</url>
     <content><![CDATA[<hr>
@@ -50,31 +103,6 @@
         <tag>算法</tag>
         <tag>HDUOJ</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cable master</title>
-    <url>/2020/04/25/Cable%20master/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://poj.org/problem?id=1064" target="_blank" rel="noopener">POJ 1064</a></center></p>
-
-<h2><span id="problem-description">Problem Description</span></h2><p>Inhabitants of the Wonderland have decided to hold a regional programming contest. The Judging Committee has volunteered and has promised to organize the most honest contest ever. It was decided to connect computers for the contestants using a “star” topology - i.e. connect them all to a single central hub. To organize a truly honest contest, the Head of the Judging Committee has decreed to place all contestants evenly around the hub on an equal distance from it.<br>To buy network cables, the Judging Committee has contacted a local network solutions provider with a request to sell for them a specified number of cables with equal lengths. The Judging Committee wants the cables to be as long as possible to sit contestants as far from each other as possible.<br>The Cable Master of the company was assigned to the task. He knows the length of each cable in the stock up to a centimeter,and he can cut them with a centimeter precision being told the length of the pieces he must cut. However, this time, the length is not known and the Cable Master is completely puzzled.<br>You are to help the Cable Master, by writing a program that will determine the maximal possible length of a cable piece that can be cut from the cables in the stock, to get the specified number of pieces.</p>
-<h2><span id="input">Input</span></h2><p>The first line of the input file contains two integer numb ers N and K, separated by a space. N (1 = N = 10000) is the number of cables in the stock, and K (1 = K = 10000) is the number of requested pieces. The first line is followed by N lines with one number per line, that specify the length of each cable in the stock in meters. All cables are at least 1 meter and at most 100 kilometers in length. All lengths in the input file are written with a centimeter precision, with exactly two digits after a decimal point.</p>
-<h2><span id="output">Output</span></h2><p>Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point.<br>If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number “0.00” (without quotes).</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 11</span><br><span class="line">8.02</span><br><span class="line">7.43</span><br><span class="line">4.57</span><br><span class="line">5.39</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.00</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> len[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numCable</span><span class="params">(<span class="keyword">double</span> dlen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        num+=(<span class="keyword">int</span>)(len[i]/dlen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len[i];</span><br><span class="line">        <span class="built_in">max</span>+=len[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">max</span>/=k;</span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=<span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">double</span> mid=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numCable(mid)&lt;k) &#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res=mid*<span class="number">100</span>;</span><br><span class="line">    mid =res*<span class="number">0.01</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>POJ</tag>
       </tags>
   </entry>
   <entry>
@@ -132,85 +160,6 @@
         <tag>截图</tag>
         <tag>技巧</tag>
         <tag>苹果</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bone Collector</title>
-    <url>/2020/04/25/Bone%20Collector/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p>
-
-<h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p>
-<img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;">
-
-<h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p>
-<h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>HDUOJ</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>与 Apple Music 一同优雅地享受音乐</title>
-    <url>/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
-<blockquote>
-<p>你有多久没有认真地听一首歌了。</p>
-</blockquote>
-<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
-<h2><span id="建立云端音乐资料库">建立云端音乐资料库</span></h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
-<h2><span id="添加音乐">添加音乐</span></h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
-<h3><span id="通过-apple-music-在线音乐库添加音乐">通过 Apple Music 在线音乐库添加音乐</span></h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
-<h3><span id="通过其他音乐软件添加音乐">通过其他音乐软件添加音乐</span></h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
-<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
-<blockquote>
-<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
-<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
-</blockquote>
-<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
-<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
-<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
-<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
-<h2><span id="整理音乐资料库">整理音乐资料库</span></h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
-<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
-<h3><span id="更改歌曲信息">更改歌曲信息</span></h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
-<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;">
-
-
-<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
-<h3><span id="创建智能播放列表">创建智能播放列表</span></h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
-<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;">
-
-
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
-<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
-<h2><span id="小结">小结</span></h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-        <tag>苹果</tag>
-        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
@@ -313,6 +262,57 @@
         <tag>Hexo</tag>
         <tag>GitHub</tag>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>与 Apple Music 一同优雅地享受音乐</title>
+    <url>/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
+<blockquote>
+<p>你有多久没有认真地听一首歌了。</p>
+</blockquote>
+<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
+<h2><span id="建立云端音乐资料库">建立云端音乐资料库</span></h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
+<h2><span id="添加音乐">添加音乐</span></h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
+<h3><span id="通过-apple-music-在线音乐库添加音乐">通过 Apple Music 在线音乐库添加音乐</span></h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
+<h3><span id="通过其他音乐软件添加音乐">通过其他音乐软件添加音乐</span></h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
+<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
+<blockquote>
+<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
+<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
+</blockquote>
+<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
+<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
+<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
+<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
+<h2><span id="整理音乐资料库">整理音乐资料库</span></h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
+<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
+<h3><span id="更改歌曲信息">更改歌曲信息</span></h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
+<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;">
+
+
+<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
+<h3><span id="创建智能播放列表">创建智能播放列表</span></h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
+<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;">
+
+
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
+<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
+<h2><span id="小结">小结</span></h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+        <tag>苹果</tag>
+        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
