@@ -236,13 +236,13 @@ Inhabitants of the Wonderland have decided to hold a regional programming contes
     
       <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
     
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="写作" scheme="https://www.wildptr.cn/tags/%E5%86%99%E4%BD%9C/"/>
     
       <category term="Markdown" scheme="https://www.wildptr.cn/tags/Markdown/"/>
     
       <category term="Typora" scheme="https://www.wildptr.cn/tags/Typora/"/>
+    
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
@@ -275,46 +275,11 @@ Command + Shift + 3 截取整个屏幕
     
       <category term="macOS" scheme="https://www.wildptr.cn/tags/macOS/"/>
     
-      <category term="苹果" scheme="https://www.wildptr.cn/tags/%E8%8B%B9%E6%9E%9C/"/>
-    
       <category term="截图" scheme="https://www.wildptr.cn/tags/%E6%88%AA%E5%9B%BE/"/>
     
       <category term="技巧" scheme="https://www.wildptr.cn/tags/%E6%8A%80%E5%B7%A7/"/>
     
-  </entry>
-  
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <link href="https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/"/>
-    <id>https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</id>
-    <published>2020-04-22T01:43:00.000Z</published>
-    <updated>2020-04-25T18:05:57.487Z</updated>
-    
-    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p><h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p><h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p><p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure><p>安装 Git。终端执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure><h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure><p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p><p>命令执行完成后，文件夹的结构如下图所示。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;"><h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面"></p><p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p><p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;"><p>这样便成功地修改了博客的主题。</p><h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody><tr><td><code>title</code></td><td>网站标题</td></tr><tr><td><code>subtitle</code></td><td>网站副标题</td></tr><tr><td><code>author</code></td><td>您的名字</td></tr><tr><td><code>theme</code></td><td>主题文件夹名称</td></tr><tr><td><code>deploy</code></td><td>部署信息</td></tr></tbody></table><h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p><p>在 GitHub 上创建一个 <code>repository</code></p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;"><p>其命名方式为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure><p>其中 <code>username</code> 为 GitHub 用户名。</p><h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p><h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3><span id="部署">部署</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p><p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p><p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p><h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
-
-Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。
-
-准备工作
-安装 Node.js
-前往 Node.js 官网安装 Node.js (Node.js 版本需
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://www.wildptr.cn/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
-    
-      <category term="Hexo" scheme="https://www.wildptr.cn/tags/Hexo/"/>
-    
-      <category term="GitHub" scheme="https://www.wildptr.cn/tags/GitHub/"/>
-    
-      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="苹果" scheme="https://www.wildptr.cn/tags/%E8%8B%B9%E6%9E%9C/"/>
     
   </entry>
   
@@ -348,6 +313,41 @@ Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插
       <category term="苹果" scheme="https://www.wildptr.cn/tags/%E8%8B%B9%E6%9E%9C/"/>
     
       <category term="音乐" scheme="https://www.wildptr.cn/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <link href="https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://www.wildptr.cn/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</id>
+    <published>2020-04-22T01:43:00.000Z</published>
+    <updated>2020-04-25T18:05:57.487Z</updated>
+    
+    <content type="html"><![CDATA[<hr><blockquote><p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p></blockquote><p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p><h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p><h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p><p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure><p>安装 Git。终端执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure><h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure><p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p><p>命令执行完成后，文件夹的结构如下图所示。</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;"><h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面"></p><p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p><p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;"><p>这样便成功地修改了博客的主题。</p><h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody><tr><td><code>title</code></td><td>网站标题</td></tr><tr><td><code>subtitle</code></td><td>网站副标题</td></tr><tr><td><code>author</code></td><td>您的名字</td></tr><tr><td><code>theme</code></td><td>主题文件夹名称</td></tr><tr><td><code>deploy</code></td><td>部署信息</td></tr></tbody></table><h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p><p>在 GitHub 上创建一个 <code>repository</code></p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;"><p>其命名方式为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure><p>其中 <code>username</code> 为 GitHub 用户名。</p><h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p><h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3><span id="部署">部署</span></h3><p>“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p><p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p><p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p><h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      版权声明： 本文所有内容均为 @EchoForger 的个人博客 WildPtr 野指针的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。
+
+Hexo 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。GitHub 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。
+
+准备工作
+安装 Node.js
+前往 Node.js 官网安装 Node.js (Node.js 版本需
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://www.wildptr.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="网站" scheme="https://www.wildptr.cn/tags/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="博客" scheme="https://www.wildptr.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="Hexo" scheme="https://www.wildptr.cn/tags/Hexo/"/>
+    
+      <category term="GitHub" scheme="https://www.wildptr.cn/tags/GitHub/"/>
     
   </entry>
   
