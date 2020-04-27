@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Piggy-Bank</title>
-    <url>/2020/04/26/Piggy-Bank/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1114" target="_blank" rel="noopener">HDUOJ 1114</a></center></p>
-
-<h2><span id="problem-description">Problem Description</span></h2><p>Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Bound Money (IBM). The idea behind is simple. Whenever some ACM member has any small money, he takes all the coins and throws them into a piggy-bank. You know that this process is irreversible, the coins cannot be removed without breaking the pig. After a sufficiently long time, there should be enough cash in the piggy-bank to pay everything that needs to be paid. </p>
-<p>But there is a big problem with piggy-banks. It is not possible to determine how much money is inside. So we might break the pig into pieces only to find out that there is not enough money. Clearly, we want to avoid this unpleasant situation. The only possibility is to weigh the piggy-bank and try to guess how many coins are inside. Assume that we are able to determine the weight of the pig exactly and that we know the weights of all coins of a given currency. Then there is some minimum amount of money in the piggy-bank that we can guarantee. Your task is to find out this worst case and determine the minimum amount of cash inside the piggy-bank. We need your help. No more prematurely broken pigs! </p>
-<h2><span id="input">Input</span></h2><p>The input consists of T test cases. The number of them (T) is given on the first line of the input file. Each test case begins with a line containing two integers E and F. They indicate the weight of an empty pig and of the pig filled with coins. Both weights are given in grams. No pig will weigh more than 10 kg, that means 1 &lt;= E &lt;= F &lt;= 10000. On the second line of each test case, there is an integer number N (1 &lt;= N &lt;= 500) that gives the number of various coins used in the given currency. Following this are exactly N lines, each specifying one coin type. These lines contain two integers each, Pand W (1 &lt;= P &lt;= 50000, 1 &lt;= W &lt;=10000). P is the value of the coin in monetary units, W is it’s weight in grams. </p>
-<h2><span id="output">Output</span></h2><p>Print exactly one line of output for each test case. The line must contain the sentence “The minimum amount of money in the piggy-bank is X.” where X is the minimum amount of money that can be achieved using coins with the given total weight. If the weight cannot be reached exactly, print a line “This is impossible.”. </p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">30 50</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">50 30</span><br><span class="line">1 6</span><br><span class="line">2</span><br><span class="line">10 3</span><br><span class="line">20 4</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The minimum amount of money in the piggy-bank is 60.</span><br><span class="line">The minimum amount of money in the piggy-bank is 100.</span><br><span class="line">This is impossible.</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">500</span>*<span class="number">50000</span>;</span><br><span class="line"><span class="keyword">int</span> W,N;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">500</span>],w[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">10000</span>+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> filledPig,emptyPig;<span class="built_in">cin</span>&gt;&gt;emptyPig&gt;&gt;filledPig&gt;&gt;N;</span><br><span class="line">        W=filledPig-emptyPig;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p[i]&gt;&gt;w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=W; i++) &#123;</span><br><span class="line">            DP[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=w[i]; j&lt;=W; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">min</span>(DP[j],DP[j-w[i]]+p[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (DP[W]!=INF) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The minimum amount of money in the piggy-bank is "</span>&lt;&lt;DP[W]&lt;&lt;<span class="string">"."</span>&lt;&lt;<span class="built_in">endl</span>;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"This is impossible."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>HDUOJ</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bone Collector</title>
     <url>/2020/04/25/Bone%20Collector/</url>
     <content><![CDATA[<hr>
@@ -81,162 +54,85 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <url>/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
+    <title>A + B Problem II</title>
+    <url>/2020/04/25/A%20+%20B%20Problem%20II/</url>
     <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
-<h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
-<h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
-<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1002" target="_blank" rel="noopener">HDUOJ 1002</a></center></p>
 
-<p>安装 Git。终端执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+<h2><span id="problem-description">Problem Description</span></h2><p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
+<h2><span id="input">Input</span></h2><p>The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
+<h2><span id="output">Output</span></h2><p>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B = Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">112233445566778899 998877665544332211</span><br></pre></td></tr></table></figure>
 
-<h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">1 + 2 &#x3D; 3</span><br><span class="line"></span><br><span class="line">Case 2:</span><br><span class="line">112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</span><br></pre></td></tr></table></figure>
 
-<h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;<span class="built_in">print</span>;</span><br><span class="line">    <span class="keyword">int</span> n;<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="built_in">string</span> a,b;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        <span class="keyword">while</span> (a.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;a.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            a.erase(a.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (b.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;b.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            b.erase(b.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> oa=a,ob=b;</span><br><span class="line">        <span class="keyword">if</span>(a.<span class="built_in">size</span>()&lt;b.<span class="built_in">size</span>())&#123;</span><br><span class="line">            <span class="built_in">string</span> temp=a;</span><br><span class="line">            a=b;</span><br><span class="line">            b=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> on=<span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">string</span> res=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">while</span> (a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> aL=a.at(a.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>,bL=<span class="number">0</span>;</span><br><span class="line">            a.erase(a.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">if</span> (b.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                bL=b.at(b.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>;</span><br><span class="line">                b.erase(b.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tempSum=aL+bL;</span><br><span class="line">            <span class="keyword">if</span> (on) &#123;</span><br><span class="line">                tempSum++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (tempSum&gt;=<span class="number">10</span>) &#123;</span><br><span class="line">                on=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> on=<span class="literal">false</span>;</span><br><span class="line">            res=to_string(tempSum%<span class="number">10</span>)+res;</span><br><span class="line">            <span class="keyword">if</span> (!a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                res=to_string(tempSum/<span class="number">10</span>)+res;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;res&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (res.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;res.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            res.erase(res.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        res=<span class="string">"Case "</span>+to_string(i)+<span class="string">":\n"</span> + oa+<span class="string">" + "</span>+ob+<span class="string">" = "</span>+res+<span class="string">"\n"</span>;</span><br><span class="line">        <span class="built_in">print</span>.push_back(res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">print</span>.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">print</span>.at(i);</span><br><span class="line">        <span class="keyword">if</span> (i!=<span class="built_in">print</span>.<span class="built_in">size</span>()<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
-<p>命令执行完成后，文件夹的结构如下图所示。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;">
-
-
-<h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
-"></p>
-<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
-<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;">
-
-
-<p>这样便成功地修改了博客的主题。</p>
-<h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>您的名字</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>主题文件夹名称</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署信息</td>
-</tr>
-</tbody></table>
-<h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
-<p>在 GitHub 上创建一个 <code>repository</code></p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;">
-
-
-<p>其命名方式为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>username</code> 为 GitHub 用户名。</p>
-<h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
-<h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3><span id="部署">部署</span></h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
-<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
-<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
-<h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>ACM 题目</category>
       </categories>
       <tags>
-        <tag>网站</tag>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
-        <tag>博客</tag>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
       </tags>
   </entry>
   <entry>
-    <title>一篇文章搞定 macOS 截图</title>
-    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
+    <title>Piggy-Bank</title>
+    <url>/2020/04/26/Piggy-Bank/</url>
     <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
-<h2><span id="普通系统截图">普通系统截图</span></h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
-<h3><span id="command-shift-3-截取整个屏幕"><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></span></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;">
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1114" target="_blank" rel="noopener">HDUOJ 1114</a></center></p>
 
+<h2><span id="problem-description">Problem Description</span></h2><p>Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Bound Money (IBM). The idea behind is simple. Whenever some ACM member has any small money, he takes all the coins and throws them into a piggy-bank. You know that this process is irreversible, the coins cannot be removed without breaking the pig. After a sufficiently long time, there should be enough cash in the piggy-bank to pay everything that needs to be paid. </p>
+<p>But there is a big problem with piggy-banks. It is not possible to determine how much money is inside. So we might break the pig into pieces only to find out that there is not enough money. Clearly, we want to avoid this unpleasant situation. The only possibility is to weigh the piggy-bank and try to guess how many coins are inside. Assume that we are able to determine the weight of the pig exactly and that we know the weights of all coins of a given currency. Then there is some minimum amount of money in the piggy-bank that we can guarantee. Your task is to find out this worst case and determine the minimum amount of cash inside the piggy-bank. We need your help. No more prematurely broken pigs! </p>
+<h2><span id="input">Input</span></h2><p>The input consists of T test cases. The number of them (T) is given on the first line of the input file. Each test case begins with a line containing two integers E and F. They indicate the weight of an empty pig and of the pig filled with coins. Both weights are given in grams. No pig will weigh more than 10 kg, that means 1 &lt;= E &lt;= F &lt;= 10000. On the second line of each test case, there is an integer number N (1 &lt;= N &lt;= 500) that gives the number of various coins used in the given currency. Following this are exactly N lines, each specifying one coin type. These lines contain two integers each, Pand W (1 &lt;= P &lt;= 50000, 1 &lt;= W &lt;=10000). P is the value of the coin in monetary units, W is it’s weight in grams. </p>
+<h2><span id="output">Output</span></h2><p>Print exactly one line of output for each test case. The line must contain the sentence “The minimum amount of money in the piggy-bank is X.” where X is the minimum amount of money that can be achieved using coins with the given total weight. If the weight cannot be reached exactly, print a line “This is impossible.”. </p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">30 50</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">50 30</span><br><span class="line">1 6</span><br><span class="line">2</span><br><span class="line">10 3</span><br><span class="line">20 4</span><br></pre></td></tr></table></figure>
 
-<h3><span id="command-shift-4-截取部分屏幕"><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></span></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
-<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
-<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
-<p>也可以在终端执行一条命令永久去除软阴影：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The minimum amount of money in the piggy-bank is 60.</span><br><span class="line">The minimum amount of money in the piggy-bank is 100.</span><br><span class="line">This is impossible.</span><br></pre></td></tr></table></figure>
 
-<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">500</span>*<span class="number">50000</span>;</span><br><span class="line"><span class="keyword">int</span> W,N;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">500</span>],w[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">10000</span>+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> filledPig,emptyPig;<span class="built_in">cin</span>&gt;&gt;emptyPig&gt;&gt;filledPig&gt;&gt;N;</span><br><span class="line">        W=filledPig-emptyPig;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p[i]&gt;&gt;w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=W; i++) &#123;</span><br><span class="line">            DP[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=w[i]; j&lt;=W; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">min</span>(DP[j],DP[j-w[i]]+p[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (DP[W]!=INF) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The minimum amount of money in the piggy-bank is "</span>&lt;&lt;DP[W]&lt;&lt;<span class="string">"."</span>&lt;&lt;<span class="built_in">endl</span>;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"This is impossible."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
-<h3><span id="command-shift-5-打开截图工具栏"><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></span></h3><h3><span id="command-shift-6-截取触控栏"><strong><code>Command + Shift + 6</code> 截取触控栏</strong></span></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
-<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
-<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;">
-
-
-<h3><span id="系统自带的截屏app">系统自带的“截屏”app</span></h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
-<h3><span id="截图缩略图">截图缩略图</span></h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
-<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;">
-
-
-<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
-<h2><span id="长截图">长截图</span></h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;"></p>
-<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
-<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
-<h2><span id="截取动图">截取动图</span></h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
-<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;">
-
-
-<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
-<h2><span id="小结">小结</span></h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
 ]]></content>
       <categories>
-        <category>数字生活</category>
+        <category>ACM 题目</category>
       </categories>
       <tags>
-        <tag>macOS</tag>
-        <tag>截图</tag>
-        <tag>技巧</tag>
-        <tag>苹果</tag>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Robberies</title>
+    <url>/2020/04/27/Robberies/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2955" target="_blank" rel="noopener">HDUOJ 2955</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy. He has decided to work in the lucrative business of bank robbery only for a short while, before retiring to a comfortable job at a university.</p>
+<img src="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg" alt="img" style="zoom: 33%;">
+
+<p>For a few months now, Roy has been assessing the security of various banks and the amount of cash they hold. He wants to make a calculated risk, and grab as much money as possible.<br>His mother, Ola, has decided upon a tolerable probability of getting caught. She feels that he is safe enough if the banks he robs together give a probability less than this.</p>
+<h2><span id="input">Input</span></h2><p>The first line of input gives T, the number of cases. For each scenario, the first line of input gives a floating point number P, the probability Roy needs to be below, and an integer N, the number of banks he has plans for. Then follow N lines, where line j gives an integer Mj and a floating point number Pj .<br>Bank j contains Mj millions, and the probability of getting caught from robbing it is Pj .</p>
+<h2><span id="output">Output</span></h2><p>For each test case, output a line with the maximum number of millions he can expect to get while the probability of getting caught is less than the limit set.</p>
+<p>Notes and Constraints<br>0 &lt; T &lt;= 100<br>0.0 &lt;= P &lt;= 1.0<br>0 &lt; N &lt;= 100<br>0 &lt; Mj &lt;= 100<br>0.0 &lt;= Pj &lt;= 1.0<br>A bank goes bankrupt if it is robbed, and you may assume that all probabilities are independent as the police have very low funds.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">0.04 3</span><br><span class="line">1 0.02</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.06 3</span><br><span class="line">2 0.03</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.10 3</span><br><span class="line">1 0.03</span><br><span class="line">2 0.02</span><br><span class="line">3 0.05</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -442,10 +338,67 @@
       </categories>
       <tags>
         <tag>网站</tag>
-        <tag>博客</tag>
         <tag>写作</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一篇文章搞定 macOS 截图</title>
+    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
+<h2><span id="普通系统截图">普通系统截图</span></h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
+<h3><span id="command-shift-3-截取整个屏幕"><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></span></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;">
+
+
+<h3><span id="command-shift-4-截取部分屏幕"><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></span></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
+<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
+<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
+<p>也可以在终端执行一条命令永久去除软阴影：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
+<h3><span id="command-shift-5-打开截图工具栏"><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></span></h3><h3><span id="command-shift-6-截取触控栏"><strong><code>Command + Shift + 6</code> 截取触控栏</strong></span></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
+<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
+<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;">
+
+
+<h3><span id="系统自带的截屏app">系统自带的“截屏”app</span></h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
+<h3><span id="截图缩略图">截图缩略图</span></h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
+<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;">
+
+
+<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
+<h2><span id="长截图">长截图</span></h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;"></p>
+<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
+<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
+<h2><span id="截取动图">截取动图</span></h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
+<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;">
+
+
+<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
+<h2><span id="小结">小结</span></h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+        <tag>苹果</tag>
+        <tag>截图</tag>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -494,28 +447,105 @@
       </tags>
   </entry>
   <entry>
-    <title>A + B Problem II</title>
-    <url>/2020/04/25/A%20+%20B%20Problem%20II/</url>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <url>/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1002" target="_blank" rel="noopener">HDUOJ 1002</a></center></p>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
 
-<h2><span id="problem-description">Problem Description</span></h2><p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
-<h2><span id="input">Input</span></h2><p>The first line of the input contains an integer T(1&lt;=T&lt;=20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
-<h2><span id="output">Output</span></h2><p>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B = Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">112233445566778899 998877665544332211</span><br></pre></td></tr></table></figure>
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">1 + 2 &#x3D; 3</span><br><span class="line"></span><br><span class="line">Case 2:</span><br><span class="line">112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</span><br></pre></td></tr></table></figure>
+<h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;<span class="built_in">print</span>;</span><br><span class="line">    <span class="keyword">int</span> n;<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="built_in">string</span> a,b;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        <span class="keyword">while</span> (a.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;a.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            a.erase(a.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (b.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;b.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            b.erase(b.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> oa=a,ob=b;</span><br><span class="line">        <span class="keyword">if</span>(a.<span class="built_in">size</span>()&lt;b.<span class="built_in">size</span>())&#123;</span><br><span class="line">            <span class="built_in">string</span> temp=a;</span><br><span class="line">            a=b;</span><br><span class="line">            b=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> on=<span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">string</span> res=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">while</span> (a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> aL=a.at(a.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>,bL=<span class="number">0</span>;</span><br><span class="line">            a.erase(a.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">if</span> (b.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                bL=b.at(b.<span class="built_in">size</span>()<span class="number">-1</span>)-<span class="string">'0'</span>;</span><br><span class="line">                b.erase(b.<span class="built_in">end</span>()<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tempSum=aL+bL;</span><br><span class="line">            <span class="keyword">if</span> (on) &#123;</span><br><span class="line">                tempSum++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (tempSum&gt;=<span class="number">10</span>) &#123;</span><br><span class="line">                on=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> on=<span class="literal">false</span>;</span><br><span class="line">            res=to_string(tempSum%<span class="number">10</span>)+res;</span><br><span class="line">            <span class="keyword">if</span> (!a.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                res=to_string(tempSum/<span class="number">10</span>)+res;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;res&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (res.at(<span class="number">0</span>)==<span class="string">'0'</span>&amp;&amp;res.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            res.erase(res.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        res=<span class="string">"Case "</span>+to_string(i)+<span class="string">":\n"</span> + oa+<span class="string">" + "</span>+ob+<span class="string">" = "</span>+res+<span class="string">"\n"</span>;</span><br><span class="line">        <span class="built_in">print</span>.push_back(res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">print</span>.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">print</span>.at(i);</span><br><span class="line">        <span class="keyword">if</span> (i!=<span class="built_in">print</span>.<span class="built_in">size</span>()<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
 
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;">
+
+
+<h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;">
+
+
+<p>这样便成功地修改了博客的主题。</p>
+<h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code></p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;">
+
+
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3><span id="部署">部署</span></h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>ACM 题目</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>HDUOJ</tag>
+        <tag>网站</tag>
+        <tag>博客</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
 </search>
