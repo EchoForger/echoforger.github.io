@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="ACM,算法,HDUOJ,动态规划," />
+  <meta name="keywords" content="ACM,算法,POJ,二叉树," />
 
 
 
@@ -109,20 +109,20 @@
 
 
 
-<meta name="description" content="Source: HDUOJ 1114  Problem Description Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Boun">
+<meta name="description" content="Source: POJ 2431  Description A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and punct">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Piggy-Bank">
-<meta property="og:url" content="https://www.wildptr.cn/2020/04/26/Piggy-Bank/index.html">
+<meta property="og:title" content="Expedition">
+<meta property="og:url" content="https://www.wildptr.cn/2020/05/02/Expedition/index.html">
 <meta property="og:site_name" content="WildPtr 野指针">
-<meta property="og:description" content="Source: HDUOJ 1114  Problem Description Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Boun">
+<meta property="og:description" content="Source: POJ 2431  Description A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and punct">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-26T12:23:00.000Z">
-<meta property="article:modified_time" content="2020-04-27T07:20:00.791Z">
+<meta property="article:published_time" content="2020-05-02T01:23:00.000Z">
+<meta property="article:modified_time" content="2020-05-02T06:47:28.473Z">
 <meta property="article:author" content="EchoForger">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="HDUOJ">
-<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="POJ">
+<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
 
 
@@ -153,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="https://www.wildptr.cn/2020/04/26/Piggy-Bank/"/>
+  <link rel="canonical" href="https://www.wildptr.cn/2020/05/02/Expedition/"/>
 
 
 
 
 
-  <title>Piggy-Bank | WildPtr 野指针</title>
+  <title>Expedition | WildPtr 野指针</title>
   
 
 
@@ -330,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/26/Piggy-Bank/">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/05/02/Expedition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EchoForger">
@@ -347,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Piggy-Bank</h1>
+          <h1 class="post-title" itemprop="name headline">Expedition</h1>
         
 
         <div class="post-meta">
@@ -357,8 +357,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-26T20:23:00+08:00">
-                2020-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-02T09:23:00+08:00">
+                2020-05-02
               </time>
             
 
@@ -407,7 +407,7 @@
                 </span>
                 
                 <span title="Words count in article">
-                  643
+                  535
                 </span>
               
 
@@ -421,7 +421,7 @@
                 </span>
                 
                 <span title="Reading time">
-                  4
+                  3
                 </span>
               
             </div>
@@ -443,17 +443,21 @@
 
       
         <hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1114" target="_blank" rel="noopener">HDUOJ 1114</a></center></p>
+<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
 
-<h2><span id="problem-description">Problem Description</span></h2><p>Before ACM can do anything, a budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Bound Money (IBM). The idea behind is simple. Whenever some ACM member has any small money, he takes all the coins and throws them into a piggy-bank. You know that this process is irreversible, the coins cannot be removed without breaking the pig. After a sufficiently long time, there should be enough cash in the piggy-bank to pay everything that needs to be paid. </p>
-<p>But there is a big problem with piggy-banks. It is not possible to determine how much money is inside. So we might break the pig into pieces only to find out that there is not enough money. Clearly, we want to avoid this unpleasant situation. The only possibility is to weigh the piggy-bank and try to guess how many coins are inside. Assume that we are able to determine the weight of the pig exactly and that we know the weights of all coins of a given currency. Then there is some minimum amount of money in the piggy-bank that we can guarantee. Your task is to find out this worst case and determine the minimum amount of cash inside the piggy-bank. We need your help. No more prematurely broken pigs! </p>
-<h2><span id="input">Input</span></h2><p>The input consists of T test cases. The number of them (T) is given on the first line of the input file. Each test case begins with a line containing two integers E and F. They indicate the weight of an empty pig and of the pig filled with coins. Both weights are given in grams. No pig will weigh more than 10 kg, that means 1 &lt;= E &lt;= F &lt;= 10000. On the second line of each test case, there is an integer number N (1 &lt;= N &lt;= 500) that gives the number of various coins used in the given currency. Following this are exactly N lines, each specifying one coin type. These lines contain two integers each, Pand W (1 &lt;= P &lt;= 50000, 1 &lt;= W &lt;=10000). P is the value of the coin in monetary units, W is it’s weight in grams. </p>
-<h2><span id="output">Output</span></h2><p>Print exactly one line of output for each test case. The line must contain the sentence “The minimum amount of money in the piggy-bank is X.” where X is the minimum amount of money that can be achieved using coins with the given total weight. If the weight cannot be reached exactly, print a line “This is impossible.”. </p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">30 50</span><br><span class="line">10 110</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">50 30</span><br><span class="line">1 6</span><br><span class="line">2</span><br><span class="line">10 3</span><br><span class="line">20 4</span><br></pre></td></tr></table></figure>
+<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
+<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
+<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
+<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
+<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
+<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
+<p>* Line N+2: Two space-separated integers, L and P</p>
+<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The minimum amount of money in the piggy-bank is 60.</span><br><span class="line">The minimum amount of money in the piggy-bank is 100.</span><br><span class="line">This is impossible.</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
 
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">500</span>*<span class="number">50000</span>;</span><br><span class="line"><span class="keyword">int</span> W,N;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">500</span>],w[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">10000</span>+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> filledPig,emptyPig;<span class="built_in">cin</span>&gt;&gt;emptyPig&gt;&gt;filledPig&gt;&gt;N;</span><br><span class="line">        W=filledPig-emptyPig;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p[i]&gt;&gt;w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=W; i++) &#123;</span><br><span class="line">            DP[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=w[i]; j&lt;=W; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">min</span>(DP[j],DP[j-w[i]]+p[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (DP[W]!=INF) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The minimum amount of money in the piggy-bank is "</span>&lt;&lt;DP[W]&lt;&lt;<span class="string">"."</span>&lt;&lt;<span class="built_in">endl</span>;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"This is impossible."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -484,9 +488,9 @@
           
             <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           
-            <a href="/tags/HDUOJ/" rel="tag"># HDUOJ</a>
+            <a href="/tags/POJ/" rel="tag"># POJ</a>
           
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
           
         </div>
       
@@ -499,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/25/Bone%20Collector/" rel="next" title="Bone Collector">
-                <i class="fa fa-chevron-left"></i> Bone Collector
+              <a href="/2020/04/30/%E6%95%B0%E5%A1%94/" rel="next" title="数塔">
+                <i class="fa fa-chevron-left"></i> 数塔
               </a>
             
           </div>
@@ -509,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="prev" title="动态规划：背包问题">
-                动态规划：背包问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/02/Tree%20Recovery/" rel="prev" title="Tree Recovery">
+                Tree Recovery <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -682,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution</span></a></li></ol></div>
             
 
           </div>
