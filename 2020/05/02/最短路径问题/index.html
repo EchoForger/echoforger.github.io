@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="ACM,算法,POJ,二叉树," />
+  <meta name="keywords" content="ACM,算法,HDUOJ,图,最短路径," />
 
 
 
@@ -109,20 +109,21 @@
 
 
 
-<meta name="description" content="Source: POJ 2431  Description A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and punct">
+<meta name="description" content="Source: HDUOJ 3790  Problem Description 给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。  Input 输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Expedition">
-<meta property="og:url" content="https://www.wildptr.cn/2020/05/02/Expedition/index.html">
+<meta property="og:title" content="最短路径问题">
+<meta property="og:url" content="https://www.wildptr.cn/2020/05/02/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="WildPtr 野指针">
-<meta property="og:description" content="Source: POJ 2431  Description A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and punct">
+<meta property="og:description" content="Source: HDUOJ 3790  Problem Description 给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。  Input 输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-02T01:23:00.000Z">
-<meta property="article:modified_time" content="2020-05-02T06:47:28.473Z">
+<meta property="article:modified_time" content="2020-05-02T09:07:37.855Z">
 <meta property="article:author" content="EchoForger">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="POJ">
-<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="HDUOJ">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="最短路径">
 <meta name="twitter:card" content="summary">
 
 
@@ -153,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="https://www.wildptr.cn/2020/05/02/Expedition/"/>
+  <link rel="canonical" href="https://www.wildptr.cn/2020/05/02/最短路径问题/"/>
 
 
 
 
 
-  <title>Expedition | WildPtr 野指针</title>
+  <title>最短路径问题 | WildPtr 野指针</title>
   
 
 
@@ -330,7 +331,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/05/02/Expedition/">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/05/02/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EchoForger">
@@ -347,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Expedition</h1>
+          <h1 class="post-title" itemprop="name headline">最短路径问题</h1>
         
 
         <div class="post-meta">
@@ -407,7 +408,7 @@
                 </span>
                 
                 <span title="Words count in article">
-                  535
+                  443
                 </span>
               
 
@@ -421,7 +422,7 @@
                 </span>
                 
                 <span title="Reading time">
-                  3
+                  2
                 </span>
               
             </div>
@@ -443,21 +444,16 @@
 
       
         <hr>
-<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3790" target="_blank" rel="noopener">HDUOJ 3790</a></center></p>
 
-<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
-<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
-<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
-<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
-<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
-<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
-<p>* Line N+2: Two space-separated integers, L and P</p>
-<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
+<h2><span id="problem-description">Problem Description</span></h2><p>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。</p>
+<h2><span id="input">Input</span></h2><p>输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。<br>(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)</p>
+<h2><span id="output">Output</span></h2><p>输出 一行有两个数， 最短距离及其花费。</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 2 5 6</span><br><span class="line">2 3 4 5</span><br><span class="line">1 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9 11</span><br></pre></td></tr></table></figure>
 
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution-memory-limit-exceeded">My Solution (Memory Limit Exceeded)</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">9999999</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> disMap[(MAX_N<span class="number">-1</span>)*MAX_N/<span class="number">2</span>+MAX_N],costMap[(MAX_N<span class="number">-1</span>)*MAX_N/<span class="number">2</span>+MAX_N],shortDis[MAX_N+<span class="number">1</span>],shortCost[MAX_N+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> visited[(MAX_N<span class="number">-1</span>)*MAX_N/<span class="number">2</span>+MAX_N];</span><br><span class="line"><span class="keyword">int</span> n,m,start,target,maxPos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;</span><br><span class="line">    visited[pos]=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (disMap[pos*(pos+<span class="number">1</span>)/<span class="number">2</span>+i]!=<span class="number">0</span>&amp;&amp;visited[pos*(pos+<span class="number">1</span>)/<span class="number">2</span>+i]==<span class="literal">false</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(shortDis[i]&gt;shortDis[pos]+disMap[pos*(pos+<span class="number">1</span>)/<span class="number">2</span>+i])&#123;</span><br><span class="line">                shortDis[i]=shortDis[pos]+disMap[pos*(pos+<span class="number">1</span>)/<span class="number">2</span>+i];</span><br><span class="line">                shortCost[i]=shortCost[pos]+costMap[pos*(pos+<span class="number">1</span>)/<span class="number">2</span>+i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i==target<span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            DFS(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        maxPos=(n<span class="number">-1</span>)*n/<span class="number">2</span>+n;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>&amp;&amp;m==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;maxPos; i++) &#123;</span><br><span class="line">            visited[i]=<span class="literal">false</span>;</span><br><span class="line">            shortDis[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s,t,dis,cost;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t&gt;&gt;dis&gt;&gt;cost;</span><br><span class="line">            <span class="keyword">int</span> pos=(s<span class="number">-1</span>)*s/<span class="number">2</span>+t<span class="number">-1</span>;</span><br><span class="line">            disMap[pos]=dis;</span><br><span class="line">            costMap[pos]=cost;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;start&gt;&gt;target;</span><br><span class="line">        shortDis[start<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">        DFS(start<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;shortDis[target<span class="number">-1</span>]&lt;&lt;<span class="string">" "</span>&lt;&lt;shortCost[target<span class="number">-1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -488,9 +484,11 @@
           
             <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           
-            <a href="/tags/POJ/" rel="tag"># POJ</a>
+            <a href="/tags/HDUOJ/" rel="tag"># HDUOJ</a>
           
-            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+            <a href="/tags/%E5%9B%BE/" rel="tag"># 图</a>
+          
+            <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" rel="tag"># 最短路径</a>
           
         </div>
       
@@ -503,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/02/Tree%20Recovery/" rel="next" title="Tree Recovery">
-                <i class="fa fa-chevron-left"></i> Tree Recovery
+              <a href="/2020/04/30/%E6%95%B0%E5%A1%94/" rel="next" title="数塔">
+                <i class="fa fa-chevron-left"></i> 数塔
               </a>
             
           </div>
@@ -512,6 +510,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/02/Tree%20Recovery/" rel="prev" title="Tree Recovery">
+                Tree Recovery <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -682,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution (Memory Limit Exceeded)</span></a></li></ol></div>
             
 
           </div>
