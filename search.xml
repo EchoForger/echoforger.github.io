@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Bone Collector</title>
+    <url>/2020/04/25/Bone%20Collector/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p>
+<img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;">
+
+<h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p>
+<h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A + B Problem II</title>
     <url>/2020/04/25/A%20+%20B%20Problem%20II/</url>
     <content><![CDATA[<hr>
@@ -51,21 +79,24 @@
       </tags>
   </entry>
   <entry>
-    <title>Bone Collector</title>
-    <url>/2020/04/25/Bone%20Collector/</url>
+    <title>Expedition</title>
+    <url>/2020/05/02/Expedition/</url>
     <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p>
+<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
 
-<h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p>
-<img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;">
+<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
+<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
+<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
+<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
+<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
+<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
+<p>* Line N+2: Two space-separated integers, L and P</p>
+<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
 
-<h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p>
-<h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -74,8 +105,8 @@
       <tags>
         <tag>ACM</tag>
         <tag>算法</tag>
-        <tag>HDUOJ</tag>
-        <tag>动态规划</tag>
+        <tag>POJ</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -106,6 +137,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Tree Recovery</title>
+    <url>/2020/05/02/Tree%20Recovery/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://poj.org/problem?id=2255" target="_blank" rel="noopener">POJ 2255</a></center></p>
+
+<h2><span id="description">Description</span></h2><p>Little Valentine liked playing with binary trees very much. Her favorite game was constructing randomly looking binary trees with capital letters in the nodes.<br>This is an example of one of her creations: </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">      D</span><br><span class="line"></span><br><span class="line">     &#x2F; \</span><br><span class="line"></span><br><span class="line">    &#x2F;   \</span><br><span class="line"></span><br><span class="line">   B     E</span><br><span class="line"></span><br><span class="line">  &#x2F; \     \</span><br><span class="line"></span><br><span class="line"> &#x2F;   \     \</span><br><span class="line"></span><br><span class="line">A     C     G</span><br><span class="line"></span><br><span class="line">           &#x2F;</span><br><span class="line"></span><br><span class="line">          &#x2F;</span><br><span class="line"></span><br><span class="line">         F</span><br></pre></td></tr></table></figure>
+
+
+<p>To record her trees for future generations, she wrote down two strings for each tree: a preorder traversal (root, left subtree, right subtree) and an inorder traversal (left subtree, root, right subtree). For the tree drawn above the preorder traversal is DBACEGF and the inorder traversal is ABCDEFG.<br>She thought that such a pair of strings would give enough information to reconstruct the tree later (but she never tried it). </p>
+<p>Now, years later, looking again at the strings, she realized that reconstructing the trees was indeed possible, but only because she never had used the same letter twice in the same tree.<br>However, doing the reconstruction by hand, soon turned out to be tedious.<br>So now she asks you to write a program that does the job for her! </p>
+<h2><span id="input">Input</span></h2><p>The input will contain one or more test cases.<br>Each test case consists of one line containing two strings preord and inord, representing the preorder traversal and inorder traversal of a binary tree. Both strings consist of unique capital letters. (Thus they are not longer than 26 characters.)<br>Input is terminated by end of file. </p>
+<h2><span id="output">Output</span></h2><p>For each test case, recover Valentine’s binary tree and print one line containing the tree’s postorder traversal (left subtree, right subtree, root). </p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DBACEGF ABCDEFG</span><br><span class="line">BCAD CBAD</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ACBFGED</span><br><span class="line">CDAB</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution-compile-error">My Solution (Compile Error)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> preOrder,inOrder;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Bigger</span><span class="params">(<span class="keyword">char</span> a,<span class="keyword">char</span> b)</span></span>&#123; <span class="comment">//a&gt;b?</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;inOrder.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (inOrder[i]==a) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (inOrder[i]==b) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    T m_value;</span><br><span class="line">    Node *m_left;</span><br><span class="line">    Node *m_right;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Node()&#123;</span><br><span class="line">        m_left=<span class="literal">NULL</span>;</span><br><span class="line">        m_right=<span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">T &amp;<span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_value;&#125;</span><br><span class="line">    <span class="function">Node *&amp;<span class="title">left</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_left;&#125;</span><br><span class="line">    <span class="function">Node *&amp;<span class="title">right</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_right;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span> &#123;</span></span><br><span class="line">    Node&lt;T&gt; m_root;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node&lt;T&gt; *nd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nd!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">            postOrder(nd-&gt;left());</span><br><span class="line">            postOrder(nd-&gt;right());</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;nd-&gt;value();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Node&lt;T&gt; *<span class="title">root</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> &amp;m_root;&#125;</span><br><span class="line">    <span class="function">Node&lt;T&gt; *<span class="title">search</span><span class="params">(T value)</span></span>&#123;</span><br><span class="line">        Node&lt;T&gt; * nd=root();</span><br><span class="line">        <span class="keyword">while</span> (nd!=<span class="literal">NULL</span>&amp;&amp;nd-&gt;value()!=value) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Bigger(nd-&gt;value(), value)) &#123;</span><br><span class="line">                nd=nd-&gt;left();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                nd=nd-&gt;right();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nd;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Add</span><span class="params">(T value)</span></span>&#123;</span><br><span class="line">        Node&lt;T&gt; *father=root();</span><br><span class="line">        <span class="keyword">while</span> (father!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Bigger(value,father-&gt;value())) &#123;</span><br><span class="line">                <span class="keyword">if</span> (father-&gt;right()==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                    father-&gt;right()=<span class="keyword">new</span> Node&lt;<span class="keyword">char</span>&gt;;</span><br><span class="line">                    father-&gt;right()-&gt;value()=value;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                father=father-&gt;right();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (father-&gt;left()==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                    father-&gt;left()=<span class="keyword">new</span> Node&lt;<span class="keyword">char</span>&gt;;</span><br><span class="line">                    father-&gt;left()-&gt;value()=value;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                father=father-&gt;left();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;preOrder&gt;&gt;inOrder) &#123;</span><br><span class="line">        BinaryTree&lt;<span class="keyword">char</span>&gt; BT;</span><br><span class="line">        BT.root()-&gt;value()=preOrder[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;preOrder.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> now=preOrder[i];</span><br><span class="line">            BT.Add(now);</span><br><span class="line">        &#125;</span><br><span class="line">        BT.postOrder(BT.root());</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>POJ</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Robberies</title>
     <url>/2020/04/27/Robberies/</url>
     <content><![CDATA[<hr>
@@ -133,94 +195,6 @@
         <tag>算法</tag>
         <tag>HDUOJ</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一篇文章搞定 macOS 截图</title>
-    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
-<h2><span id="普通系统截图">普通系统截图</span></h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
-<h3><span id="command-shift-3-截取整个屏幕"><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></span></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;">
-
-
-<h3><span id="command-shift-4-截取部分屏幕"><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></span></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
-<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
-<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
-<p>也可以在终端执行一条命令永久去除软阴影：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
-
-<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
-<h3><span id="command-shift-5-打开截图工具栏"><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></span></h3><h3><span id="command-shift-6-截取触控栏"><strong><code>Command + Shift + 6</code> 截取触控栏</strong></span></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
-<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
-<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;">
-
-
-<h3><span id="系统自带的截屏app">系统自带的“截屏”app</span></h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
-<h3><span id="截图缩略图">截图缩略图</span></h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
-<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;">
-
-
-<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
-<h2><span id="长截图">长截图</span></h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;"></p>
-<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
-<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
-<h2><span id="截取动图">截取动图</span></h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
-<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;">
-
-
-<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
-<h2><span id="小结">小结</span></h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-        <tag>截图</tag>
-        <tag>技巧</tag>
-        <tag>苹果</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Expedition</title>
-    <url>/2020/05/02/Expedition/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
-
-<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
-<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
-<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
-<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
-<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
-<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
-<p>* Line N+2: Two space-separated integers, L and P</p>
-<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>POJ</tag>
-        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -272,37 +246,6 @@
         <tag>macOS</tag>
         <tag>苹果</tag>
         <tag>音乐</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tree Recovery</title>
-    <url>/2020/05/02/Tree%20Recovery/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://poj.org/problem?id=2255" target="_blank" rel="noopener">POJ 2255</a></center></p>
-
-<h2><span id="description">Description</span></h2><p>Little Valentine liked playing with binary trees very much. Her favorite game was constructing randomly looking binary trees with capital letters in the nodes.<br>This is an example of one of her creations: </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">      D</span><br><span class="line"></span><br><span class="line">     &#x2F; \</span><br><span class="line"></span><br><span class="line">    &#x2F;   \</span><br><span class="line"></span><br><span class="line">   B     E</span><br><span class="line"></span><br><span class="line">  &#x2F; \     \</span><br><span class="line"></span><br><span class="line"> &#x2F;   \     \</span><br><span class="line"></span><br><span class="line">A     C     G</span><br><span class="line"></span><br><span class="line">           &#x2F;</span><br><span class="line"></span><br><span class="line">          &#x2F;</span><br><span class="line"></span><br><span class="line">         F</span><br></pre></td></tr></table></figure>
-
-
-<p>To record her trees for future generations, she wrote down two strings for each tree: a preorder traversal (root, left subtree, right subtree) and an inorder traversal (left subtree, root, right subtree). For the tree drawn above the preorder traversal is DBACEGF and the inorder traversal is ABCDEFG.<br>She thought that such a pair of strings would give enough information to reconstruct the tree later (but she never tried it). </p>
-<p>Now, years later, looking again at the strings, she realized that reconstructing the trees was indeed possible, but only because she never had used the same letter twice in the same tree.<br>However, doing the reconstruction by hand, soon turned out to be tedious.<br>So now she asks you to write a program that does the job for her! </p>
-<h2><span id="input">Input</span></h2><p>The input will contain one or more test cases.<br>Each test case consists of one line containing two strings preord and inord, representing the preorder traversal and inorder traversal of a binary tree. Both strings consist of unique capital letters. (Thus they are not longer than 26 characters.)<br>Input is terminated by end of file. </p>
-<h2><span id="output">Output</span></h2><p>For each test case, recover Valentine’s binary tree and print one line containing the tree’s postorder traversal (left subtree, right subtree, root). </p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DBACEGF ABCDEFG</span><br><span class="line">BCAD CBAD</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ACBFGED</span><br><span class="line">CDAB</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution-compile-error">My Solution (Compile Error)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> preOrder,inOrder;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Bigger</span><span class="params">(<span class="keyword">char</span> a,<span class="keyword">char</span> b)</span></span>&#123; <span class="comment">//a&gt;b?</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;inOrder.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (inOrder[i]==a) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (inOrder[i]==b) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    T m_value;</span><br><span class="line">    Node *m_left;</span><br><span class="line">    Node *m_right;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Node()&#123;</span><br><span class="line">        m_left=<span class="literal">NULL</span>;</span><br><span class="line">        m_right=<span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">T &amp;<span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_value;&#125;</span><br><span class="line">    <span class="function">Node *&amp;<span class="title">left</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_left;&#125;</span><br><span class="line">    <span class="function">Node *&amp;<span class="title">right</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> m_right;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span> &#123;</span></span><br><span class="line">    Node&lt;T&gt; m_root;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node&lt;T&gt; *nd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nd!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">            postOrder(nd-&gt;left());</span><br><span class="line">            postOrder(nd-&gt;right());</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;nd-&gt;value();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Node&lt;T&gt; *<span class="title">root</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> &amp;m_root;&#125;</span><br><span class="line">    <span class="function">Node&lt;T&gt; *<span class="title">search</span><span class="params">(T value)</span></span>&#123;</span><br><span class="line">        Node&lt;T&gt; * nd=root();</span><br><span class="line">        <span class="keyword">while</span> (nd!=<span class="literal">NULL</span>&amp;&amp;nd-&gt;value()!=value) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Bigger(nd-&gt;value(), value)) &#123;</span><br><span class="line">                nd=nd-&gt;left();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                nd=nd-&gt;right();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nd;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Add</span><span class="params">(T value)</span></span>&#123;</span><br><span class="line">        Node&lt;T&gt; *father=root();</span><br><span class="line">        <span class="keyword">while</span> (father!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Bigger(value,father-&gt;value())) &#123;</span><br><span class="line">                <span class="keyword">if</span> (father-&gt;right()==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                    father-&gt;right()=<span class="keyword">new</span> Node&lt;<span class="keyword">char</span>&gt;;</span><br><span class="line">                    father-&gt;right()-&gt;value()=value;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                father=father-&gt;right();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (father-&gt;left()==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                    father-&gt;left()=<span class="keyword">new</span> Node&lt;<span class="keyword">char</span>&gt;;</span><br><span class="line">                    father-&gt;left()-&gt;value()=value;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                father=father-&gt;left();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;preOrder&gt;&gt;inOrder) &#123;</span><br><span class="line">        BinaryTree&lt;<span class="keyword">char</span>&gt; BT;</span><br><span class="line">        BT.root()-&gt;value()=preOrder[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;preOrder.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> now=preOrder[i];</span><br><span class="line">            BT.Add(now);</span><br><span class="line">        &#125;</span><br><span class="line">        BT.postOrder(BT.root());</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>POJ</tag>
-        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -405,6 +348,63 @@
         <tag>Hexo</tag>
         <tag>GitHub</tag>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一篇文章搞定 macOS 截图</title>
+    <url>/2020/04/23/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E5%AE%9A%20macOS%20%E6%88%AA%E5%9B%BE/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>截图是我们在日常办公中十分常用的操作之一，很多人在刚刚接触 macOS 的时候，对新系统的截图功能非常陌生，今天就让我们用一篇文章，解决在 macOS 上的截图需求。</p>
+<h2><span id="普通系统截图">普通系统截图</span></h2><p>系统截图是最方便也最常用的截图方法，不需要安装任何插件，操作也非常简单，可以使用以下快捷键进行截图。</p>
+<h3><span id="command-shift-3-截取整个屏幕"><strong><code>Command + Shift + 3</code> 截取整个屏幕</strong></span></h3><p>使用此快捷键会截取屏幕的所有内容，生成一张与屏幕像素尺寸相同的图片。屏幕像素尺寸可以在“关于本机”&gt;“显示器”中看到。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05NDFmNzc0OWI5NTM3MGZkLnBuZw?x-oss-process=image/format,png" alt="查看屏幕像素尺寸" style="zoom:50%;">
+
+
+<h3><span id="command-shift-4-截取部分屏幕"><strong><code>Command + Shift + 4</code> 截取部分屏幕</strong></span></h3><p>选取需要截图的区域后，按住鼠标的同时按下 <code>空格</code>，这时你能通过移动鼠标来移动整个已选择区域；按住鼠标的同时按下 <code>Shift</code> 键，这时你能通过横向或竖向移动鼠标来改变已选择区域的长或高；按住鼠标的同时按下 <code>Option</code> 键，这时你通过移动鼠标可以对称地改变截图区域。</p>
+<p>按下<code>Command + Shift + 4 + 空格</code> 再点击某个窗口可以截取选中的窗口，点击桌面可以截取桌面壁纸。</p>
+<p>截取窗口时，macOS 默认会给截图加上一层<strong>软阴影</strong>，个人认为这层软阴影还是挺好看的，如果你想去除，只需要在截图的时候按住 <code>Option</code> 即可。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YmE5ZTFiMzBkN2EyODZjLnBuZw?x-oss-process=image/format,png" alt="有阴影截图（左）和无阴影截图（右）"></p>
+<p>也可以在终端执行一条命令永久去除软阴影：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool true&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果要把软阴影找回来，同样也只需要一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">defaults write com.apple.screencapture disable-shadow -bool false&amp;&amp;killall SystemUIServer</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是带触控栏的 MacBook Pro，则在按下 <code>Command + Shift + 4</code> 后可以在触控栏选择“截取整个屏幕”、“截取所选窗口”或“截取部分屏幕”，也可以对截图的储存位置进行修改。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kMTc3ZDJlN2M3ZmFlZDQwLnBuZw?x-oss-process=image/format,png" alt="使用触控栏进行截图操作"></p>
+<h3><span id="command-shift-5-打开截图工具栏"><strong><code>Command + Shift + 5</code> 打开截图工具栏</strong></span></h3><h3><span id="command-shift-6-截取触控栏"><strong><code>Command + Shift + 6</code> 截取触控栏</strong></span></h3><p>如果你在上述任意一套组合键中加上 <code>Control</code>，则截图会自动进入系统的剪切板记录，桌面不会再保存截图，此时你可以直接使用 <code>Command + V</code> 进行粘贴。</p>
+<p>当你按下截图组合键后想停止截图操作，只要按 <code>Esc</code> 就能停止截图，此时不会保存任何图片文件。</p>
+<p>当然，以上的快捷键都可以根据个人喜好进行修改。若要修改截图快捷键只需要进入“系统偏好设置”&gt;”键盘”&gt;“快捷键”&gt;“截图”进行修改即可。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZTcwOTBmYTE0ZjJiNjdiLnBuZw?x-oss-process=image/format,png" alt="修改快捷键" style="zoom:50%;">
+
+
+<h3><span id="系统自带的截屏app">系统自带的“截屏”app</span></h3><p>在 macOS 中有自在的截图 app“截屏”，它就藏在程序列表的“其他”文件夹中，打开“截屏”app 就相当于启动截图工具栏，与 <code>Command + Shift + 5</code> 效果相同。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04YWY2NmI4NDIxNzgxYWZlLnBuZw?x-oss-process=image/format,png" alt="截屏"></p>
+<h3><span id="截图缩略图">截图缩略图</span></h3><p>在使用系统截图截图完成后，便会在屏幕的右下角生成一个截图缩略图，我们可以点击它，对截图进行快速编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1kZWEwZTgzZWVhMTA0MzJlLnBuZw?x-oss-process=image/format,png" alt="对截图进行快速编辑"></p>
+<p>如果不想处理，可以将其向右轻扫。我们还可以拖动缩略图储存到不同的位置。不仅如此，还可以按住 <code>Control</code> 并点击或者右击缩略图，弹出菜单选项，选择不同的处理方式。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1hZmNlNzQ2OWFhMjkxOGZhLnBuZw?x-oss-process=image/format,png" alt="菜单选项" style="zoom:67%;">
+
+
+<p>可以说，macOS 自带的截图功能已经非常强大，足以满足我们日常生活中的绝大多数需求，但接下来要说的截图工具，会让你的 Mac 截图更强大。</p>
+<h2><span id="长截图">长截图</span></h2><p>说到 macOS 的长截图，在这里就不得不提 iShot 了。iShot 是一款非常优秀的截图软件，我们可以在 <a href="https://apps.apple.com/cn/app/ishot-%E6%88%AA%E5%9B%BE-%E9%95%BF%E6%88%AA%E5%9B%BE-%E8%B4%B4%E5%9B%BE-%E5%BD%95%E5%B1%8F%E5%B7%A5%E5%85%B7/id1485844094?mt=12" target="_blank" rel="noopener">Mac App Store 上免费下载</a>。安装完成后，屏幕右上角会出现一个小按钮，我们只需要点击它就可以使用各种截图功能。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0yZWExZjU2NzI4NTQxZDYyLnBuZw?x-oss-process=image/format,png" alt="屏幕右上角会出现一个小按钮" style="zoom:50%;"></p>
+<p>想要使用 iShot 的长截图功能，只需要点击截图（快捷键 <code>Option + A</code>），然后框选出要截图的窗口，点击下方的“长截图”按钮（或者直接使用快捷键 <code>S</code>）即可开始长截图。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWQ0ODAyMDc1ZmM1M2RlLmdpZg" alt="使用 iShot 进行长截图.gif"></p>
+<p>进行长截图时，缓慢的滑动页面，完成后点击下方的确认，一张精美的长截图便制作完成了。</p>
+<h2><span id="截取动图">截取动图</span></h2><p>除了静态的截图，iShot 也是一款优秀的动图截取软件，可以轻松利用 iShot 制作精美动图，为你的文章增添色彩。</p>
+<p>截取 gif 动图，只需要点击右上角的 iShot 小图标，点击“开始录屏”（快捷键 <code>Option + W</code>）并框选住要录制的区域。在下方的工具栏中可以选择画质，记得在选项中选择格式为“gif”，这样才会录制动图而不是视频哦。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iMDdlZDAyZjJhMzgwYTJiLnBuZw?x-oss-process=image/format,png" alt="选择格式为 gif" style="zoom:50%;">
+
+
+<p>当然这里 gif 不要选择过高的清晰度，因为这样会导致 gif 文件的体积非常大，以至于不适合在网络上传输。</p>
+<h2><span id="小结">小结</span></h2><p>关于 macOS 的截图方法就介绍到这里，不得不说 macOS 的截图功能相对于隔壁的 Windows 真的是强大了不少，掌握了这些截图的方法，便可以很大程度上地提升工作和学习的效率 ，省去很多不必要的麻烦了。</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+        <tag>苹果</tag>
+        <tag>截图</tag>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -566,6 +566,36 @@
       </tags>
   </entry>
   <entry>
+    <title>数塔</title>
+    <url>/2020/04/30/%E6%95%B0%E5%A1%94/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2084" target="_blank" rel="noopener">HDUOJ 2084</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>在讲述DP算法的时候，一个经典的例子就是数塔问题，它是这样描述的：</p>
+<p>有如下所示的数塔，要求从顶层走到底层，若每一步只能走到相邻的结点，则经过的结点的数字之和最大是多少？</p>
+<img src="http://acm.hdu.edu.cn/data/images/2084-1.jpg" style="zoom:75%;">
+
+<p>已经告诉你了，这是个DP的题目，你能AC吗?</p>
+<h2><span id="input">Input</span></h2><p>输入数据首先包括一个整数C,表示测试实例的个数，每个测试实例的第一行是一个整数N(1 &lt;= N &lt;= 100)，表示数塔的高度，接下来用N行数字表示数塔，其中第i行有个i个整数，且所有的整数均在区间[0,99]内。</p>
+<h2><span id="output">Output</span></h2><p>对于每个测试实例，输出可能得到的最大和，每个实例的输出占一行。</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">3 8</span><br><span class="line">8 1 0 </span><br><span class="line">2 7 4 4</span><br><span class="line">4 5 2 6 5</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">30</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">100</span>+<span class="number">1</span>][<span class="number">100</span>+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> tower[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">floor</span>;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;<span class="built_in">floor</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i; j++) &#123;</span><br><span class="line">                <span class="built_in">cin</span>&gt;&gt;tower[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(DP,<span class="number">0</span>,<span class="keyword">sizeof</span>(DP));</span><br><span class="line">        DP[<span class="number">0</span>][<span class="number">0</span>]=tower[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        DP[<span class="number">1</span>][<span class="number">1</span>]=tower[<span class="number">1</span>][<span class="number">1</span>]+DP[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">0</span>)&#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(j==i)&#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+<span class="built_in">max</span>(DP[i][j],DP[i][j<span class="number">-1</span>]);</span><br><span class="line">                    DP[i+<span class="number">1</span>][j+<span class="number">1</span>]=tower[i+<span class="number">1</span>][j+<span class="number">1</span>]+DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+<span class="built_in">max</span>(DP[i][j],DP[i][j<span class="number">-1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            res=<span class="built_in">max</span>(res,DP[<span class="built_in">floor</span><span class="number">-1</span>][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态规划：背包问题</title>
     <url>/2020/04/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<hr>
@@ -660,36 +690,6 @@
       <tags>
         <tag>ACM</tag>
         <tag>算法</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数塔</title>
-    <url>/2020/04/30/%E6%95%B0%E5%A1%94/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2084" target="_blank" rel="noopener">HDUOJ 2084</a></center></p>
-
-<h2><span id="problem-description">Problem Description</span></h2><p>在讲述DP算法的时候，一个经典的例子就是数塔问题，它是这样描述的：</p>
-<p>有如下所示的数塔，要求从顶层走到底层，若每一步只能走到相邻的结点，则经过的结点的数字之和最大是多少？</p>
-<img src="http://acm.hdu.edu.cn/data/images/2084-1.jpg" style="zoom:75%;">
-
-<p>已经告诉你了，这是个DP的题目，你能AC吗?</p>
-<h2><span id="input">Input</span></h2><p>输入数据首先包括一个整数C,表示测试实例的个数，每个测试实例的第一行是一个整数N(1 &lt;= N &lt;= 100)，表示数塔的高度，接下来用N行数字表示数塔，其中第i行有个i个整数，且所有的整数均在区间[0,99]内。</p>
-<h2><span id="output">Output</span></h2><p>对于每个测试实例，输出可能得到的最大和，每个实例的输出占一行。</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">3 8</span><br><span class="line">8 1 0 </span><br><span class="line">2 7 4 4</span><br><span class="line">4 5 2 6 5</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">30</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">100</span>+<span class="number">1</span>][<span class="number">100</span>+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> tower[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">floor</span>;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;<span class="built_in">floor</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i; j++) &#123;</span><br><span class="line">                <span class="built_in">cin</span>&gt;&gt;tower[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(DP,<span class="number">0</span>,<span class="keyword">sizeof</span>(DP));</span><br><span class="line">        DP[<span class="number">0</span>][<span class="number">0</span>]=tower[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        DP[<span class="number">1</span>][<span class="number">1</span>]=tower[<span class="number">1</span>][<span class="number">1</span>]+DP[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">0</span>)&#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(j==i)&#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+<span class="built_in">max</span>(DP[i][j],DP[i][j<span class="number">-1</span>]);</span><br><span class="line">                    DP[i+<span class="number">1</span>][j+<span class="number">1</span>]=tower[i+<span class="number">1</span>][j+<span class="number">1</span>]+DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=tower[i+<span class="number">1</span>][j]+<span class="built_in">max</span>(DP[i][j],DP[i][j<span class="number">-1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">floor</span>; i++) &#123;</span><br><span class="line">            res=<span class="built_in">max</span>(res,DP[<span class="built_in">floor</span><span class="number">-1</span>][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>HDUOJ</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
