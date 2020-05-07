@@ -17,9 +17,9 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Connect the Cities</title>
-    <link href="https://www.wildptr.cn/2020/05/07/Connect%20the%20Cities/"/>
-    <id>https://www.wildptr.cn/2020/05/07/Connect%20the%20Cities/</id>
+    <title>(Unresolved) Connect the Cities</title>
+    <link href="https://www.wildptr.cn/2020/05/07/(Unresolved)%20Connect%20the%20Cities/"/>
+    <id>https://www.wildptr.cn/2020/05/07/(Unresolved)%20Connect%20the%20Cities/</id>
     <published>2020-05-07T01:23:00.000Z</published>
     <updated>2020-05-07T11:30:38.914Z</updated>
     
@@ -47,6 +47,57 @@ In 2100, since the sea level rise, most of the cities disappear. Though some sur
       <category term="图" scheme="https://www.wildptr.cn/tags/%E5%9B%BE/"/>
     
       <category term="最小生成树" scheme="https://www.wildptr.cn/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>(Unresolved) 最短路径问题</title>
+    <link href="https://www.wildptr.cn/2020/05/02/(Unresolved)%20%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://www.wildptr.cn/2020/05/02/(Unresolved)%20%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-05-02T01:23:00.000Z</published>
+    <updated>2020-05-03T09:15:32.612Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3790" target="_blank" rel="noopener">HDUOJ 3790</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。</p><h2><span id="input">Input</span></h2><p>输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。<br>(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)</p><h2><span id="output">Output</span></h2><p>输出 一行有两个数， 最短距离及其花费。</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 2 5 6</span><br><span class="line">2 3 4 5</span><br><span class="line">1 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9 11</span><br></pre></td></tr></table></figure><h2><span id="my-solution-memory-limit-exceeded">My Solution (Memory Limit Exceeded)</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">99999999</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> dis;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    edge(<span class="keyword">int</span> t,<span class="keyword">int</span> d,<span class="keyword">int</span> c):to(t),dis(d),cost(c)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_N];</span><br><span class="line"><span class="keyword">int</span> dis[MAX_N],cost[MAX_N];</span><br><span class="line"><span class="keyword">int</span> n,m,start,target;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>&amp;&amp;m==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s,t,d,c;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t&gt;&gt;d&gt;&gt;c;</span><br><span class="line">            G[s<span class="number">-1</span>].push_back(edge(t<span class="number">-1</span>,d,c));</span><br><span class="line">            G[t<span class="number">-1</span>].push_back(edge(s<span class="number">-1</span>,d,c));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            dis[i]=cost[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;start&gt;&gt;target;</span><br><span class="line">        start--;target--;</span><br><span class="line">        dis[start]=cost[start]=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;q;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">while</span> (q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p=q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;G[p].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[G[p][i].to]&gt;dis[p]+G[p][i].dis||(dis[G[p][i].to]==dis[p]+G[p][i].dis&amp;&amp;cost[G[p][i].to]&gt;cost[p]+G[p][i].cost)) &#123;</span><br><span class="line">                    dis[G[p][i].to]=dis[p]+G[p][i].dis;</span><br><span class="line">                    cost[G[p][i].to]=cost[p]+G[p][i].cost;</span><br><span class="line">                    q.push(G[p][i].to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//for(int i=0;i&lt;n;i++)cout&lt;&lt;dis[i]&lt;&lt;" "&lt;&lt;cost[i]&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dis[target]&lt;&lt;<span class="string">" "</span>&lt;&lt;cost[target]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Source: HDUOJ 3790
+
+Problem Description
+给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。
+
+Input
+输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。
+(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)
+
+Output
+输出 一行有两个数， 最短距离及其花费。
+
+Sample Input
+1
+2
+3
+4
+5
+
+
+
+    
+    </summary>
+    
+    
+      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
+    
+      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
+    
+      <category term="图" scheme="https://www.wildptr.cn/tags/%E5%9B%BE/"/>
+    
+      <category term="最短路径" scheme="https://www.wildptr.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
     
   </entry>
   
@@ -138,57 +189,6 @@ This is an example of one of her creations:
       <category term="POJ" scheme="https://www.wildptr.cn/tags/POJ/"/>
     
       <category term="二叉树" scheme="https://www.wildptr.cn/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最短路径问题</title>
-    <link href="https://www.wildptr.cn/2020/05/02/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://www.wildptr.cn/2020/05/02/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</id>
-    <published>2020-05-02T01:23:00.000Z</published>
-    <updated>2020-05-03T09:15:32.612Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3790" target="_blank" rel="noopener">HDUOJ 3790</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。</p><h2><span id="input">Input</span></h2><p>输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。<br>(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)</p><h2><span id="output">Output</span></h2><p>输出 一行有两个数， 最短距离及其花费。</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 2 5 6</span><br><span class="line">2 3 4 5</span><br><span class="line">1 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9 11</span><br></pre></td></tr></table></figure><h2><span id="my-solution-memory-limit-exceeded">My Solution (Memory Limit Exceeded)</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">99999999</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> dis;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    edge(<span class="keyword">int</span> t,<span class="keyword">int</span> d,<span class="keyword">int</span> c):to(t),dis(d),cost(c)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_N];</span><br><span class="line"><span class="keyword">int</span> dis[MAX_N],cost[MAX_N];</span><br><span class="line"><span class="keyword">int</span> n,m,start,target;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>&amp;&amp;m==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s,t,d,c;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t&gt;&gt;d&gt;&gt;c;</span><br><span class="line">            G[s<span class="number">-1</span>].push_back(edge(t<span class="number">-1</span>,d,c));</span><br><span class="line">            G[t<span class="number">-1</span>].push_back(edge(s<span class="number">-1</span>,d,c));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            dis[i]=cost[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;start&gt;&gt;target;</span><br><span class="line">        start--;target--;</span><br><span class="line">        dis[start]=cost[start]=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;q;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">while</span> (q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p=q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;G[p].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[G[p][i].to]&gt;dis[p]+G[p][i].dis||(dis[G[p][i].to]==dis[p]+G[p][i].dis&amp;&amp;cost[G[p][i].to]&gt;cost[p]+G[p][i].cost)) &#123;</span><br><span class="line">                    dis[G[p][i].to]=dis[p]+G[p][i].dis;</span><br><span class="line">                    cost[G[p][i].to]=cost[p]+G[p][i].cost;</span><br><span class="line">                    q.push(G[p][i].to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//for(int i=0;i&lt;n;i++)cout&lt;&lt;dis[i]&lt;&lt;" "&lt;&lt;cost[i]&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dis[target]&lt;&lt;<span class="string">" "</span>&lt;&lt;cost[target]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      Source: HDUOJ 3790
-
-Problem Description
-给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。
-
-Input
-输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。
-(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)
-
-Output
-输出 一行有两个数， 最短距离及其花费。
-
-Sample Input
-1
-2
-3
-4
-5
-
-
-
-    
-    </summary>
-    
-    
-      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
-    
-      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
-    
-      <category term="图" scheme="https://www.wildptr.cn/tags/%E5%9B%BE/"/>
-    
-      <category term="最短路径" scheme="https://www.wildptr.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
     
   </entry>
   
