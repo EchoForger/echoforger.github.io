@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>线段树</title>
+    <url>/2020/04/25/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>(Unresolved) Connect the Cities</title>
     <url>/2020/05/07/(Unresolved)%20Connect%20the%20Cities/</url>
     <content><![CDATA[<hr>
@@ -57,6 +62,33 @@
       </tags>
   </entry>
   <entry>
+    <title>(Unresolved) 最短路径问题</title>
+    <url>/2020/05/02/(Unresolved)%20%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3790" target="_blank" rel="noopener">HDUOJ 3790</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。</p>
+<h2><span id="input">Input</span></h2><p>输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。<br>(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)</p>
+<h2><span id="output">Output</span></h2><p>输出 一行有两个数， 最短距离及其花费。</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 2 5 6</span><br><span class="line">2 3 4 5</span><br><span class="line">1 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9 11</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution-unresolved">My Solution (Unresolved)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">99999999</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> dis;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    edge(<span class="keyword">int</span> t,<span class="keyword">int</span> d,<span class="keyword">int</span> c):to(t),dis(d),cost(c)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_N];</span><br><span class="line"><span class="keyword">int</span> dis[MAX_N],cost[MAX_N];</span><br><span class="line"><span class="keyword">int</span> n,m,start,target;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>&amp;&amp;m==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s,t,d,c;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t&gt;&gt;d&gt;&gt;c;</span><br><span class="line">            G[s<span class="number">-1</span>].push_back(edge(t<span class="number">-1</span>,d,c));</span><br><span class="line">            G[t<span class="number">-1</span>].push_back(edge(s<span class="number">-1</span>,d,c));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            dis[i]=cost[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;start&gt;&gt;target;</span><br><span class="line">        start--;target--;</span><br><span class="line">        dis[start]=cost[start]=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;q;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">while</span> (q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p=q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;G[p].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[G[p][i].to]&gt;dis[p]+G[p][i].dis||(dis[G[p][i].to]==dis[p]+G[p][i].dis&amp;&amp;cost[G[p][i].to]&gt;cost[p]+G[p][i].cost)) &#123;</span><br><span class="line">                    dis[G[p][i].to]=dis[p]+G[p][i].dis;</span><br><span class="line">                    cost[G[p][i].to]=cost[p]+G[p][i].cost;</span><br><span class="line">                    q.push(G[p][i].to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//for(int i=0;i&lt;n;i++)cout&lt;&lt;dis[i]&lt;&lt;" "&lt;&lt;cost[i]&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dis[target]&lt;&lt;<span class="string">" "</span>&lt;&lt;cost[target]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>图</tag>
+        <tag>最短路径</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(Unresolved) I Hate It</title>
     <url>/2020/05/09/(Unresolved)%20I%20Hate%20It/</url>
     <content><![CDATA[<hr>
@@ -83,33 +115,6 @@
         <tag>HDUOJ</tag>
         <tag>图</tag>
         <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(Unresolved) 最短路径问题</title>
-    <url>/2020/05/02/(Unresolved)%20%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3790" target="_blank" rel="noopener">HDUOJ 3790</a></center></p>
-
-<h2><span id="problem-description">Problem Description</span></h2><p>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。</p>
-<h2><span id="input">Input</span></h2><p>输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点。n和m为0时输入结束。<br>(1&lt;n&lt;=1000, 0&lt;m&lt;100000, s != t)</p>
-<h2><span id="output">Output</span></h2><p>输出 一行有两个数， 最短距离及其花费。</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 2 5 6</span><br><span class="line">2 3 4 5</span><br><span class="line">1 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9 11</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution-unresolved">My Solution (Unresolved)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">99999999</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> dis;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    edge(<span class="keyword">int</span> t,<span class="keyword">int</span> d,<span class="keyword">int</span> c):to(t),dis(d),cost(c)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_N];</span><br><span class="line"><span class="keyword">int</span> dis[MAX_N],cost[MAX_N];</span><br><span class="line"><span class="keyword">int</span> n,m,start,target;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>&amp;&amp;m==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> s,t,d,c;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t&gt;&gt;d&gt;&gt;c;</span><br><span class="line">            G[s<span class="number">-1</span>].push_back(edge(t<span class="number">-1</span>,d,c));</span><br><span class="line">            G[t<span class="number">-1</span>].push_back(edge(s<span class="number">-1</span>,d,c));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            dis[i]=cost[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;start&gt;&gt;target;</span><br><span class="line">        start--;target--;</span><br><span class="line">        dis[start]=cost[start]=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;q;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">while</span> (q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p=q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;G[p].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[G[p][i].to]&gt;dis[p]+G[p][i].dis||(dis[G[p][i].to]==dis[p]+G[p][i].dis&amp;&amp;cost[G[p][i].to]&gt;cost[p]+G[p][i].cost)) &#123;</span><br><span class="line">                    dis[G[p][i].to]=dis[p]+G[p][i].dis;</span><br><span class="line">                    cost[G[p][i].to]=cost[p]+G[p][i].cost;</span><br><span class="line">                    q.push(G[p][i].to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//for(int i=0;i&lt;n;i++)cout&lt;&lt;dis[i]&lt;&lt;" "&lt;&lt;cost[i]&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dis[target]&lt;&lt;<span class="string">" "</span>&lt;&lt;cost[target]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>HDUOJ</tag>
-        <tag>图</tag>
-        <tag>最短路径</tag>
       </tags>
   </entry>
   <entry>
@@ -166,6 +171,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Fence Repair</title>
+    <url>/2020/05/12/Fence%20Repair/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://poj.org/problem?id=3253" target="_blank" rel="noopener">POJ 3253</a></center></p>
+
+<h2><span id="description">Description</span></h2><p>Farmer John wants to repair a small length of the fence around the pasture. He measures the fence and finds that he needs <em>N</em>(1 ≤ <em>N</em> ≤ 20,000) planks of wood, each having some integer length <em>Li</em> (1 ≤ <em>Li</em> ≤ 50,000) units. He then purchases a single long board just long enough to saw into the <em>N</em> planks (i.e., whose length is the sum of the lengths <em>Li</em>). FJ is ignoring the “kerf”, the extra length lost to sawdust when a sawcut is made; you should ignore it, too.</p>
+<p>FJ sadly realizes that he doesn’t own a saw with which to cut the wood, so he mosies over to Farmer Don’s Farm with this long board and politely asks if he may borrow a saw.</p>
+<p>Farmer Don, a closet capitalist, doesn’t lend FJ a saw but instead offers to charge Farmer John for each of the <em>N</em>-1 cuts in the plank. The charge to cut a piece of wood is exactly equal to its length. Cutting a plank of length 21 costs 21 cents.</p>
+<p>Farmer Don then lets Farmer John decide the order and locations to cut the plank. Help Farmer John determine the minimum amount of money he can spend to create the <em>N</em> planks. FJ knows that he can cut the board in various different orders which will result in different charges since the resulting intermediate planks are of different lengths.</p>
+<h2><span id="input">Input</span></h2><p>Line 1: One integer <em>N</em>, the number of planks<br>Lines 2..<em>N</em>+1: Each line contains a single integer describing the length of a needed plank</p>
+<h2><span id="output">Output</span></h2><p>Line 1: One integer: the minimum amount of money he must spend to make <em>N</em>-1 cuts</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">8</span><br><span class="line">5</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">34</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    priority_queue &lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,greater&lt;<span class="keyword">int</span>&gt; &gt; que;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> l;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l;</span><br><span class="line">        que.push(l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(que.<span class="built_in">size</span>()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> l1=que.top();que.pop();</span><br><span class="line">        <span class="keyword">int</span> l2=que.top();que.pop();</span><br><span class="line">        ans+=l1+l2;</span><br><span class="line">        que.push(l1+l2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>POJ</tag>
+        <tag>优先队列</tag>
+        <tag>贪心算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cable master</title>
     <url>/2020/04/25/Cable%20master/</url>
     <content><![CDATA[<hr>
@@ -191,37 +226,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Expedition</title>
-    <url>/2020/05/02/Expedition/</url>
-    <content><![CDATA[<hr>
-<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
-
-<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
-<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
-<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
-<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
-<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
-<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
-<p>* Line N+2: Two space-separated integers, L and P</p>
-<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
-
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ACM 题目</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>算法</tag>
-        <tag>POJ</tag>
-        <tag>二叉树</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Piggy-Bank</title>
     <url>/2020/04/26/Piggy-Bank/</url>
     <content><![CDATA[<hr>
@@ -236,6 +240,36 @@
 <h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The minimum amount of money in the piggy-bank is 60.</span><br><span class="line">The minimum amount of money in the piggy-bank is 100.</span><br><span class="line">This is impossible.</span><br></pre></td></tr></table></figure>
 
 <h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">500</span>*<span class="number">50000</span>;</span><br><span class="line"><span class="keyword">int</span> W,N;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">500</span>],w[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">10000</span>+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> filledPig,emptyPig;<span class="built_in">cin</span>&gt;&gt;emptyPig&gt;&gt;filledPig&gt;&gt;N;</span><br><span class="line">        W=filledPig-emptyPig;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p[i]&gt;&gt;w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=W; i++) &#123;</span><br><span class="line">            DP[i]=INF;</span><br><span class="line">        &#125;</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=w[i]; j&lt;=W; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">min</span>(DP[j],DP[j-w[i]]+p[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (DP[W]!=INF) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The minimum amount of money in the piggy-bank is "</span>&lt;&lt;DP[W]&lt;&lt;<span class="string">"."</span>&lt;&lt;<span class="built_in">endl</span>;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"This is impossible."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ACM 题目</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>HDUOJ</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Robberies</title>
+    <url>/2020/04/27/Robberies/</url>
+    <content><![CDATA[<hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2955" target="_blank" rel="noopener">HDUOJ 2955</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy. He has decided to work in the lucrative business of bank robbery only for a short while, before retiring to a comfortable job at a university.</p>
+<img src="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg" alt="img" style="zoom: 50%;">
+
+<p>For a few months now, Roy has been assessing the security of various banks and the amount of cash they hold. He wants to make a calculated risk, and grab as much money as possible.<br>His mother, Ola, has decided upon a tolerable probability of getting caught. She feels that he is safe enough if the banks he robs together give a probability less than this.</p>
+<h2><span id="input">Input</span></h2><p>The first line of input gives T, the number of cases. For each scenario, the first line of input gives a floating point number P, the probability Roy needs to be below, and an integer N, the number of banks he has plans for. Then follow N lines, where line j gives an integer Mj and a floating point number Pj .<br>Bank j contains Mj millions, and the probability of getting caught from robbing it is Pj .</p>
+<h2><span id="output">Output</span></h2><p>For each test case, output a line with the maximum number of millions he can expect to get while the probability of getting caught is less than the limit set.</p>
+<p>Notes and Constraints<br>0 &lt; T &lt;= 100<br>0.0 &lt;= P &lt;= 1.0<br>0 &lt; N &lt;= 100<br>0 &lt; Mj &lt;= 100<br>0.0 &lt;= Pj &lt;= 1.0<br>A bank goes bankrupt if it is robbed, and you may assume that all probabilities are independent as the police have very low funds.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">0.04 3</span><br><span class="line">1 0.02</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.06 3</span><br><span class="line">2 0.03</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.10 3</span><br><span class="line">1 0.03</span><br><span class="line">2 0.02</span><br><span class="line">3 0.05</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution-wa">My Solution (WA)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> P,p[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> N,m[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">float</span> DP[<span class="number">100</span>*<span class="number">100</span>+<span class="number">1</span>];<span class="comment">//DP[j]表示在抢 j millons 美元时最大的逃脱概率；</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;P&gt;&gt;N;</span><br><span class="line">        <span class="keyword">int</span> maxM=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;m[i]&gt;&gt;p[i];</span><br><span class="line">            maxM+=m[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(DP, <span class="number">0</span>, <span class="keyword">sizeof</span>(DP));</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=m[i]; j&lt;=maxM; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">max</span>(DP[j],DP[j-m[i]]*(<span class="number">1</span>-p[i]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res;</span><br><span class="line">        <span class="keyword">for</span> (res=maxM; res&gt;=<span class="number">0</span>; res--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DP[res]&gt;=<span class="number">1</span>-P) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -280,23 +314,24 @@
       </tags>
   </entry>
   <entry>
-    <title>Robberies</title>
-    <url>/2020/04/27/Robberies/</url>
+    <title>Expedition</title>
+    <url>/2020/05/02/Expedition/</url>
     <content><![CDATA[<hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2955" target="_blank" rel="noopener">HDUOJ 2955</a></center></p>
+<p><center>Source: <a href="http://poj.org/problem?id=2431" target="_blank" rel="noopener">POJ 2431</a></center></p>
 
-<h2><span id="problem-description">Problem Description</span></h2><p>The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy. He has decided to work in the lucrative business of bank robbery only for a short while, before retiring to a comfortable job at a university.</p>
-<img src="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg" alt="img" style="zoom: 50%;">
+<h2><span id="description">Description</span></h2><p>A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck’s fuel tank. The truck now leaks one unit of fuel every unit of distance it travels. </p>
+<p>To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 &lt;= N &lt;= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop). </p>
+<p>The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 &lt;= P &lt;= 1,000,000). </p>
+<p>Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all. </p>
+<h2><span id="input">Input</span></h2><p>* Line 1: A single integer, N </p>
+<p>* Lines 2..N+1: Each line contains two space-separated integers describing a fuel stop: The first integer is the distance from the town to the stop; the second is the amount of fuel available at that stop. </p>
+<p>* Line N+2: Two space-separated integers, L and P</p>
+<h2><span id="output">Output</span></h2><p>* Line 1: A single integer giving the minimum number of fuel stops necessary to reach the town. If it is not possible to reach the town, output -1.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">4 4</span><br><span class="line">5 2</span><br><span class="line">11 5</span><br><span class="line">15 10</span><br><span class="line">25 10</span><br></pre></td></tr></table></figure>
 
-<p>For a few months now, Roy has been assessing the security of various banks and the amount of cash they hold. He wants to make a calculated risk, and grab as much money as possible.<br>His mother, Ola, has decided upon a tolerable probability of getting caught. She feels that he is safe enough if the banks he robs together give a probability less than this.</p>
-<h2><span id="input">Input</span></h2><p>The first line of input gives T, the number of cases. For each scenario, the first line of input gives a floating point number P, the probability Roy needs to be below, and an integer N, the number of banks he has plans for. Then follow N lines, where line j gives an integer Mj and a floating point number Pj .<br>Bank j contains Mj millions, and the probability of getting caught from robbing it is Pj .</p>
-<h2><span id="output">Output</span></h2><p>For each test case, output a line with the maximum number of millions he can expect to get while the probability of getting caught is less than the limit set.</p>
-<p>Notes and Constraints<br>0 &lt; T &lt;= 100<br>0.0 &lt;= P &lt;= 1.0<br>0 &lt; N &lt;= 100<br>0 &lt; Mj &lt;= 100<br>0.0 &lt;= Pj &lt;= 1.0<br>A bank goes bankrupt if it is robbed, and you may assume that all probabilities are independent as the police have very low funds.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">0.04 3</span><br><span class="line">1 0.02</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.06 3</span><br><span class="line">2 0.03</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.10 3</span><br><span class="line">1 0.03</span><br><span class="line">2 0.02</span><br><span class="line">3 0.05</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution-wa">My Solution (WA)</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> P,p[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> N,m[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">float</span> DP[<span class="number">100</span>*<span class="number">100</span>+<span class="number">1</span>];<span class="comment">//DP[j]表示在抢 j millons 美元时最大的逃脱概率；</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;P&gt;&gt;N;</span><br><span class="line">        <span class="keyword">int</span> maxM=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;m[i]&gt;&gt;p[i];</span><br><span class="line">            maxM+=m[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(DP, <span class="number">0</span>, <span class="keyword">sizeof</span>(DP));</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=m[i]; j&lt;=maxM; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">max</span>(DP[j],DP[j-m[i]]*(<span class="number">1</span>-p[i]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res;</span><br><span class="line">        <span class="keyword">for</span> (res=maxM; res&gt;=<span class="number">0</span>; res--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DP[res]&gt;=<span class="number">1</span>-P) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;powerRights;	<span class="comment">//经过加油站视作可以加油的权利</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;stops;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;a,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N,L,P;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> l,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(l,p));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        stops.at(i).first=L-stops.at(i).first;</span><br><span class="line">    &#125;</span><br><span class="line">    stops.push_back(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(L,<span class="number">0</span>));</span><br><span class="line">    sort(stops.<span class="built_in">begin</span>(),stops.<span class="built_in">end</span>(),comp);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=N; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (P&gt;=stops.at(i).first) &#123;</span><br><span class="line">                powerRights.push(stops.at(i).second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!powerRights.empty())&#123;</span><br><span class="line">                P+=powerRights.top();</span><br><span class="line">                powerRights.pop();</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                res=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res==<span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -305,8 +340,8 @@
       <tags>
         <tag>ACM</tag>
         <tag>算法</tag>
-        <tag>HDUOJ</tag>
-        <tag>动态规划</tag>
+        <tag>POJ</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -335,6 +370,159 @@
         <tag>算法</tag>
         <tag>POJ</tag>
         <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>与 Apple Music 一同优雅地享受音乐</title>
+    <url>/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
+<blockquote>
+<p>你有多久没有认真地听一首歌了。</p>
+</blockquote>
+<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
+<h2><span id="建立云端音乐资料库">建立云端音乐资料库</span></h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
+<h2><span id="添加音乐">添加音乐</span></h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
+<h3><span id="通过-apple-music-在线音乐库添加音乐">通过 Apple Music 在线音乐库添加音乐</span></h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
+<h3><span id="通过其他音乐软件添加音乐">通过其他音乐软件添加音乐</span></h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
+<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
+<blockquote>
+<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
+<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
+</blockquote>
+<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
+<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
+<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
+<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
+<h2><span id="整理音乐资料库">整理音乐资料库</span></h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
+<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
+<h3><span id="更改歌曲信息">更改歌曲信息</span></h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
+<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;">
+
+
+<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
+<h3><span id="创建智能播放列表">创建智能播放列表</span></h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
+<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;">
+
+
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
+<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
+<h2><span id="小结">小结</span></h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
+]]></content>
+      <categories>
+        <category>数字生活</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+        <tag>苹果</tag>
+        <tag>音乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
+    <url>/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
+</blockquote>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
+<h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
+<h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
+<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装 Git。终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
+<p>命令执行完成后，文件夹的结构如下图所示。</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;">
+
+
+<h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
+"></p>
+<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
+<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;">
+
+
+<p>这样便成功地修改了博客的主题。</p>
+<h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>主题文件夹名称</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>部署信息</td>
+</tr>
+</tbody></table>
+<h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
+<p>在 GitHub 上创建一个 <code>repository</code></p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;">
+
+
+<p>其命名方式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 为 GitHub 用户名。</p>
+<h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
+<h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3><span id="部署">部署</span></h3><p>“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
+<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
+<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
+<h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>网站</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -389,60 +577,9 @@
       </categories>
       <tags>
         <tag>macOS</tag>
+        <tag>苹果</tag>
         <tag>截图</tag>
         <tag>技巧</tag>
-        <tag>苹果</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>与 Apple Music 一同优雅地享受音乐</title>
-    <url>/2020/04/22/%E4%B8%8E%20Apple%20Music%20%E4%B8%80%E5%90%8C%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BA%AB%E5%8F%97%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p>还在使用网易云音乐、QQ音乐又或是其他音乐流媒体平台吗？相信在这个版权之战打得热火朝天的时代，我们往往需要同时使用多个音乐软件，甚至开通多项音乐服务，才能满足我们的听歌需求。为了听周杰伦得去QQ音乐充音乐包，为了听华晨宇得去网易云购买专辑，总之各大音乐平台都掌握着某些歌手的独家的版权。不仅如此，除了这些，你还得忍受各种各样的广告推送、音乐订阅号、音乐短视频……这些和音乐无关的东西渐渐让我们远离了音乐本身。</p>
-<blockquote>
-<p>你有多久没有认真地听一首歌了。</p>
-</blockquote>
-<p>而 Apple Music 却是一个优雅的存在，它是一个音乐软件，它也只是一个音乐软件；它让我们可以听歌，也仅仅可以听歌。很多人往往因为对过去 iTunes 难以操作的观点，对 Apple Music 的软件界面望而却步，抱怨苹果为什么会开发出这么难用的软件。其实不然，Apple Music 是我用过最好的音乐库管理软件，它在做到优雅简洁的同时又不乏强大的管理功能。接下来就让我们一起打造属于自己的音乐资料库。</p>
-<h2><span id="建立云端音乐资料库">建立云端音乐资料库</span></h2><p>使用 Apple Music 的第一步就是打开其云端资料库。这里需要订阅 Apple Music 的音乐服务，在国内的资费是 10 元每个月，或者以学生优惠 5 元每个月的价格订阅即可，然后在各个设备上登陆你的 Apple ID，并在“设置”或者“偏好设置”中打w开“同步资料库”。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1lNzA5YzZiMzIzYWRhMGM0LnBuZw?x-oss-process=image/format,png" alt="打开其云端资料库"></p>
-<h2><span id="添加音乐">添加音乐</span></h2><p>添加音乐的方式有很多种，你可以通过 Apple Music 在线音乐库或者从其他音乐软件添加音乐，接下来将逐一介绍。</p>
-<h3><span id="通过-apple-music-在线音乐库添加音乐">通过 Apple Music 在线音乐库添加音乐</span></h3><p>当然这是最简单也最方便的音乐添加方式，只需要在 Apple Music 的在线音乐库中搜索然后添加即可。这样添加固然很好，所有的歌曲信息以及歌词、专辑封面等都会自动匹配好。关键是在 iOS 13 以及 macOS 10.15.4 及以后的 Apple Music 中还有非常炫酷的动态歌词，歌词根据音乐律动，不得不说苹果的动态歌词真的做的非常出色，也引来了其他音乐平台的模仿。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jNzQ0OGQ3NWMzNzliM2ZiLlBORw?x-oss-process=image/format,png" alt="苹果的动态歌词"></p>
-<h3><span id="通过其他音乐软件添加音乐">通过其他音乐软件添加音乐</span></h3><p>然而 Apple Music 对于喜欢华语音乐的人来说其曲库算不上丰富，很多中国的独立音乐人在 Apple Music 上都搜不到，甚至有些歌手的专辑收录不全（其实其他的流媒体音乐平台也有很多音乐没有版权），在这种情况下，我们便可以手动地从其他软件下载音乐文件，并添加到 Apple Music 资料库中。</p>
-<p>不过由于我国很多音乐软件下载下来的音乐都是播放器独家的格式，没有办法在其他播放器中播放（例如网易云音乐的 .ncm 格式），要想获取 .mp3 格式的音乐文件，就得花钱购买专辑，把这些专辑购买下来也未尝不可，但我相信下面的两个网站可以帮到你。</p>
-<blockquote>
-<p>.ncm 格式在线转换为 .mp3 格式：<a href="http://ncm.worthsee.com" target="_blank" rel="noopener">http://ncm.worthsee.com</a></p>
-<p>.qmc 格式在线转换为 .mp3 格式：<a href="http://convert.freelrc.com/QMC-to-MP3" target="_blank" rel="noopener">http://convert.freelrc.com/QMC-to-MP3</a></p>
-</blockquote>
-<p>得到 .mp3 格式的音乐文件后，只需要在 macOS 端的 Apple Music 上，将音乐文件拖到“歌曲列表”中，就会自动添加到云端音乐库中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1iZWYwZjc0MDRhMzdmYzI0LnBuZw?x-oss-process=image/format,png" alt="更新云端资料库"></p>
-<p>若没有添加成功，我们可以通过“文件”&gt;“资料库”&gt;“更新云端资料库”来进行同步。</p>
-<p>同步的过程中，Apple Music 会将本地的音乐与 Apple Music 在线资料库中的音乐进行匹配（妙选），若没有匹配到相同的音乐，将会自动上传本地音乐文件。</p>
-<p>但是这个上传的网络速度在国内貌似并不很好，上传的时间也根据网络速度而定。</p>
-<h2><span id="整理音乐资料库">整理音乐资料库</span></h2><p>当你将自己的音乐都添加到 Apple Music 云端资料库之后，一个属于自己的私人音乐资料库便构建完成了，从此再也不要打开多个软件进行听歌了，只需要点击 Apple Music 应用图标，所有的音乐便全部掌握在手中，而且不要担心歌曲版权下架（Apple Music 在线资料库也存在音乐版权下架），属于自己的音乐永远在自己的资料库中。</p>
-<p>而接下来就应该对自己的音乐库进行整理，特别是对通过其他音乐软件添加的音乐进行整理。因为往往从网上下载的音乐，其歌曲信息极有可能不完整，比如缺少专辑图片、缺少专辑发行年份等等。作为一个轻微强迫症患者，我不允许我的资料库出现这种混乱的现象，所以需要对资料库的信息进行整理，而 Apple Music 在这方面做的非常的出色。</p>
-<h3><span id="更改歌曲信息">更改歌曲信息</span></h3><p>在歌曲列表中可以自定义显示的歌曲参数，如“专辑艺人”、“类型”、“年份”等，我们可以直接在歌曲列表中对这些信息进行编辑。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05OTQzODc2NGY0ODhkZDQxLnBuZw?x-oss-process=image/format,png" alt="自定义显示的歌曲参数"></p>
-<p>选择某个音乐右击“显示简介”或者 <code>Command + I</code> 可以查看具体某一个音乐的信息，还可以对音乐的插图、歌词进行修改。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YmIxNTNmZTljYzE4NTRlLnBuZw?x-oss-process=image/format,png" alt="显示简介" style="zoom:50%;">
-
-
-<p>Apple Music 的强大之处便是在此，可以非常直观地对资料库中所有的歌曲信息进行修改。</p>
-<h3><span id="创建智能播放列表">创建智能播放列表</span></h3><p>当歌曲的信息都被正确地写入之后，我们便可以按照自己的意愿随意地欣赏资料库中的音乐。例如我们可以按照流派、年代以及歌曲情绪来听歌。而这一切都得益于 Apple Music 的智能播放列表。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS04NDAyZDAxNzVlNTRjMGI1LnBuZw?x-oss-process=image/format,png" alt="创建智能播放列表"></p>
-<p>点击“文件”&gt;“新建智能播放列表”，弹出条件筛选对话框。例如我想收听 21 世纪 00 年代的华语音乐，我可以设置为“年份在 2000 至 2010 范围内”且“类型是国语流行”的音乐，点击确定，你资料库中符合条件的音乐就自动组成了一个播放列表。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jY2IyNmRkYWVjMjExYTcxLnBuZw?x-oss-process=image/format,png" alt="条件筛选对话框" style="zoom:67%;">
-
-
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS05YjMzZTgyODJiZmFlYWU0LnBuZw?x-oss-process=image/format,png" alt="自动组成了一个播放列表"></p>
-<p>不仅如此，我们在听音乐时可以对歌曲标记星级来代表我们对歌曲的喜爱程度，这样在建立智能播放列表的时候就可以根据自己的喜爱程度建立。</p>
-<h2><span id="小结">小结</span></h2><p>整理好自己的音乐资料库确实不是一件简单的事情，我们需要投入我们的时间与精力，而正是我们对于这种对音乐认真与执着，本着生命在于折腾的观念，让我们在挑选每一首歌的时候都非常的慎重。摆脱了流媒体音乐的各种推送和广告之后，我的音乐软件变成了一个单纯的音乐载体，它更像是一本回忆录，每听到每一首歌的时候，都可以想起第一次听到这首歌时的场景。这样纯粹的音乐播放器虽然“减”去了很多东西，但却“增”加了我对于音乐本身的理解与感悟。戴上耳机，尽情享受音乐最纯粹的乐趣吧！</p>
-]]></content>
-      <categories>
-        <category>数字生活</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-        <tag>苹果</tag>
-        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
@@ -597,112 +734,10 @@
       </categories>
       <tags>
         <tag>网站</tag>
+        <tag>博客</tag>
         <tag>写作</tag>
         <tag>Markdown</tag>
         <tag>Typora</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Hexo 和 GitHub 搭建自己的个人博客平台</title>
-    <url>/2020/04/22/%E4%BD%BF%E7%94%A8%20Hexo%20%E5%92%8C%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p><strong>版权声明：</strong> <em>本文所有内容均为 @EchoForger 的个人博客 <a href="https://www.wildptr.cn">WildPtr 野指针</a>的原创内容，转载请务必注明作者与原文链接，且不得篡改原文内容。</em></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 是一个高效、简洁的博客框架，我们可以使用其丰富的插件和主题快速地搭建属于自己的博客平台。<a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 则作为代码仓库在云端托管所搭建的网站，尽管 GitHub 在国内的速度有点不尽人意，但是作为个人博客的载体还是绰绰有余。接下来就让我手把手地教各位在 macOS 环境下使用 Hexo 和 GitHub 搭建自己的个人博客平台。</p>
-<h2><span id="准备工作">准备工作</span></h2><h3><span id="安装-nodejs">安装 Node.js</span></h3><p>前往 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js 官网</a>安装 Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)。</p>
-<h3><span id="安装-git">安装 Git</span></h3><p>如果安装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 则可以跳过此步骤，因为苹果在 XCode 中携带了 Git 的二进制包。</p>
-<p>通过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装 Git，先安装 Homebrew。打开“终端”，并执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>安装 Git。终端执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
-
-<h3><span id="安装-hexo">安装 Hexo</span></h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2><span id="建站">建站</span></h2><h3><span id="创建网站文件夹">创建网站文件夹</span></h3><p>新建一个空的文件夹，“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;folder&gt;</code> 是新建文件夹的路径，可以将文件夹拖至“终端”窗口中，将自动输入文件夹路径。</p>
-<p>命令执行完成后，文件夹的结构如下图所示。</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS1jODFhMmVlNzU4ZjY2NjdhLnBuZw?x-oss-process=image/format,png" alt="文件夹的结构" style="zoom:67%;">
-
-
-<h3><span id="选取主题">选取主题</span></h3><p>前往 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网的主题页面</a>选择主题，点击主题名称可以前往该主题的源码仓库。<img src="https://upload-images.jianshu.io/upload_images/23107301-02da7e7e5a1d9f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" Hexo 官网的主题页面
-"></p>
-<p>下载主题的源码，解压并放入网站文件夹中的 <code>theme</code> 子文件夹中。<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01ZDNhOWEwNjRiYzI3YzE2LnBuZw?x-oss-process=image/format,png" alt="下载主题的源码"></p>
-<p>修改 <code>_config.yml</code> 中的 <code>theme</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">theme: &lt;theme folder name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;theme folder name&gt;</code> 为主题的文件夹名称，例如：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zODQ0NjJlMDMwMTY0MmM1LnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 theme 值" style="zoom:67%;">
-
-
-<p>这样便成功地修改了博客的主题。</p>
-<h3><span id="配置网站">配置网站</span></h3><p>网站的配置信息储存在 <code>_config.yml</code>（注意这里的 <code>_config.yml</code> 是网站根目录下的）中，打开文件进行修改。这里只介绍几个简单的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>title</code></td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td><code>subtitle</code></td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td><code>author</code></td>
-<td>您的名字</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>主题文件夹名称</td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td>部署信息</td>
-</tr>
-</tbody></table>
-<h2><span id="部署至-github">部署至 GitHub</span></h2><h3><span id="创建仓库">创建仓库</span></h3><p>首先，需要在 GitHub 上<a href="https://github.com/join" target="_blank" rel="noopener">创建一个账户</a>。</p>
-<p>在 GitHub 上创建一个 <code>repository</code></p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS01YjU5MzViYmI2OGQ5YWYzLnBuZw?x-oss-process=image/format,png" alt="创建一个 repository" style="zoom:50%;">
-
-
-<p>其命名方式为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username.github.io</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>username</code> 为 GitHub 用户名。</p>
-<h3><span id="配置网站">配置网站</span></h3><p>修改 <code>_config.yml</code> 中的 <code>deploy</code> 值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: &lt;repo address&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;repo address&gt;</code>  为新建仓库的地址。例如：<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yMzEwNzMwMS0zYThlZGZiNTg3ZjNkNDNjLnBuZw?x-oss-process=image/format,png" alt="修改 _config.yml 中的 deploy 值"></p>
-<h3><span id="安装-deployer-git">安装 Deployer Git</span></h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3><span id="部署">部署</span></h3><p>“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>第一行语句用来生成网页静态文件，第二行语句将网页内容上传至 GitHub 仓库。</p>
-<p>过程中需要输入 GitHub 的用户名的密码。当执行 <code>hexo deploy</code> 时，Hexo 会将 <code>public</code> 目录中的文件和目录推送至 <code>_config.yml</code> 中指定的远端仓库和分支中，并且<strong>完全覆盖</strong>该分支下的已有内容。</p>
-<p>部署完成后，便可以通过 <code>username.github.io</code> 访问新搭建的博客了！</p>
-<h3><span id="更新网站内容">更新网站内容</span></h3><p>若在本地对网站进行了更改，需要对云端托管的代码进行更新，应该先生成网页的静态文件，然后将其部署至云端。“终端”执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>网站</tag>
-        <tag>博客</tag>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -804,8 +839,8 @@
       </tags>
   </entry>
   <entry>
-    <title>数塔</title>
-    <url>/2020/04/30/%E6%95%B0%E5%A1%94/</url>
+    <title>装满背包 </title>
+    <url>/2020/04/30/%E8%A3%85%E6%BB%A1%E8%83%8C%E5%8C%85%20/</url>
     <content><![CDATA[<hr>
 <p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2084" target="_blank" rel="noopener">HDUOJ 2084</a></center></p>
 
@@ -834,24 +869,8 @@
       </tags>
   </entry>
   <entry>
-    <title>线段树实现</title>
-    <url>/2020/05/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<hr>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1</span>&lt;&lt;<span class="number">17</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,dat[<span class="number">2</span>*MAX_N<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n_)</span></span>&#123;</span><br><span class="line">    n=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (n&lt;n_) n*=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>*n<span class="number">-1</span>;i++) dat[i]=INT_MAX;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> k,<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    k+=n<span class="number">-1</span>;</span><br><span class="line">    dat[k]=a;</span><br><span class="line">    <span class="keyword">while</span> (k&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        k=(k<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">        dat[k]=<span class="built_in">min</span>(dat[k*<span class="number">2</span>+<span class="number">1</span>],dat[k*<span class="number">2</span>+<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> k,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r&lt;=a||b&lt;=l) <span class="keyword">return</span> INT_MAX; <span class="comment">//不包含</span></span><br><span class="line">    <span class="keyword">if</span> (a&lt;=l&amp;&amp;r&lt;=b) <span class="keyword">return</span> dat[k];  <span class="comment">//全部包含</span></span><br><span class="line">    <span class="keyword">else</span> &#123;                          <span class="comment">//部分包含</span></span><br><span class="line">        <span class="keyword">int</span> vl=query(a,b,k*<span class="number">2</span>+<span class="number">1</span>,l,(l+r)/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">int</span> vr=query(a,b,k*<span class="number">2</span>+<span class="number">2</span>,(l+r)/<span class="number">2</span>,r);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(vl,vr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>线段树</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>装满背包 </title>
-    <url>/2020/04/30/%E8%A3%85%E6%BB%A1%E8%83%8C%E5%8C%85%20/</url>
+    <title>数塔</title>
+    <url>/2020/04/30/%E6%95%B0%E5%A1%94/</url>
     <content><![CDATA[<hr>
 <p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2084" target="_blank" rel="noopener">HDUOJ 2084</a></center></p>
 
