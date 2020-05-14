@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ACM,算法,HDUOJ,树状数组," />
 
 
 
@@ -109,14 +109,20 @@
 
 
 
-<meta name="description" content="00 后计算机专业本科在读，热爱代码、音乐和生活。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WildPtr 野指针">
-<meta property="og:url" content="https://www.wildptr.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/index.html">
+<meta name="description" content="Source: HDUOJ 4911  Problem Description bobo has a sequence a1,a2,…,an. He is allowed to swap two adjacent numbers for no more than k times.  Find the minimum number of inversions after his swaps.  No">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inversion">
+<meta property="og:url" content="https://www.wildptr.cn/2020/05/12/Inversion/index.html">
 <meta property="og:site_name" content="WildPtr 野指针">
-<meta property="og:description" content="00 后计算机专业本科在读，热爱代码、音乐和生活。">
+<meta property="og:description" content="Source: HDUOJ 4911  Problem Description bobo has a sequence a1,a2,…,an. He is allowed to swap two adjacent numbers for no more than k times.  Find the minimum number of inversions after his swaps.  No">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-12T01:23:00.000Z">
+<meta property="article:modified_time" content="2020-05-12T14:10:59.068Z">
 <meta property="article:author" content="EchoForger">
+<meta property="article:tag" content="ACM">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="HDUOJ">
+<meta property="article:tag" content="树状数组">
 <meta name="twitter:card" content="summary">
 
 
@@ -147,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="https://www.wildptr.cn/tags/最短路径/"/>
+  <link rel="canonical" href="https://www.wildptr.cn/2020/05/12/Inversion/"/>
 
 
 
 
 
-  <title>Tag: 最短路径 | WildPtr 野指针</title>
+  <title>Inversion | WildPtr 野指针</title>
   
 
 
@@ -172,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -310,54 +316,225 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>最短路径<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/05/12/Inversion/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EchoForger">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WildPtr 野指针">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/05/02/(Unresolved)%20%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/" itemprop="url">
-              
-                <span itemprop="name">(Unresolved) 最短路径问题</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Inversion</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-05-02T09:23:00+08:00"
-              content="2020-05-02" >
-          05-02
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-12T09:23:00+08:00">
+                2020-05-12
+              </time>
+            
 
-    </header>
-  </article>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM-%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM 题目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  314
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4911" target="_blank" rel="noopener">HDUOJ 4911</a></center></p>
+
+<h2><span id="problem-description">Problem Description</span></h2><p>bobo has a sequence a1,a2,…,an. He is allowed to swap two <strong>adjacent</strong> numbers for no more than k times.</p>
+<p>Find the minimum number of inversions after his swaps.</p>
+<p>Note: The number of inversions is the number of pair (i,j) where 1≤i&lt;j≤n and ai&gt;aj.</p>
+<h2><span id="input">Input</span></h2><p>The input consists of several tests. For each tests:</p>
+<p>The first line contains 2 integers n,k (1≤n≤105,0≤k≤109). The second line contains n integers a1,a2,…,an (0≤ai≤109).</p>
+<h2><span id="output">Output</span></h2><p>For each tests:</p>
+<p>A single integer denotes the minimum number of inversions.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">2 2 1</span><br><span class="line">3 0</span><br><span class="line">2 2 1</span><br></pre></td></tr></table></figure>
+
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">bit</span>[MAX_N+<span class="number">1</span>],n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        s+=<span class="built_in">bit</span>[i];</span><br><span class="line">        i=i&amp;(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;=n)&#123;</span><br><span class="line">        <span class="built_in">bit</span>[i]+=x;</span><br><span class="line">        i+=i&amp;-i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> k;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k) &#123;</span><br><span class="line">        <span class="keyword">int</span> a[MAX_N],b[MAX_N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;b[i];</span><br><span class="line">            a[i]=b[i];</span><br><span class="line">            <span class="built_in">bit</span>[i+<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(b,b+n);</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            mp[b[i]]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            a[i]=mp[a[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j++) &#123;</span><br><span class="line">            res+=j-sum(a[j]);</span><br><span class="line">            add(a[j],<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(res-k&gt;=<span class="number">0</span>)<span class="built_in">cout</span>&lt;&lt;res-k&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/about/wechatofficial/QRCode.jpg" alt="EchoForger wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅“WildPtr 野指针”官方公众号</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ACM/" rel="tag"># ACM</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/HDUOJ/" rel="tag"># HDUOJ</a>
+          
+            <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag"># 树状数组</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/09/(Unresolved)%20I%20Hate%20It/" rel="next" title="(Unresolved) I Hate It">
+                <i class="fa fa-chevron-left"></i> (Unresolved) I Hate It
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/12/Fence%20Repair/" rel="prev" title="Fence Repair">
+                Fence Repair <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -365,6 +542,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -385,8 +566,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,6 +675,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -641,6 +847,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
