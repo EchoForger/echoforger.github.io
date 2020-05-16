@@ -118,7 +118,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://poj.org/images/1039/pipe.gif">
 <meta property="article:published_time" content="2020-05-16T09:23:00.000Z">
-<meta property="article:modified_time" content="2020-05-16T09:05:28.279Z">
+<meta property="article:modified_time" content="2020-05-16T09:15:57.032Z">
 <meta property="article:author" content="EchoForger">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="算法">
@@ -448,7 +448,7 @@
 <p><center>Source: <a href="http://poj.org/problem?id=1039" target="_blank" rel="noopener">POJ 1039</a></center></p>
 
 <h2><span id="description">Description</span></h2><p>The GX Light Pipeline Company started to prepare bent pipes for the new transgalactic light pipeline. During the design phase of the new pipe shape the company ran into the problem of determining how far the light can reach inside each component of the pipe. Note that the material which the pipe is made from is not transparent and not light reflecting. </p>
-<img src="http://poj.org/images/1039/pipe.gif" style="zoom:50%;">
+<img src="http://poj.org/images/1039/pipe.gif">
 
 <p>Each pipe component consists of many straight pipes connected tightly together. For the programming purposes, the company developed the description of each component as a sequence of points [x1; y1], [x2; y2], . . ., [xn; yn], where x1 &lt; x2 &lt; . . . xn . These are the upper points of the pipe contour. The bottom points of the pipe contour consist of points with y-coordinate decreased by 1. To each upper point [xi; yi] there is a corresponding bottom point [xi; (yi)-1] (see picture above). The company wants to find, for each pipe component, the point with maximal x-coordinate that the light will reach. The light is emitted by a segment source with endpoints [x1; (y1)-1] and [x1; y1] (endpoints are emitting light too). Assume that the light is not bent at the pipe bent points and the bent points do not stop the light beam. </p>
 <h2><span id="input">Input</span></h2><p>The input file contains several blocks each describing one pipe component. Each block starts with the number of bent points 2 &lt;= n &lt;= 20 on separate line. Each of the next n lines contains a pair of real values xi, yi separated by space. The last block is denoted with n = 0. </p>
