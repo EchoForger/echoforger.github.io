@@ -173,9 +173,9 @@ During the War of Resistance Against Japan, tunnel warfare was carried out exten
     
       <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="线段树" scheme="https://www.wildptr.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
+    
+      <category term="线段树" scheme="https://www.wildptr.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="区间合并" scheme="https://www.wildptr.cn/tags/%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/"/>
     
@@ -291,11 +291,11 @@ Input
     
       <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="线段树" scheme="https://www.wildptr.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
     
       <category term="图" scheme="https://www.wildptr.cn/tags/%E5%9B%BE/"/>
+    
+      <category term="线段树" scheme="https://www.wildptr.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -681,39 +681,6 @@ Before ACM can do anything, a budget must be prepared and the necessary financia
   </entry>
   
   <entry>
-    <title>Bone Collector</title>
-    <link href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/"/>
-    <id>https://www.wildptr.cn/2020/04/25/Bone%20Collector/</id>
-    <published>2020-04-25T12:23:00.000Z</published>
-    <updated>2020-04-27T08:31:28.888Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p><img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;"><h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p><h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      Source: HDUOJ 2602
-
-Problem Description
-Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …
-The bone collector had a big bag with a volume of V ,and along his trip of coll
-    
-    </summary>
-    
-    
-      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
-    
-      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
-    
-      <category term="动态规划" scheme="https://www.wildptr.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
     <title>A + B Problem II</title>
     <link href="https://www.wildptr.cn/2020/04/25/A%20+%20B%20Problem%20II/"/>
     <id>https://www.wildptr.cn/2020/04/25/A%20+%20B%20Problem%20II/</id>
@@ -743,6 +710,39 @@ The first line of the input contains an integer T(1&lt;=T&lt;=20) which means th
       <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Bone Collector</title>
+    <link href="https://www.wildptr.cn/2020/04/25/Bone%20Collector/"/>
+    <id>https://www.wildptr.cn/2020/04/25/Bone%20Collector/</id>
+    <published>2020-04-25T12:23:00.000Z</published>
+    <updated>2020-04-27T08:31:28.888Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2602" target="_blank" rel="noopener">HDUOJ 2602</a></center></p><h2><span id="problem-description">Problem Description</span></h2><p>Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …<br>The bone collector had a big bag with a volume of V ,and along his trip of collecting there are a lot of bones , obviously , different bone has different value and different volume, now given the each bone’s value along his trip , can you calculate out the maximum of the total value the bone collector can get ?</p><img src="http://acm.hdu.edu.cn/data/images/C154-1003-1.jpg" alt="img" style="zoom:50%;"><h2><span id="input">Input</span></h2><p>The first line contain a integer T , the number of cases.<br>Followed by T cases , each case three lines , the first line contain two integer N , V, (N &lt;= 1000 , V &lt;= 1000 )representing the number of bones and the volume of his bag. And the second line contain N integers representing the value of each bone. The third line contain N integers representing the volume of each bone.</p><h2><span id="output">Output</span></h2><p>One integer per line representing the maximum of the total value (this number will be less than 231).</p><h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure><h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure><h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,V;</span><br><span class="line"><span class="keyword">int</span> value[<span class="number">1000</span>],volume[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DP[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;V;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;value[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) <span class="built_in">cin</span>&gt;&gt;volume[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=V; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j&lt;volume[i]) &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=DP[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    DP[i+<span class="number">1</span>][j]=<span class="built_in">max</span>(DP[i][j],DP[i][j-volume[i]]+value[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;DP[N][V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Source: HDUOJ 2602
+
+Problem Description
+Many years ago , in Teddy’s hometown there was a man who was called “Bone Collector”. This man like to collect varies of bones , such as dog’s , cow’s , also he went to the grave …
+The bone collector had a big bag with a volume of V ,and along his trip of coll
+    
+    </summary>
+    
+    
+      <category term="ACM 题目" scheme="https://www.wildptr.cn/categories/ACM-%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ACM" scheme="https://www.wildptr.cn/tags/ACM/"/>
+    
+      <category term="算法" scheme="https://www.wildptr.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="HDUOJ" scheme="https://www.wildptr.cn/tags/HDUOJ/"/>
+    
+      <category term="动态规划" scheme="https://www.wildptr.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
