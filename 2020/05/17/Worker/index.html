@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="ACM,算法,HDUOJ,动态规划," />
+  <meta name="keywords" content="ACM,算法,HDUOJ,GCD," />
 
 
 
@@ -109,23 +109,21 @@
 
 
 
-<meta name="description" content="Source: HDUOJ 2955  Problem Description The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy.">
+<meta name="description" content="Source: HDUOJ 6576  Problem Description Avin meets a rich customer today. He will earn 1 million dollars if he can solve a hard problem. There are n warehouses and m workers. Any worker in the i-th wa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Robberies">
-<meta property="og:url" content="https://www.wildptr.cn/2020/04/27/Robberies/index.html">
+<meta property="og:title" content="Worker">
+<meta property="og:url" content="https://www.wildptr.cn/2020/05/17/Worker/index.html">
 <meta property="og:site_name" content="WildPtr 野指针">
-<meta property="og:description" content="Source: HDUOJ 2955  Problem Description The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy.">
+<meta property="og:description" content="Source: HDUOJ 6576  Problem Description Avin meets a rich customer today. He will earn 1 million dollars if he can solve a hard problem. There are n warehouses and m workers. Any worker in the i-th wa">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg">
-<meta property="article:published_time" content="2020-04-27T12:23:00.000Z">
-<meta property="article:modified_time" content="2020-04-28T12:58:07.450Z">
+<meta property="article:published_time" content="2020-05-17T06:25:04.000Z">
+<meta property="article:modified_time" content="2020-05-23T13:54:10.805Z">
 <meta property="article:author" content="EchoForger">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="HDUOJ">
-<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="GCD">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg">
 
 
 
@@ -155,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="https://www.wildptr.cn/2020/04/27/Robberies/"/>
+  <link rel="canonical" href="https://www.wildptr.cn/2020/05/17/Worker/"/>
 
 
 
 
 
-  <title>Robberies | WildPtr 野指针</title>
+  <title>Worker | WildPtr 野指针</title>
   
 
 
@@ -332,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/04/27/Robberies/">
+    <link itemprop="mainEntityOfPage" href="https://www.wildptr.cn/2020/05/17/Worker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EchoForger">
@@ -349,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Robberies</h1>
+          <h1 class="post-title" itemprop="name headline">Worker</h1>
         
 
         <div class="post-meta">
@@ -359,8 +357,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-27T20:23:00+08:00">
-                2020-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-17T14:25:04+08:00">
+                2020-05-17
               </time>
             
 
@@ -409,7 +407,7 @@
                 </span>
                 
                 <span title="Words count in article">
-                  473
+                  366
                 </span>
               
 
@@ -445,20 +443,16 @@
 
       
         <hr>
-<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2955" target="_blank" rel="noopener">HDUOJ 2955</a></center></p>
+<p><center>Source: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6576" target="_blank" rel="noopener">HDUOJ 6576</a></center></p>
 
-<h2><span id="problem-description">Problem Description</span></h2><p>The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy. He has decided to work in the lucrative business of bank robbery only for a short while, before retiring to a comfortable job at a university.</p>
-<img src="http://acm.hdu.edu.cn/data/images/con211-1010-1.jpg" alt="img" style="zoom: 50%;">
+<h2><span id="problem-description">Problem Description</span></h2><p>Avin meets a rich customer today. He will earn 1 million dollars if he can solve a hard problem. There are n warehouses and m workers. Any worker in the i-th warehouse can handle ai orders per day. The customer wonders whether there exists one worker assignment method satisfying that every warehouse handles the same number of orders every day. Note that each worker should be assigned to exactly one warehouse and no worker is lazy when working.</p>
+<h2><span id="input">Input</span></h2><p>The first line contains two integers n (1 ≤ n ≤ 1, 000), m (1 ≤ m ≤ 1018). The second line contains n integers. The i-th integer ai (1 ≤ ai ≤ 10) represents one worker in the i-th warehouse can handle ai orders per day.</p>
+<h2><span id="output">Output</span></h2><p>If there is a feasible assignment method, print “Yes” in the first line. Then, in the second line, print n integers with the i-th integer representing the number of workers assigned to the i-th warehouse.<br>Otherwise, print “No” in one line. If there are multiple solutions, any solution is accepted.</p>
+<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2 6</span><br><span class="line">1 2</span><br><span class="line">2 5</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
 
-<p>For a few months now, Roy has been assessing the security of various banks and the amount of cash they hold. He wants to make a calculated risk, and grab as much money as possible.<br>His mother, Ola, has decided upon a tolerable probability of getting caught. She feels that he is safe enough if the banks he robs together give a probability less than this.</p>
-<h2><span id="input">Input</span></h2><p>The first line of input gives T, the number of cases. For each scenario, the first line of input gives a floating point number P, the probability Roy needs to be below, and an integer N, the number of banks he has plans for. Then follow N lines, where line j gives an integer Mj and a floating point number Pj .<br>Bank j contains Mj millions, and the probability of getting caught from robbing it is Pj .</p>
-<h2><span id="output">Output</span></h2><p>For each test case, output a line with the maximum number of millions he can expect to get while the probability of getting caught is less than the limit set.</p>
-<p>Notes and Constraints<br>0 &lt; T &lt;= 100<br>0.0 &lt;= P &lt;= 1.0<br>0 &lt; N &lt;= 100<br>0 &lt; Mj &lt;= 100<br>0.0 &lt;= Pj &lt;= 1.0<br>A bank goes bankrupt if it is robbed, and you may assume that all probabilities are independent as the police have very low funds.</p>
-<h2><span id="sample-input">Sample Input</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">0.04 3</span><br><span class="line">1 0.02</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.06 3</span><br><span class="line">2 0.03</span><br><span class="line">2 0.03</span><br><span class="line">3 0.05</span><br><span class="line">0.10 3</span><br><span class="line">1 0.03</span><br><span class="line">2 0.02</span><br><span class="line">3 0.05</span><br></pre></td></tr></table></figure>
+<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">4 2</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
 
-<h2><span id="sample-output">Sample Output</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
-
-<h2><span id="my-solution-wa">My Solution (WA)</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> P,p[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> N,m[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">float</span> DP[<span class="number">100</span>*<span class="number">100</span>+<span class="number">1</span>];<span class="comment">//DP[j]表示在抢 j millons 美元时最大的逃脱概率；</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;P&gt;&gt;N;</span><br><span class="line">        <span class="keyword">int</span> maxM=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;m[i]&gt;&gt;p[i];</span><br><span class="line">            maxM+=m[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(DP, <span class="number">0</span>, <span class="keyword">sizeof</span>(DP));</span><br><span class="line">        DP[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=m[i]; j&lt;=maxM; j++) &#123;</span><br><span class="line">                DP[j]=<span class="built_in">max</span>(DP[j],DP[j-m[i]]*(<span class="number">1</span>-p[i]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res;</span><br><span class="line">        <span class="keyword">for</span> (res=maxM; res&gt;=<span class="number">0</span>; res--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DP[res]&gt;=<span class="number">1</span>-P) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="my-solution">My Solution</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a,<span class="keyword">long</span> <span class="keyword">long</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)<span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> gcd(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n,m;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m) &#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> a[<span class="number">1000</span>];</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">            sum=sum*a[i]/gcd(sum,a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> all=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            a[i]=sum/a[i];</span><br><span class="line">            all+=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m%all==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"Yes\n"</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;a[i]*m/all;</span><br><span class="line">                <span class="keyword">if</span> (i&lt;n<span class="number">-1</span>) &#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">"No\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -491,7 +485,7 @@
           
             <a href="/tags/HDUOJ/" rel="tag"># HDUOJ</a>
           
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+            <a href="/tags/GCD/" rel="tag"># GCD</a>
           
         </div>
       
@@ -504,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="next" title="动态规划：背包问题">
-                <i class="fa fa-chevron-left"></i> 动态规划：背包问题
+              <a href="/2020/05/17/Fishnet/" rel="next" title="Fishnet">
+                <i class="fa fa-chevron-left"></i> Fishnet
               </a>
             
           </div>
@@ -514,8 +508,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/30/%E6%95%B0%E5%A1%94/" rel="prev" title="数塔">
-                数塔 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/17/Surround%20the%20Trees/" rel="prev" title="Surround the Trees">
+                Surround the Trees <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -687,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution (WA)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">My Solution</span></a></li></ol></div>
             
 
           </div>
